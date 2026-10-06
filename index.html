@@ -17,7 +17,7 @@
 --rouge:#d6336c;--rouge-soft:#e85a8a;--rouge-deep:#a82250;
 --or:#d4af37;--or-soft:#f4d03f;--or-deep:#9c7c1f;
 --satin:#f8bbd0;--champagne:#f7e7ce;--champagne-soft:#fff8e7;
---emeraude:#1abc9c;
+--emeraude:#1abc9c;--emeraude-soft:#2ecc71;
 --ink:#fce4ec;--ink-dim:#c8a0b0;--ink-faint:#7a5060;
 --success:#2ecc71;--error:#e74c3c;--warn:#f39c12;
 --radius:24px;--radius-sm:14px;
@@ -43,6 +43,7 @@ padding:calc(0.8rem + env(safe-area-inset-top)) 1rem calc(7rem + env(safe-area-i
 font-size:14px;line-height:1.6;max-width:900px;margin:0 auto;
 letter-spacing:0.015em;-webkit-font-smoothing:antialiased;overflow-x:hidden
 }
+/* SPARKLES */
 .bg-sparkles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .sparkle{position:absolute;font-size:1.5rem;opacity:0;animation:sparkleAnim 8s ease-in-out infinite;filter:drop-shadow(0 0 8px var(--or))}
 .sparkle:nth-child(1){top:8%;left:10%;animation-delay:0s}
@@ -55,6 +56,7 @@ letter-spacing:0.015em;-webkit-font-smoothing:antialiased;overflow-x:hidden
 .sparkle:nth-child(8){top:55%;left:30%;animation-delay:7s}
 @keyframes sparkleAnim{0%,100%{opacity:0;transform:scale(.5) rotate(0)}50%{opacity:.5;transform:scale(1.1) rotate(180deg)}}
 body > *:not(.bg-sparkles){position:relative;z-index:1}
+/* HEADER */
 header{display:flex;align-items:center;justify-content:space-between;padding:.5rem .2rem 1rem;margin-bottom:.5rem}
 .header-brand{display:flex;align-items:center;gap:.7rem}
 .header-mono{font-family:var(--font-display);font-size:1.6rem;font-style:italic;font-weight:500;background:linear-gradient(135deg,var(--satin) 0%,var(--or-soft) 50%,var(--rouge-soft) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:.02em;line-height:1}
@@ -63,6 +65,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.5r
 .header-btn{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--panel),var(--panel-2));border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--or-soft);transition:all .2s}
 .header-btn:active{transform:scale(.94);border-color:var(--or)}
 .header-btn.ok{background:linear-gradient(135deg,rgba(46,204,113,.20),rgba(46,204,113,.10));border-color:var(--success);color:var(--success);box-shadow:0 0 16px rgba(46,204,113,.35)}
+/* TABS NAV */
 .tabs-nav{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(20,10,16,.95),rgba(10,5,8,.98));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);padding:.5rem .5rem calc(.6rem + env(safe-area-inset-bottom));z-index:90;display:flex;justify-content:space-around;box-shadow:0 -12px 48px rgba(0,0,0,.5)}
 .tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;padding:.5rem .2rem;cursor:pointer;user-select:none;color:var(--ink-faint);transition:all .25s;position:relative;border-radius:var(--radius-sm);max-width:90px}
 .tab-btn:active{transform:scale(.95)}
@@ -71,15 +74,19 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.5r
 .tab-icon{font-size:1.3rem;transition:all .25s;display:block}
 .tab-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
 .tab-btn.active::before{content:'';position:absolute;top:-.5rem;left:50%;transform:translateX(-50%);width:30px;height:2px;background:linear-gradient(90deg,transparent,var(--or),transparent);border-radius:2px;box-shadow:0 0 12px var(--or)}
+/* TAB CONTENT */
 .tab-content{display:none;animation:fadeInUp .4s cubic-bezier(.2,.9,.3,1.1)}
 .tab-content.active{display:block}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+/* CARDS */
 .card{background:linear-gradient(165deg,var(--panel),var(--panel-2));border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1.3rem;margin-bottom:1rem;box-shadow:var(--shadow-soft);position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s}
 .card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--or-deep),transparent);opacity:.5}
 .card:hover{border-color:var(--or-deep)}
 .card-title{font-family:var(--font-display);font-size:1.15rem;font-style:italic;font-weight:500;color:var(--ink);margin-bottom:.8rem;letter-spacing:.06em;display:flex;align-items:center;gap:.5rem}
 .card-title .emoji{filter:drop-shadow(0 0 8px var(--or-soft))}
 .card-subtitle{font-size:.75rem;color:var(--ink-dim);margin-bottom:1rem;font-style:italic;font-family:var(--font-display)}
+.card-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem}
+/* DIANA MASCOT */
 .diana-mascot{display:flex;justify-content:center;align-items:flex-end;margin-bottom:.8rem}
 .diana-svg{width:140px;height:200px;filter:drop-shadow(0 12px 32px rgba(214,51,108,.35))}
 .diana-svg .diana-hair{transform-origin:50% 30%;animation:dianaHair 4s ease-in-out infinite}
@@ -91,6 +98,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.5r
 @keyframes dianaBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
 .diana-svg .diana-jewel{animation:dianaShimmer 2.5s ease-in-out infinite}
 @keyframes dianaShimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5) drop-shadow(0 0 6px var(--or))}}
+/* AGENT HERO */
 .agent-hero{background:linear-gradient(165deg,rgba(214,51,108,.18),rgba(139,46,92,.12),var(--panel));border:1px solid var(--rouge-deep);border-radius:var(--radius);padding:1.5rem 1.3rem;margin-bottom:1rem;box-shadow:var(--shadow-lux),inset 0 0 60px rgba(214,51,108,.08);position:relative;overflow:hidden}
 .agent-hero::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(212,175,55,.15) 0%,transparent 70%);animation:shimmerRotate 8s linear infinite;pointer-events:none}
 @keyframes shimmerRotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
@@ -119,16 +127,21 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.5r
 .agent-log .log-success{color:var(--success)}
 .agent-log .log-error{color:var(--error)}
 .agent-log .log-thinking{color:var(--emeraude);font-style:italic}
+/* UPLOAD */
 .upload-zone{position:relative;border:2px dashed var(--or-deep);border-radius:var(--radius-sm);padding:2rem 1rem;text-align:center;cursor:pointer;background:rgba(10,5,8,.4);display:block;transition:all .25s}
 .upload-zone:active{border-color:var(--rouge);background:rgba(214,51,108,.06);transform:scale(.99)}
 .upload-zone input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0);pointer-events:none}
 .upload-zone .up-icon{font-size:2.4rem;display:block;margin-bottom:.6rem}
 .upload-zone .up-t1{font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--ink);margin-bottom:.3rem}
 .upload-zone .up-t2{font-size:.7rem;color:var(--ink-dim)}
+/* PHOTO GRID */
 .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:.5rem;margin-top:.8rem}
 .photo-card{position:relative;border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);aspect-ratio:9/16}
 .photo-card img{width:100%;height:100%;object-fit:cover;display:block}
-.photo-card .rm{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,.92);color:#fff;border:none;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.photo-card .rm{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;background:rgba(231,76,60,.92);color:#fff;border:none;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
+.photo-card .dl{position:absolute;bottom:4px;right:4px;width:24px;height:24px;border-radius:50%;background:rgba(212,175,55,.92);color:#000;border:none;font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;font-weight:700}
+.photo-card .dl:active{transform:scale(.9)}
+/* STYLE GRID */
 .style-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:.55rem}
 .style-card{padding:.85rem .5rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(10,5,8,.5);cursor:pointer;text-align:center;transition:all .2s;position:relative;overflow:hidden}
 .style-card:active{transform:scale(.96)}
@@ -137,6 +150,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.5r
 .style-emoji{font-size:1.5rem;display:block;margin-bottom:.25rem;filter:drop-shadow(0 2px 8px rgba(214,51,108,.3))}
 .style-name{font-family:var(--font-display);font-size:.82rem;font-weight:500;color:var(--ink);font-style:italic;display:block}
 .style-desc{font-size:.58rem;color:var(--ink-dim);margin-top:.15rem;display:block}
+/* FORM */
 .form-row{margin-bottom:1rem}
 .form-row:last-child{margin-bottom:0}
 .form-label{display:block;font-family:var(--font-display);font-size:.8rem;color:var(--ink-dim);margin-bottom:.45rem;font-style:italic;letter-spacing:.08em}
@@ -147,6 +161,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:.5r
 optgroup{background:var(--velvet-3);color:var(--or-soft);font-style:italic;font-weight:600}
 .form-textarea{resize:vertical;min-height:70px;line-height:1.5}
 .form-textarea::placeholder,.form-input::placeholder{color:var(--ink-faint);font-style:italic}
+/* BUTTONS */
 .btn-primary{width:100%;padding:1.15rem;border-radius:var(--radius-sm);border:1px solid var(--or-deep);background:linear-gradient(135deg,rgba(214,51,108,.28),rgba(212,175,55,.22));color:var(--champagne-soft);font-family:var(--font-display);font-size:1rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:all .2s;box-shadow:var(--shadow-lux);position:relative;overflow:hidden;margin-bottom:.8rem}
 .btn-primary::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .6s}
 .btn-primary:hover::before{left:100%}
@@ -158,6 +173,7 @@ optgroup{background:var(--velvet-3);color:var(--or-soft);font-style:italic;font-
 .btn-danger:active{background:rgba(231,76,60,.1);transform:scale(.98)}
 .btn-stop{width:100%;padding:.9rem;border-radius:var(--radius-sm);border:1px solid var(--error);background:transparent;color:var(--error);font-family:var(--font-display);font-size:.85rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;margin-bottom:1rem;display:none}
 .btn-stop.visible{display:block}
+/* DURATION/FORMAT */
 .duration-grid,.format-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.5rem}
 .duration-btn,.format-btn{padding:.8rem .5rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(10,5,8,.5);color:var(--ink-dim);cursor:pointer;text-align:center;transition:all .18s}
 .duration-btn:active,.format-btn:active{transform:scale(.95)}
@@ -167,12 +183,14 @@ optgroup{background:var(--velvet-3);color:var(--or-soft);font-style:italic;font-
 .format-btn .fmt-icon{font-size:1.5rem;display:block;margin-bottom:.15rem}
 .format-btn .fmt-name{font-family:var(--font-display);font-size:.85rem;font-weight:500;font-style:italic;display:block}
 .format-btn .fmt-ratio{font-size:.6rem;letter-spacing:.12em;font-family:var(--font-mono);opacity:.6;margin-top:.1rem;display:block}
+/* SEGMENT GRID */
 .segment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
 .segment-grid.full{grid-template-columns:1fr}
 .segment-grid.two{grid-template-columns:repeat(2,1fr)}
 .segment-btn{padding:.75rem .6rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:rgba(10,5,8,.5);color:var(--ink-dim);cursor:pointer;text-align:center;font-size:.75rem;letter-spacing:.05em;line-height:1.3;transition:all .18s}
 .segment-btn:active{transform:scale(.96)}
 .segment-btn.selected{background:linear-gradient(135deg,rgba(214,51,108,.15),rgba(212,175,55,.10));border-color:var(--or);color:var(--or-soft);font-weight:600;box-shadow:0 0 0 1px var(--or-deep)}
+/* CHARACTERS */
 .char-card{background:rgba(10,5,8,.5);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem;margin-bottom:.6rem}
 .char-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem}
 .char-name{font-family:var(--font-display);font-size:.95rem;font-style:italic;color:var(--or-soft)}
@@ -180,15 +198,32 @@ optgroup{background:var(--velvet-3);color:var(--or-soft);font-style:italic;font-
 .char-remove:active{background:rgba(231,76,60,.15);transform:scale(.92)}
 .char-card input,.char-card textarea{margin-bottom:.4rem;font-size:.82rem}
 .char-card input:last-child,.char-card textarea:last-child{margin-bottom:0}
+.char-lock-row{display:flex;align-items:center;gap:.5rem;margin-top:.4rem;font-size:.72rem;color:var(--ink-dim);font-family:var(--font-display);font-style:italic}
+.char-lock-toggle{position:relative;width:38px;height:20px;background:var(--border);border-radius:999px;cursor:pointer;transition:all .25s;flex-shrink:0}
+.char-lock-toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:var(--ink-dim);border-radius:50%;transition:all .25s}
+.char-lock-toggle.on{background:linear-gradient(135deg,var(--rouge),var(--or))}
+.char-lock-toggle.on::after{left:20px;background:#fff;box-shadow:0 0 8px var(--or)}
 .add-char-btn{width:100%;padding:.9rem;border-radius:var(--radius-sm);border:1px dashed var(--or-deep);background:transparent;color:var(--or-soft);font-family:var(--font-display);font-size:.85rem;font-style:italic;letter-spacing:.1em;cursor:pointer;transition:all .2s}
 .add-char-btn:active{background:rgba(212,175,55,.08);transform:scale(.99)}
+/* PRESET CHIPS */
 .preset-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
 .preset-chip{padding:.4rem .8rem;border-radius:999px;border:1px solid var(--border);background:rgba(10,5,8,.5);color:var(--ink-dim);font-size:.7rem;cursor:pointer;font-style:italic;font-family:var(--font-display);transition:all .18s}
 .preset-chip:active{background:rgba(214,51,108,.12);color:var(--satin);border-color:var(--rouge-deep)}
+/* STORYBOARD */
 .storyboard{background:rgba(10,5,8,.5);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem;margin-bottom:1rem}
 .storyboard-title{font-family:var(--font-display);font-size:1rem;font-style:italic;color:var(--or-soft);margin-bottom:.7rem;letter-spacing:.1em}
 .storyboard-scene{font-size:.75rem;color:var(--ink-dim);padding:.55rem .75rem;border-left:2px solid var(--rouge-deep);margin-bottom:.4rem;border-radius:0 var(--radius-sm) var(--radius-sm) 0;background:rgba(214,51,108,.04);line-height:1.5}
 .storyboard-scene strong{color:var(--or-soft);font-family:var(--font-display);font-style:italic;font-weight:500;margin-right:.3rem}
+/* STORYBOARD VISUEL */
+.storyboard-visual{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.6rem;margin-bottom:1rem}
+.storyboard-thumb{border-radius:var(--radius-sm);overflow:hidden;border:1px solid var(--border);background:#000;aspect-ratio:9/16;position:relative;cursor:pointer;transition:all .2s}
+.storyboard-thumb:hover{border-color:var(--or);transform:scale(1.02)}
+.storyboard-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.storyboard-thumb .thumb-num{position:absolute;top:.3rem;left:.3rem;background:rgba(0,0,0,.75);color:var(--or-soft);font-family:var(--font-mono);font-size:.65rem;padding:.1rem .4rem;border-radius:4px;font-weight:700}
+.storyboard-thumb .thumb-remove{position:absolute;top:.3rem;right:.3rem;background:rgba(231,76,60,.92);color:#fff;border:none;width:20px;height:20px;border-radius:50%;font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.storyboard-thumb .thumb-dl{position:absolute;bottom:.3rem;right:.3rem;background:rgba(212,175,55,.92);color:#000;border:none;width:22px;height:22px;border-radius:50%;font-size:.7rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700}
+.storyboard-thumb.empty{display:flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:.7rem;text-align:center;padding:.5rem}
+/* QUEUE */
 .queue{margin-top:1rem}
 .queue-item{display:flex;align-items:center;gap:.9rem;padding:1rem 1.1rem;border-radius:var(--radius-sm);border:1px solid var(--border-soft);margin-bottom:.5rem;background:linear-gradient(165deg,var(--panel),var(--panel-2));font-size:.85rem;transition:border-color .3s,box-shadow .3s}
 .queue-item.processing{border-color:var(--or);background:linear-gradient(90deg,rgba(212,175,55,.08),var(--panel));box-shadow:var(--glow-or)}
@@ -201,6 +236,7 @@ optgroup{background:var(--velvet-3);color:var(--or-soft);font-style:italic;font-
 .queue-item .q-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-display);font-style:italic;font-size:.95rem}
 .queue-item .q-status{font-size:.68rem;color:var(--ink-dim);text-align:right;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:var(--font-mono)}
 @keyframes spin{to{transform:rotate(360deg)}}
+/* GALLERY */
 .gallery-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
 .gallery-item{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:#000;box-shadow:var(--shadow-soft);animation:fadeInUp .5s ease;position:relative}
 .gallery-item.favorite{border-color:var(--or);box-shadow:0 0 32px rgba(212,175,55,.35)}
@@ -214,18 +250,22 @@ optgroup{background:var(--velvet-3);color:var(--or-soft);font-style:italic;font-
 .gallery-item .g-fav.active{color:var(--or);border-color:var(--or);background:rgba(212,175,55,.1)}
 .gallery-item .g-download:active,.gallery-item .g-fav:active{transform:scale(.97)}
 .gallery-item .g-remove{position:absolute;top:.6rem;right:.6rem;width:32px;height:32px;border-radius:50%;background:rgba(231,76,60,.92);color:#fff;border:none;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.5)}
+/* EMPTY */
 .empty-state{text-align:center;padding:3rem 1rem;color:var(--ink-faint)}
 .empty-state .empty-icon{font-size:3rem;margin-bottom:.8rem;opacity:.4}
 .empty-state .empty-text{font-family:var(--font-display);font-size:1rem;font-style:italic;line-height:1.6}
+/* TOAST */
 .toast{position:fixed;top:calc(1rem + env(safe-area-inset-top));left:50%;transform:translateX(-50%) translateY(-140px);background:linear-gradient(135deg,var(--panel),var(--panel-2));color:var(--ink);border:1px solid var(--or-deep);border-left:4px solid var(--or);padding:.95rem 1.4rem;border-radius:var(--radius-sm);font-size:.82rem;font-weight:500;box-shadow:var(--shadow-deep),var(--shadow-lux);z-index:1000;opacity:0;max-width:90vw;text-align:center;transition:transform .4s cubic-bezier(.2,.9,.3,1.2),opacity .4s ease;display:flex;align-items:center;gap:.6rem}
 .toast.visible{transform:translateX(-50%) translateY(0);opacity:1}
 .toast.success{border-left-color:var(--success)}
 .toast.error{border-left-color:var(--error)}
 .toast.warn{border-left-color:var(--warn)}
 .toast .toast-icon{font-size:1rem;color:var(--or);filter:drop-shadow(0 0 8px var(--or-soft))}
+/* STATUS BAR */
 .status-bar{position:fixed;bottom:calc(5.5rem + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(20px);background:linear-gradient(135deg,var(--rouge-deep),var(--rouge));color:#fff;padding:.75rem 1.2rem;border-radius:999px;font-size:.78rem;font-weight:500;box-shadow:var(--shadow-deep),var(--glow-rouge);z-index:95;opacity:0;max-width:90vw;display:flex;align-items:center;gap:.6rem;transition:all .3s;pointer-events:none}
 .status-bar.visible{opacity:1;transform:translateX(-50%) translateY(0)}
 .status-bar .spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+/* DETAILS */
 details{margin-bottom:1rem;border-radius:var(--radius-sm);overflow:hidden}
 details summary{padding:.85rem 1rem;background:rgba(10,5,8,.5);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;user-select:none;font-family:var(--font-display);font-size:.85rem;font-style:italic;color:var(--or-soft);letter-spacing:.1em;list-style:none;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
 details summary::-webkit-details-marker{display:none}
@@ -233,7 +273,9 @@ details summary::after{content:'▼';font-size:.7rem;color:var(--or-deep);transi
 details[open] summary::after{transform:rotate(180deg)}
 details summary:active{background:rgba(212,175,55,.06)}
 details > *:not(summary){margin-top:.6rem}
+/* HELP TEXT */
 .help-text{font-size:.7rem;color:var(--ink-faint);font-style:italic;margin-top:.4rem;font-family:var(--font-display);line-height:1.5}
+/* PROTOCOL ZONE */
 .protocol-zone{border:2px dashed var(--or-deep);border-radius:var(--radius-sm);padding:1.4rem 1rem;background:rgba(10,5,8,.4);text-align:center;cursor:pointer;transition:all .25s;position:relative;margin-bottom:.8rem}
 .protocol-zone:active,.protocol-zone.dragover{border-color:var(--rouge);background:rgba(214,51,108,.06)}
 .protocol-zone input[type=file]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0);pointer-events:none}
@@ -248,8 +290,35 @@ details > *:not(summary){margin-top:.6rem}
 .protocol-status .proto-line{padding:.25rem 0;display:flex;align-items:center;gap:.5rem}
 .protocol-status .proto-line .check{color:var(--success);font-weight:700}
 .protocol-status .proto-line .cross{color:var(--ink-faint)}
+/* TOGGLE PRINCIPAL */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1rem;background:rgba(10,5,8,.5);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:.7rem;gap:.8rem}
+.toggle-row .toggle-info{flex:1;min-width:0}
+.toggle-row .toggle-name{font-family:var(--font-display);font-size:.9rem;font-style:italic;color:var(--ink);font-weight:500;margin-bottom:.15rem}
+.toggle-row .toggle-desc{font-size:.65rem;color:var(--ink-dim);line-height:1.4}
+.toggle-switch{position:relative;width:48px;height:26px;background:var(--border);border-radius:999px;cursor:pointer;transition:all .25s;flex-shrink:0}
+.toggle-switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:var(--ink-dim);border-radius:50%;transition:all .25s}
+.toggle-switch.on{background:linear-gradient(135deg,var(--rouge),var(--or))}
+.toggle-switch.on::after{left:25px;background:#fff;box-shadow:0 0 12px var(--or)}
+/* INSPIRATIONS */
+.inspiration-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.6rem}
+.inspiration-card{padding:1rem .9rem;border-radius:var(--radius-sm);border:1px solid var(--border);background:linear-gradient(165deg,rgba(214,51,108,.08),rgba(212,175,55,.05));cursor:pointer;transition:all .2s;text-align:center;position:relative;overflow:hidden}
+.inspiration-card:active{transform:scale(.97);border-color:var(--or)}
+.inspiration-card:hover{border-color:var(--or);box-shadow:0 0 20px rgba(212,175,55,.2)}
+.inspiration-card .insp-emoji{font-size:1.8rem;display:block;margin-bottom:.4rem;filter:drop-shadow(0 2px 8px rgba(214,51,108,.3))}
+.inspiration-card .insp-name{font-family:var(--font-display);font-size:.85rem;font-weight:500;color:var(--ink);font-style:italic;display:block;line-height:1.2}
+.inspiration-card .insp-tag{font-size:.58rem;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem;display:block}
+/* FUSION ZONE */
+.fusion-panel{background:linear-gradient(165deg,rgba(26,188,156,.08),rgba(212,175,55,.05));border:1px solid var(--emeraude);border-radius:var(--radius);padding:1.2rem;margin-top:1rem}
+.fusion-panel .fusion-title{font-family:var(--font-display);font-size:1rem;font-style:italic;color:var(--emeraude-soft);margin-bottom:.5rem;letter-spacing:.08em}
+.fusion-panel .fusion-desc{font-size:.72rem;color:var(--ink-dim);line-height:1.5;margin-bottom:.8rem;font-style:italic}
+/* NO SLEEP */
 #noSleepCanvas,#noSleepVideo{position:fixed;top:0;left:0;width:1px;height:1px;opacity:.01;pointer-events:none;z-index:-1}
-@media(min-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr)}.header-mono{font-size:2rem}}
+/* RESPONSIVE */
+@media(min-width:640px){
+.gallery-grid{grid-template-columns:repeat(2,1fr)}
+.header-mono{font-size:2rem}
+.storyboard-visual{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+}
 </style>
 </head>
 <body>
@@ -270,6 +339,7 @@ details > *:not(summary){margin-top:.6rem}
 <div class="header-sub">Couture</div>
 </div>
 <div class="header-actions">
+<button type="button" class="header-btn" id="header-help-btn" title="Aide">❓</button>
 <button type="button" class="header-btn" id="header-settings-btn" title="Réglages">⚙️</button>
 <button type="button" class="header-btn" id="header-api-status" title="Statut API">🔑</button>
 </div>
@@ -332,10 +402,51 @@ details > *:not(summary){margin-top:.6rem}
 </svg>
 </div>
 
-<div class="agent-hero">
+<!-- MODE RAPIDE -->
+<div class="agent-hero" id="quick-mode-hero">
+<div class="agent-title">✦ Création Rapide ✦</div>
+<div class="agent-subtitle">3 clics et ta vidéo est prête</div>
+
+<div class="form-row" style="margin-bottom:.8rem;">
+<label class="form-label" style="text-align:center;">1 · Choisis ton inspiration</label>
+</div>
+<div class="inspiration-grid" id="inspiration-grid" style="margin-bottom:1rem;"></div>
+
+<div class="form-row" style="margin-bottom:.8rem;">
+<label class="form-label" style="text-align:center;">2 · Choisis un style</label>
+</div>
+<div class="style-grid" id="style-grid-quick"></div>
+
+<div class="form-row" style="margin-bottom:.8rem;margin-top:1rem;">
+<label class="form-label" style="text-align:center;">3 · Où tu vas publier ?</label>
+</div>
+<div class="segment-grid" id="quick-format-grid">
+<div class="segment-btn" data-quick-format="portrait">📱 TikTok</div>
+<div class="segment-btn" data-quick-format="youtube">🎬 YouTube</div>
+<div class="segment-btn" data-quick-format="square">⬛ Carré</div>
+</div>
+
+<div style="margin-top:1rem;text-align:center;font-size:.72rem;color:var(--ink-dim);font-family:var(--font-display);font-style:italic;">
+Puis choisis une photo ci-dessous et clique sur <strong style="color:var(--or-soft);">Créer</strong>
+</div>
+</div>
+
+<!-- AGENT AVANCÉ -->
+<details style="margin-bottom:1rem;">
+<summary>🤖 Agent Diana avancé — Décris ta vision</summary>
+<div class="agent-hero" style="margin-top:.6rem;">
 <div class="agent-title">✦ Agent Diana ✦</div>
 <div class="agent-subtitle">Décris ta vision, Diana s'occupe de tout</div>
-<textarea class="agent-textarea" id="agent-idea" placeholder="Ex : Une femme élégante en robe rouge marche sous la pluie à Paris au crépuscule. Cinématique, romantique, ambiance de film français."></textarea>
+<textarea class="agent-textarea" id="agent-idea" placeholder="Ex : Une femme élégante en robe rouge marche sous la pluie à Paris au crépuscule. Cinématique, romantique."></textarea>
+
+<div class="toggle-row" style="background:rgba(214,51,108,.08);border-color:var(--rouge-deep);">
+<div class="toggle-info">
+<div class="toggle-name">🔒 Cohérence visuelle</div>
+<div class="toggle-desc">Les personnages gardent la même apparence entre toutes les scènes (même visage, même tenue).</div>
+</div>
+<div class="toggle-switch on" id="coherence-toggle-agent"></div>
+</div>
+
 <div class="agent-options-row">
 <div class="agent-opt-chip active" id="agent-opt-photos" data-opt="photos">📸 Mes photos</div>
 <div class="agent-opt-chip" id="agent-opt-generate" data-opt="generate">🎨 Tout générer</div>
@@ -345,14 +456,23 @@ details > *:not(summary){margin-top:.6rem}
 <div class="agent-opt-chip active" id="agent-opt-scenes-5" data-scenes="5">5 plans</div>
 <div class="agent-opt-chip" id="agent-opt-scenes-8" data-scenes="8">8 plans</div>
 </div>
+<div class="help-text" style="margin-bottom:.8rem;">
+💡 <strong style="color:var(--or-soft);font-style:normal;">3 plans</strong> = 3 images + 3 vidéos (~15-30s de film)<br>
+💡 <strong style="color:var(--or-soft);font-style:normal;">5 plans</strong> = 5 images + 5 vidéos (~25-50s)<br>
+💡 <strong style="color:var(--or-soft);font-style:normal;">8 plans</strong> = 8 images + 8 vidéos (~40-80s)<br>
+Plus il y a de plans, plus la génération est longue (Agnes limite à 1 vidéo/min).
+</div>
 <button type="button" class="agent-launch" id="agent-launch-btn" disabled>✨ Créer avec Diana</button>
 <div class="agent-log" id="agent-log"></div>
 </div>
+</details>
 
 <!-- PROTOCOLE -->
-<div class="card">
+<details style="margin-bottom:1rem;">
+<summary>📄 Protocole — Charge un fichier complet</summary>
+<div class="card" style="margin-top:.6rem;">
 <div class="card-title"><span class="emoji">📄</span> Protocole de création</div>
-<div class="card-subtitle">Charge un fichier complet — Diana construira toute la vidéo automatiquement</div>
+<div class="card-subtitle">Dépose un fichier .txt / .md / .json — Diana construit tout</div>
 
 <div class="protocol-zone" id="protocol-zone">
 <input type="file" id="protocol-input" accept=".txt,.md,.json,.markdown,text/*">
@@ -382,10 +502,13 @@ Dialogue : « Je t'attendais »"></textarea>
 
 <div class="protocol-status" id="protocol-status"></div>
 </div>
+</details>
 
 <!-- PHOTOS -->
 <div class="card">
-<div class="card-title"><span class="emoji">📸</span> Vos photos <span id="photos-badge" style="font-family:var(--font-mono);font-size:.7rem;color:var(--or-soft);margin-left:auto;">0</span></div>
+<div class="card-header-row">
+<div class="card-title" style="margin-bottom:0;"><span class="emoji">📸</span> Vos photos <span id="photos-badge" style="font-family:var(--font-mono);font-size:.7rem;color:var(--or-soft);margin-left:.5rem;">0</span></div>
+</div>
 <label class="upload-zone" for="file-input">
 <input type="file" id="file-input" accept="image/*,.heic,.heif" multiple>
 <div class="up-icon">💋</div>
@@ -393,16 +516,6 @@ Dialogue : « Je t'attendais »"></textarea>
 <div class="up-t2">Une ou plusieurs · chacune deviendra une vidéo</div>
 </label>
 <div id="photo-list"></div>
-</div>
-
-<!-- STYLES -->
-<div class="card">
-<div class="card-title"><span class="emoji">🎨</span> Style visuel</div>
-<div class="style-grid" id="style-grid-quick"></div>
-<details style="margin-top:.8rem;">
-<summary>Voir tous les styles (15)</summary>
-<div class="style-grid" id="style-grid-all" style="margin-top:.6rem;"></div>
-</details>
 </div>
 
 <!-- FORMAT + DURÉE -->
@@ -413,7 +526,7 @@ Dialogue : « Je t'attendais »"></textarea>
 <div class="format-grid" id="format-grid"></div>
 </div>
 <div class="form-row">
-<label class="form-label">Durée</label>
+<label class="form-label">Durée de chaque vidéo</label>
 <div class="duration-grid" id="duration-grid"></div>
 </div>
 </div>
@@ -432,6 +545,7 @@ Dialogue : « Je t'attendais »"></textarea>
 <div class="card-subtitle">Décris tes personnages — Diana s'en souviendra</div>
 <div id="char-list"></div>
 <button type="button" class="add-char-btn" id="add-char-btn">+ Ajouter un personnage</button>
+<div class="help-text" style="margin-top:.6rem;">💡 Coche 🔒 pour verrouiller l'apparence d'un personnage dans toutes les scènes.</div>
 </div>
 
 <div class="card">
@@ -476,21 +590,21 @@ Dialogue : « Je t'attendais »"></textarea>
 <div class="form-row">
 <label class="form-label">Type de plan</label>
 <select class="form-select" id="scene-shot">
-<option value="auto">Automatique</option>
-<option value="close-up">Très gros plan</option>
-<option value="medium">Plan moyen</option>
-<option value="wide">Plan large</option>
-<option value="extreme-wide">Très large</option>
-<option value="low-angle">Contre-plongée</option>
-<option value="high-angle">Plongée</option>
+<option value="auto">Automatique — Diana choisit</option>
+<option value="close-up">Très gros plan — visage</option>
+<option value="medium">Plan moyen — buste</option>
+<option value="wide">Plan large — environnement</option>
+<option value="extreme-wide">Très large — paysage</option>
+<option value="low-angle">Contre-plongée — héroïque</option>
+<option value="high-angle">Plongée — vulnérable</option>
 <option value="over-the-shoulder">Par-dessus l'épaule</option>
-<option value="dutch-angle">Plan incliné</option>
+<option value="dutch-angle">Plan incliné — tension</option>
 </select>
 </div>
 <div class="form-row">
 <label class="form-label">Mouvement de caméra</label>
 <select class="form-select" id="scene-camera">
-<option value="auto">Automatique</option>
+<option value="auto">Automatique — Diana choisit</option>
 <optgroup label="Plans classiques">
 <option value="static">Fixe — immobile</option>
 <option value="dolly-in">Travelling avant</option>
@@ -530,7 +644,7 @@ Dialogue : « Je t'attendais »"></textarea>
 <label class="form-label">Rythme du montage</label>
 <select class="form-select" id="scene-rhythm">
 <option value="single">Plan unique continu</option>
-<option value="multi-3">Multi-plans — 3 plans</option>
+<option value="multi-3">Multi-plans — 3 plans cinéma</option>
 <option value="multi-5">Multi-plans — 5 plans</option>
 </select>
 </div>
@@ -538,6 +652,7 @@ Dialogue : « Je t'attendais »"></textarea>
 
 <div class="card">
 <div class="card-title"><span class="emoji">✨</span> Effets spéciaux <span id="effects-badge" style="font-family:var(--font-mono);font-size:.7rem;color:var(--or-soft);margin-left:auto;">0</span></div>
+<div class="card-subtitle">Cumulables — ajoute des touches magiques</div>
 <div class="style-grid" id="effects-grid"></div>
 </div>
 
@@ -551,7 +666,7 @@ Dialogue : « Je t'attendais »"></textarea>
 </div>
 
 <div class="card">
-<div class="card-title"><span class="emoji">🔊</span> Son et intensité</div>
+<div class="card-title"><span class="emoji">🔊</span> Son et voix</div>
 <div class="form-row">
 <label class="form-label">Ambiance sonore</label>
 <select class="form-select" id="scene-sound">
@@ -559,6 +674,13 @@ Dialogue : « Je t'attendais »"></textarea>
 <option value="dialogue">Ambiance + voix murmurée</option>
 <option value="silent">Silence total</option>
 </select>
+</div>
+<div class="toggle-row">
+<div class="toggle-info">
+<div class="toggle-name">🗣️ Voix off TTS</div>
+<div class="toggle-desc">Ajoute une voix française qui lit le dialogue (synthèse vocale iOS gratuite).</div>
+</div>
+<div class="toggle-switch" id="tts-toggle"></div>
 </div>
 <div class="form-row">
 <label class="form-label">Sous-titres</label>
@@ -587,13 +709,27 @@ Dialogue : « Je t'attendais »"></textarea>
 <div class="card-title"><span class="emoji">🎞️</span> Mes créations</div>
 <div class="card-subtitle">Toutes tes vidéos générées</div>
 <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-<button type="button" class="btn-secondary" id="export-all-btn" style="flex:1;min-width:140px;margin:0;">⬇ Tout télécharger</button>
-<button type="button" class="btn-danger" id="clear-all-btn" style="flex:1;min-width:140px;margin:0;">✕ Tout effacer</button>
+<button type="button" class="btn-secondary" id="export-all-btn" style="flex:1;min-width:120px;margin:0;">⬇ Tout télécharger</button>
+<button type="button" class="btn-danger" id="clear-all-btn" style="flex:1;min-width:120px;margin:0;">✕ Tout effacer</button>
 </div>
 <div id="gallery-grid" class="gallery-grid"></div>
 <div id="gallery-empty" class="empty-state">
 <div class="empty-icon">💎</div>
 <div class="empty-text">Aucune vidéo pour l'instant.<br>Crée ta première avec Diana ✦</div>
+</div>
+
+<div class="fusion-panel" id="fusion-panel" style="display:none;">
+<div class="fusion-title">🎬 Fusionner les vidéos</div>
+<div class="fusion-desc">Assemble toutes tes vidéos en un seul film avec transitions.</div>
+<div class="form-row">
+<label class="form-label">Transition</label>
+<select class="form-select" id="fusion-transition">
+<option value="cut">Coupe franche</option>
+<option value="fade">Fondu au noir</option>
+</select>
+</div>
+<button type="button" class="btn-primary" id="fusion-btn">🎬 Assembler en un film</button>
+<div class="help-text">💡 Note : iOS limite la fusion automatique. Un guide te sera fourni pour assembler manuellement (gratuit, en 2 minutes avec iMovie).</div>
 </div>
 </div>
 </div>
@@ -601,8 +737,12 @@ Dialogue : « Je t'attendais »"></textarea>
 <!-- ═══════════ ONGLET STUDIO ═══════════ -->
 <div class="tab-content" id="tab-studio">
 <div class="card">
-<div class="card-title"><span class="emoji">📖</span> Storyboard</div>
-<div class="card-subtitle">Aperçu en temps réel</div>
+<div class="card-title"><span class="emoji">🖼️</span> Storyboard visuel</div>
+<div class="card-subtitle">Aperçu de chaque scène — clique pour télécharger</div>
+<div class="storyboard-visual" id="storyboard-visual"></div>
+</div>
+<div class="card">
+<div class="card-title"><span class="emoji">📖</span> Storyboard technique</div>
 <div class="storyboard" id="storyboard"></div>
 </div>
 <div class="card">
@@ -622,16 +762,36 @@ Dialogue : « Je t'attendais »"></textarea>
 <span id="api-status-text">Aucune clé enregistrée</span>
 </div>
 </div>
+
+<div class="card">
+<div class="card-title"><span class="emoji">🔒</span> Préférences</div>
+<div class="toggle-row">
+<div class="toggle-info">
+<div class="toggle-name">Cohérence visuelle</div>
+<div class="toggle-desc">Verrouille les personnages entre toutes les scènes.</div>
+</div>
+<div class="toggle-switch on" id="coherence-toggle-settings"></div>
+</div>
+<div class="toggle-row">
+<div class="toggle-info">
+<div class="toggle-name">Voix off TTS</div>
+<div class="toggle-desc">Lit automatiquement le dialogue en français.</div>
+</div>
+<div class="toggle-switch" id="tts-toggle-settings"></div>
+</div>
+</div>
+
 <div class="card">
 <div class="card-title"><span class="emoji">💡</span> À propos</div>
 <div style="font-size:.78rem;color:var(--ink-dim);line-height:1.7;font-family:var(--font-display);font-style:italic;">
-<strong style="color:var(--or-soft);font-style:normal;">DianaIA Studio Couture</strong><br>
+<strong style="color:var(--or-soft);font-style:normal;">DianaIA Studio Couture v9.0</strong><br>
 Transformez vos photos en vidéos cinématographiques par l'IA.<br><br>
 Propulsé par <strong style="color:var(--satin);font-style:normal;">Agnes AI</strong>.<br>
 Multi-plateforme : TikTok, YouTube, Instagram, cinéma.<br><br>
-<strong style="color:var(--or-soft);font-style:normal;">Version 8.0</strong> · Avec Protocole & Agent Diana ✦
+Agent Diana · Protocole · Storyboard visuel · Cohérence visuelle ✦
 </div>
 </div>
+
 <div class="card">
 <div class="card-title"><span class="emoji">🧹</span> Maintenance</div>
 <button type="button" class="btn-danger" id="reset-app-btn">Réinitialiser l'application</button>
@@ -668,12 +828,12 @@ var FRAME_RATE=24;
 var POLL_INTERVAL_SEC=8;
 var POLL_INITIAL_WAIT_SEC=80;
 var MAX_POLL_ATTEMPTS=100;
-var API_KEY_STORAGE='dianaia_v8_apikey';
-var WAKE_LOCK_PREF='dianaia_v8_wakelock';
-var HISTORY_KEY='dianaia_v8_history';
-var FAVORITES_KEY='dianaia_v8_favorites';
-var CHARS_KEY='dianaia_v8_chars';
-var PROTOCOLS_KEY='dianaia_v8_protocols';
+var API_KEY_STORAGE='dianaia_v9_apikey';
+var WAKE_LOCK_PREF='dianaia_v9_wakelock';
+var HISTORY_KEY='dianaia_v9_history';
+var FAVORITES_KEY='dianaia_v9_favorites';
+var CHARS_KEY='dianaia_v9_chars';
+var PREFS_KEY='dianaia_v9_prefs';
 var MAX_IMAGE_SIZE=12*1024*1024;
 var MAX_IMAGE_SIDE=1280;
 var MAX_HISTORY=100;
@@ -683,9 +843,9 @@ var memoryApiKey=null;
 var memoryHistory=[];
 var memoryFavorites=[];
 var memoryChars=[];
-var memoryProtocols=[];
+var memoryPrefs={};
 var localStorageAvailable=true;
-try{localStorage.setItem('__diana_v8__','1');localStorage.removeItem('__diana_v8__');}catch(e){localStorageAvailable=false;}
+try{localStorage.setItem('__diana_v9__','1');localStorage.removeItem('__diana_v9__');}catch(e){localStorageAvailable=false;}
 
 // ═══════════════════════════════════════════════════════════
 // FORMATS
@@ -718,6 +878,36 @@ var STYLES=[
 {id:'fantasy',name:'Fantastique',emoji:'🧙',desc:'Magique',featured:false,style:'Epic fantasy aesthetic, magical atmosphere, glowing particles.',motion:'magical particles floating, ethereal movement'},
 {id:'horror',name:'Horreur',emoji:'🕯️',desc:'Sombre',featured:false,style:'Horror film aesthetic, dark shadows, unsettling atmosphere.',motion:'creeping shadows, unsettling movement'},
 {id:'watercolor',name:'Aquarelle',emoji:'🖼️',desc:'Peinture douce',featured:false,style:'Dreamy watercolor painting aesthetic, soft bleeding edges.',motion:'soft watercolor flow, gentle bleeding colors'}
+];
+
+// ═══════════════════════════════════════════════════════════
+// INSPIRATIONS
+// ═══════════════════════════════════════════════════════════
+var INSPIRATIONS=[
+{id:'romantic-paris',emoji:'💋',name:'Couple à Paris',tag:'Romantique',style:'cinematic',
+prompt:'Un couple élégant marche sous la pluie à Paris au crépuscule. Cinématique, romantique, ambiance de film français.'},
+{id:'samurai',emoji:'⚔️',name:'Samouraï',tag:'Action',style:'cinematic',
+prompt:'Un samouraï solitaire traverse une forêt de bambous au lever du soleil. Cinématique, épique, ambiance Kurosawa.'},
+{id:'space',emoji:'🚀',name:'Voyage spatial',tag:'SF',style:'cinematic',
+prompt:'Un astronaute flotte dans une station spatiale en apesanteur, la Terre visible par le hublot. Cinématique, science-fiction.'},
+{id:'luxury',emoji:'💎',name:'Luxe Couture',tag:'Mode',style:'luxury',
+prompt:'Une femme élégante en robe haute couture pose dans un décor doré et velours. Luxe, glamour, ambiance magazine.'},
+{id:'anime-girl',emoji:'🌸',name:'Héroïne anime',tag:'Anime',style:'anime',
+prompt:'Une jeune femme aux cheveux roses regarde par la fenêtre, pétales de cerisier qui volent. Anime, poétique, Ghibli.'},
+{id:'cyber-city',emoji:'🌃',name:'Néon urbain',tag:'Cyberpunk',style:'cyberpunk',
+prompt:'Une femme en cuir marche dans une rue néon de nuit sous la pluie. Cyberpunk, Blade Runner.'},
+{id:'magic-forest',emoji:'🧙',name:'Forêt magique',tag:'Fantasy',style:'fantasy',
+prompt:'Une fée apparaît dans une forêt enchantée au clair de lune. Fantastique, magique, particules lumineuses.'},
+{id:'vintage-car',emoji:'🚗',name:'Voiture rétro',tag:'Vintage',style:'vintage',
+prompt:'Une voiture rétro roule sur une route de campagne au coucher du soleil. Vintage, années 70.'},
+{id:'ocean',emoji:'🌊',name:'Vagues océan',tag:'Nature',style:'cinematic',
+prompt:'Une femme regarde l\'océan, les vagues se brisent doucement. Cinématique, contemplatif.'},
+{id:'dancer',emoji:'💃',name:'Danseuse',tag:'Art',style:'luxury',
+prompt:'Une danseuse en robe rouge tournoie dans une salle dorée. Luxe, élégance, mouvement.'},
+{id:'mystery-forest',emoji:'🌫️',name:'Brume mystique',tag:'Mystère',style:'horror',
+prompt:'Une silhouette solitaire marche dans une forêt brumeuse au crépuscule. Mystérieux, atmosphérique.'},
+{id:'family',emoji:'👨‍👩‍👧',name:'Famille joyeuse',tag:'Famille',style:'realistic',
+prompt:'Une famille heureuse joue dans un parc ensoleillé. Réaliste, chaleureux, naturel.'}
 ];
 
 // ═══════════════════════════════════════════════════════════
@@ -832,6 +1022,8 @@ selectedEffects:[],
 activeTab:'create',
 scene:{action:'',setting:'',mood:'',emotion:'',camera:'auto',shot:'auto',dialogue:'',sound:'ambient',subtitles:'none',rhythm:'single'},
 transition:'cut',
+coherence:true,
+tts:false,
 protocol:{loaded:false,raw:'',data:null},
 agent:{idea:'',sceneCount:5,usePhotos:true,generateImages:false,isRunning:false,scenario:null}
 };
@@ -901,7 +1093,6 @@ var canvasStream=null;
 var canvasInterval=null;
 
 function isWakeLockSupported(){return 'wakeLock' in navigator&&typeof navigator.wakeLock.request==='function';}
-
 async function requestWakeLockAPI(){
 if(!isWakeLockSupported())return false;
 try{
@@ -910,11 +1101,9 @@ wakeLockSentinel.addEventListener('release',function(){wakeLockSentinel=null;});
 return true;
 }catch(e){return false;}
 }
-
 async function releaseWakeLockAPI(){
 if(wakeLockSentinel){try{await wakeLockSentinel.release();}catch(e){}wakeLockSentinel=null;}
 }
-
 function startCanvasStream(){
 if(canvasStream)return true;
 try{
@@ -938,30 +1127,25 @@ if(p&&p.catch)p.catch(function(){});
 return true;
 }catch(e){return false;}
 }
-
 function stopCanvasStream(){
 if(canvasInterval){clearInterval(canvasInterval);canvasInterval=null;}
 var video=$('noSleepVideo');
 if(video){try{video.pause();video.srcObject=null;}catch(e){}}
 if(canvasStream){try{canvasStream.getTracks().forEach(function(t){t.stop();});}catch(e){}canvasStream=null;}
 }
-
 async function activateWakeLock(){
 var success=false;
 if(isWakeLockSupported())success=await requestWakeLockAPI();
 if(!success)success=startCanvasStream();
 return success;
 }
-
 async function deactivateWakeLock(){
 await releaseWakeLockAPI();
 stopCanvasStream();
 }
-
 document.addEventListener('visibilitychange',function(){
 if(document.visibilityState==='visible'&&wakeLockEnabled)activateWakeLock();
 });
-
 async function ensureWakeLockActive(){
 if(!wakeLockEnabled)return;
 if(wakeLockSentinel===null&&canvasStream===null)await activateWakeLock();
@@ -975,22 +1159,27 @@ if(localStorageAvailable){
 try{state.history=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');}catch(e){state.history=memoryHistory.slice();}
 try{state.favorites=JSON.parse(localStorage.getItem(FAVORITES_KEY)||'[]');}catch(e){state.favorites=memoryFavorites.slice();}
 try{state.characters=JSON.parse(localStorage.getItem(CHARS_KEY)||'[]');}catch(e){state.characters=memoryChars.slice();}
+try{memoryPrefs=JSON.parse(localStorage.getItem(PREFS_KEY)||'{}');}catch(e){memoryPrefs={};}
 }else{
 state.history=memoryHistory.slice();
 state.favorites=memoryFavorites.slice();
 state.characters=memoryChars.slice();
 }
+if(memoryPrefs.coherence!==undefined)state.coherence=memoryPrefs.coherence;
+if(memoryPrefs.tts!==undefined)state.tts=memoryPrefs.tts;
 }
-
 function saveStorage(){
 memoryHistory=state.history.slice(0,MAX_HISTORY);
 memoryFavorites=state.favorites.slice();
 memoryChars=state.characters.slice();
+memoryPrefs.coherence=state.coherence;
+memoryPrefs.tts=state.tts;
 if(localStorageAvailable){
 try{
 localStorage.setItem(HISTORY_KEY,JSON.stringify(memoryHistory));
 localStorage.setItem(FAVORITES_KEY,JSON.stringify(memoryFavorites));
 localStorage.setItem(CHARS_KEY,JSON.stringify(memoryChars));
+localStorage.setItem(PREFS_KEY,JSON.stringify(memoryPrefs));
 }catch(e){}
 }
 }
@@ -1004,7 +1193,6 @@ try{var stored=(localStorage.getItem(API_KEY_STORAGE)||'').trim();if(stored)retu
 }
 return memoryApiKey||'';
 }
-
 function saveApiKey(){
 var input=$('api-key-input');
 if(!input)return;
@@ -1023,7 +1211,6 @@ updateApiPanel();
 showToast(saved?'Clé enregistrée ✦':'Clé active (session)',saved?'success':'warn',saved?2500:3500);
 input.blur();
 }
-
 function updateApiPanel(){
 var input=$('api-key-input');
 var statusLine=$('api-status-line');
@@ -1059,7 +1246,6 @@ r.onerror=function(){reject(new Error('Lecture impossible'));};
 try{r.readAsDataURL(file);}catch(e){reject(e);}
 });
 }
-
 function fileToDataUriViaObjectURL(file){
 return new Promise(function(resolve,reject){
 try{
@@ -1083,7 +1269,6 @@ img.src=url;
 }catch(e){reject(e);}
 });
 }
-
 function compressImage(dataUri){
 return new Promise(function(resolve){
 var img=new Image();
@@ -1102,7 +1287,6 @@ img.onerror=function(){resolve(dataUri);};
 img.src=dataUri;
 });
 }
-
 function compressImageFromUrl(url){
 return new Promise(function(resolve){
 var img=new Image();
@@ -1138,13 +1322,14 @@ try{raw=await fileToDataUri(list[i]);}
 catch(e){try{raw=await fileToDataUriViaObjectURL(list[i]);}catch(e2){continue;}}
 var processed=raw;
 try{processed=await compressImage(raw);}catch(e){}
-state.photos.push({id:Date.now()+Math.random(),dataUri:processed,thumbnail:processed});
+state.photos.push({id:Date.now()+Math.random(),dataUri:processed,thumbnail:processed,isGenerated:false});
 added++;
 }catch(e){}
 }
 setStatus(null);
 renderPhotoList();
 updateGenerateBtn();
+renderStoryboardVisual();
 if(added>0)showToast(added+' photo'+(added>1?'s':'')+' prête'+(added>1?'s':''),'success');
 }
 
@@ -1154,17 +1339,37 @@ var badge=$('photos-badge');
 if(badge)badge.textContent=state.photos.length;
 if(!list)return;
 if(!state.photos.length){list.innerHTML='';return;}
-list.innerHTML='<div class="photo-grid">'+state.photos.map(function(p){
-return '<div class="photo-card"><img src="'+p.thumbnail+'" alt=""><button type="button" class="rm" data-remove="'+p.id+'">✕</button></div>';
+list.innerHTML='<div class="photo-grid">'+state.photos.map(function(p,i){
+return '<div class="photo-card" data-photo-idx="'+i+'">'+
+'<img src="'+p.thumbnail+'" alt="">'+
+'<button type="button" class="rm" data-remove="'+p.id+'">✕</button>'+
+'<button type="button" class="dl" data-download="'+i+'" title="Télécharger">⬇</button>'+
+'</div>';
 }).join('')+'</div>';
 list.querySelectorAll('[data-remove]').forEach(function(btn){
 btn.addEventListener('click',function(e){
 e.stopPropagation();
 state.photos=state.photos.filter(function(p){return String(p.id)!==btn.getAttribute('data-remove');});
-renderPhotoList();
-updateGenerateBtn();
+renderPhotoList();updateGenerateBtn();renderStoryboardVisual();
 });
 });
+list.querySelectorAll('[data-download]').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+var idx=parseInt(btn.getAttribute('data-download'),10);
+downloadPhoto(idx);
+});
+});
+}
+
+function downloadPhoto(idx){
+var p=state.photos[idx];
+if(!p)return;
+var a=document.createElement('a');
+a.href=p.dataUri;
+a.download='DianaIA_image_'+idx+'_'+Date.now()+'.jpg';
+document.body.appendChild(a);a.click();document.body.removeChild(a);
+showToast('Image téléchargée ✦','success',1500);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1183,6 +1388,7 @@ return '<div class="char-card" data-idx="'+i+'">'+
 '<input type="text" class="form-input char-name-input" data-field="name" data-idx="'+i+'" placeholder="Nom du personnage" value="'+esc(c.name||'')+'">'+
 '<textarea class="form-textarea char-desc-input" data-field="description" data-idx="'+i+'" placeholder="Apparence physique, vêtements, âge…" style="min-height:55px;">'+esc(c.description||'')+'</textarea>'+
 '<input type="text" class="form-input char-role-input" data-field="role" data-idx="'+i+'" placeholder="Rôle / action dans la scène" value="'+esc(c.role||'')+'">'+
+'<div class="char-lock-row"><div class="char-lock-toggle'+(c.locked!==false?' on':'')+'" data-lock="'+i+'"></div><span>🔒 Verrouiller l\'apparence</span></div>'+
 '</div>';
 }).join('');
 list.querySelectorAll('.char-card input, .char-card textarea').forEach(function(el){
@@ -1191,8 +1397,7 @@ var idx=parseInt(e.target.getAttribute('data-idx'),10);
 var field=e.target.getAttribute('data-field');
 if(!state.characters[idx])return;
 state.characters[idx][field]=e.target.value;
-saveStorage();
-updateStoryboard();
+saveStorage();updateStoryboard();
 });
 });
 list.querySelectorAll('[data-remove-char]').forEach(function(btn){
@@ -1202,10 +1407,18 @@ state.characters.splice(parseInt(btn.getAttribute('data-remove-char'),10),1);
 saveStorage();renderCharacters();updateStoryboard();
 });
 });
+list.querySelectorAll('[data-lock]').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+var idx=parseInt(btn.getAttribute('data-lock'),10);
+if(!state.characters[idx])return;
+state.characters[idx].locked=(state.characters[idx].locked===false);
+saveStorage();renderCharacters();
+});
+});
 }
-
 function addCharacter(){
-state.characters.push({name:'',description:'',role:''});
+state.characters.push({name:'',description:'',role:'',locked:true});
 saveStorage();renderCharacters();updateStoryboard();
 setTimeout(function(){
 var list=$('char-list');
@@ -1218,6 +1431,47 @@ if(input)input.focus();
 }
 
 // ═══════════════════════════════════════════════════════════
+// INSPIRATIONS
+// ═══════════════════════════════════════════════════════════
+function renderInspirations(){
+var grid=$('inspiration-grid');
+if(!grid)return;
+grid.innerHTML=INSPIRATIONS.map(function(insp){
+return '<div class="inspiration-card" data-insp="'+insp.id+'">'+
+'<span class="insp-emoji">'+insp.emoji+'</span>'+
+'<span class="insp-name">'+esc(insp.name)+'</span>'+
+'<span class="insp-tag">'+esc(insp.tag)+'</span>'+
+'</div>';
+}).join('');
+grid.querySelectorAll('[data-insp]').forEach(function(el){
+el.addEventListener('click',function(){
+var insp=INSPIRATIONS.find(function(i){return i.id===el.getAttribute('data-insp');});
+if(!insp)return;
+// Remplir l'idée de l'agent
+var ideaEl=$('agent-idea');
+if(ideaEl)ideaEl.value=insp.prompt;
+// Appliquer le style
+state.selectedStyle=insp.style;
+renderStyles();
+// Afficher notification
+showToast('Inspiration « '+insp.name+' » ✦','success',2000);
+// Scroller vers l'agent
+var hero=$('quick-mode-hero');
+if(hero){
+var agent=document.querySelector('details');
+if(agent)agent.setAttribute('open','');
+setTimeout(function(){
+var ta=$('agent-idea');
+if(ta){ta.scrollIntoView({behavior:'smooth',block:'center'});ta.focus();}
+},300);
+}
+updateStoryboard();
+updateAgentBtn();
+});
+});
+}
+
+// ═══════════════════════════════════════════════════════════
 // RENDER STYLES
 // ═══════════════════════════════════════════════════════════
 function renderStyleCard(s){
@@ -1227,7 +1481,6 @@ return '<div class="style-card'+(state.selectedStyle===s.id?' selected':'')+'" d
 '<span class="style-desc">'+esc(s.desc)+'</span>'+
 '</div>';
 }
-
 function bindStyleCards(grid){
 grid.querySelectorAll('[data-style]').forEach(function(el){
 el.addEventListener('click',function(){
@@ -1240,7 +1493,6 @@ if(s)showToast('Style '+s.name,'success',1200);
 });
 });
 }
-
 function renderStyles(){
 var quick=$('style-grid-quick');
 var all=$('style-grid-all');
@@ -1301,10 +1553,24 @@ return '<div class="format-btn'+(state.selectedFormat===f.id?' selected':'')+'" 
 grid.querySelectorAll('[data-format]').forEach(function(el){
 el.addEventListener('click',function(){
 state.selectedFormat=el.getAttribute('data-format');
+renderFormats();updateStoryboard();
+});
+});
+// Quick format grid
+var qfg=$('quick-format-grid');
+if(qfg){
+qfg.querySelectorAll('[data-quick-format]').forEach(function(el){
+el.classList.toggle('selected',el.getAttribute('data-quick-format')===state.selectedFormat);
+if(!el.getAttribute('data-bound')){
+el.setAttribute('data-bound','1');
+el.addEventListener('click',function(){
+state.selectedFormat=el.getAttribute('data-quick-format');
 renderFormats();
-updateStoryboard();
+showToast('Format '+state.selectedFormat,'success',1200);
 });
+}
 });
+}
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1328,7 +1594,7 @@ renderDurations();updateGenerateBtn();updateStoryboard();
 }
 
 // ═══════════════════════════════════════════════════════════
-// RENDER INTENSITY
+// RENDER INTENSITY + SHOOTING
 // ═══════════════════════════════════════════════════════════
 function renderIntensity(){
 var grid=$('intensity-grid');
@@ -1344,10 +1610,6 @@ renderIntensity();updateStoryboard();
 }
 });
 }
-
-// ═══════════════════════════════════════════════════════════
-// RENDER SHOOTING MODE
-// ═══════════════════════════════════════════════════════════
 function renderShootingMode(){
 var grid=$('shooting-grid');
 if(!grid)return;
@@ -1412,9 +1674,10 @@ parts.push('<div class="storyboard-title">📖 Aperçu de votre scène</div>');
 parts.push('<div class="storyboard-scene"><strong>Mode</strong> : '+esc(state.selectedMode==='animate'?'Animer la photo':(state.selectedMode==='transform'?'Transformer la photo':'Créer une scène'))+'</div>');
 if(state.photos.length>0)parts.push('<div class="storyboard-scene"><strong>Photos</strong> : '+state.photos.length+' source'+(state.photos.length>1?'s':'')+'</div>');
 if(state.characters.length>0){
-var cl=state.characters.filter(function(c){return c.name||c.description;}).map(function(c){return (c.name||'?')+(c.description?' — '+c.description.slice(0,50):'');}).join(' · ');
+var cl=state.characters.filter(function(c){return c.name||c.description;}).map(function(c){return (c.locked!==false?'🔒 ':'')+(c.name||'?')+(c.description?' — '+c.description.slice(0,50):'');}).join(' · ');
 if(cl)parts.push('<div class="storyboard-scene"><strong>Personnages</strong> : '+esc(cl)+'</div>');
 }
+if(state.coherence)parts.push('<div class="storyboard-scene"><strong>Cohérence visuelle</strong> : ✓ ACTIVÉE</div>');
 if(state.scene.action)parts.push('<div class="storyboard-scene"><strong>Action</strong> : '+esc(state.scene.action)+'</div>');
 if(state.scene.setting)parts.push('<div class="storyboard-scene"><strong>Décor</strong> : '+esc(state.scene.setting)+'</div>');
 if(state.scene.mood)parts.push('<div class="storyboard-scene"><strong>Ambiance</strong> : '+esc(state.scene.mood)+'</div>');
@@ -1423,6 +1686,7 @@ if(state.scene.shot!=='auto')parts.push('<div class="storyboard-scene"><strong>P
 if(state.scene.camera!=='auto')parts.push('<div class="storyboard-scene"><strong>Caméra</strong> : '+esc(CAMERA_MAP[state.scene.camera]||state.scene.camera)+'</div>');
 if(state.scene.rhythm!=='single')parts.push('<div class="storyboard-scene"><strong>Rythme</strong> : '+esc(RHYTHM_MAP[state.scene.rhythm]||state.scene.rhythm)+'</div>');
 if(state.scene.dialogue)parts.push('<div class="storyboard-scene"><strong>Dialogue</strong> : « '+esc(state.scene.dialogue)+' »</div>');
+if(state.tts)parts.push('<div class="storyboard-scene"><strong>Voix off</strong> : ✓ TTS activée</div>');
 if(state.selectedStyle){
 var st=STYLES.find(function(x){return x.id===state.selectedStyle;});
 if(st)parts.push('<div class="storyboard-scene"><strong>Style</strong> : '+st.emoji+' '+esc(st.name)+'</div>');
@@ -1441,6 +1705,36 @@ parts.push('<div class="storyboard-scene"><strong>Format</strong> : '+fmt.icon+'
 parts.push('<div class="storyboard-scene"><strong>Mouvement</strong> : '+esc(state.intensity)+'</div>');
 parts.push('<div class="storyboard-scene"><strong>Son</strong> : '+esc(SOUND_MAP[state.scene.sound]||state.scene.sound)+'</div>');
 sb.innerHTML=parts.join('');
+}
+
+function renderStoryboardVisual(){
+var visual=$('storyboard-visual');
+if(!visual)return;
+if(!state.photos.length){
+visual.innerHTML='<div class="empty-state" style="padding:1.5rem 0;grid-column:1/-1;"><div class="empty-text" style="font-size:.85rem;">Les vignettes de tes scènes apparaîtront ici.</div></div>';
+return;
+}
+visual.innerHTML=state.photos.map(function(p,i){
+return '<div class="storyboard-thumb">'+
+'<img src="'+p.thumbnail+'" alt="">'+
+'<div class="thumb-num">Scène '+(i+1)+'</div>'+
+'<button type="button" class="thumb-remove" data-thumb-remove="'+p.id+'">✕</button>'+
+'<button type="button" class="thumb-dl" data-thumb-dl="'+i+'" title="Télécharger">⬇</button>'+
+'</div>';
+}).join('');
+visual.querySelectorAll('[data-thumb-remove]').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+state.photos=state.photos.filter(function(p){return String(p.id)!==btn.getAttribute('data-thumb-remove');});
+renderPhotoList();renderStoryboardVisual();updateGenerateBtn();
+});
+});
+visual.querySelectorAll('[data-thumb-dl]').forEach(function(btn){
+btn.addEventListener('click',function(e){
+e.stopPropagation();
+downloadPhoto(parseInt(btn.getAttribute('data-thumb-dl'),10));
+});
+});
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1483,7 +1777,7 @@ var btn=document.querySelector('.tab-btn[data-tab="'+tabName+'"]');
 if(content)content.classList.add('active');
 if(btn)btn.classList.add('active');
 window.scrollTo({top:0,behavior:'smooth'});
-if(tabName==='studio'){updateStoryboard();updateStats();}
+if(tabName==='studio'){updateStoryboard();updateStats();renderStoryboardVisual();}
 if(tabName==='gallery')renderGallery();
 }
 
@@ -1505,10 +1799,23 @@ parts.push('Visual style: '+style.style);
 parts.push('Use this image as the base scene. You MAY add or modify elements to include the described characters and action.');
 parts.push('Visual style: '+style.style);
 }
-if(state.characters.length>0){
+// Cohérence visuelle
+if(state.coherence&&state.characters.length>0){
+var lockedChars=state.characters.filter(function(c){return c.locked!==false&&(c.name||c.description);});
+if(lockedChars.length>0){
+parts.push('CHARACTERS (must remain VISUALLY IDENTICAL across all scenes — same face, same hair, same clothes, same body proportions):');
+lockedChars.forEach(function(c,i){
+var desc=c.name||('Personnage '+(i+1));
+if(c.description)desc+=' — '+c.description;
+if(c.role)desc+='. Action : '+c.role;
+parts.push('  • '+desc);
+});
+parts.push('CRITICAL: These characters MUST look EXACTLY the same as in every other scene of this film. Do NOT change their appearance.');
+}
+}else if(state.characters.length>0){
 var chars=state.characters.filter(function(c){return c.name||c.description;});
 if(chars.length>0){
-parts.push('CHARACTERS in this scene:');
+parts.push('CHARACTERS:');
 chars.forEach(function(c,i){
 var desc=c.name||('Personnage '+(i+1));
 if(c.description)desc+=' — '+c.description;
@@ -1644,7 +1951,7 @@ throw new Error('Délai maximal dépassé');
 }
 
 // ═══════════════════════════════════════════════════════════
-// IMAGE + TEXT API (pour l'agent)
+// IMAGE + TEXT API
 // ═══════════════════════════════════════════════════════════
 async function generateAgentImage(prompt){
 var fmt=FORMATS.find(function(f){return f.id===state.selectedFormat;})||FORMATS[0];
@@ -1693,7 +2000,7 @@ return content;
 }
 
 // ═══════════════════════════════════════════════════════════
-// PARSE JSON (5 stratégies)
+// PARSE JSON
 // ═══════════════════════════════════════════════════════════
 function parseJSON(text){
 if(!text)return null;
@@ -1716,42 +2023,24 @@ return null;
 }
 
 // ═══════════════════════════════════════════════════════════
-// PROTOCOLE — Extraction de données
+// PROTOCOLE
 // ═══════════════════════════════════════════════════════════
 function extractProtocolFromText(text){
-// Essaie d'abord JSON direct
 var jsonAttempt=parseJSON(text);
-if(jsonAttempt&&(jsonAttempt.scenes||jsonAttempt.title)){
-return jsonAttempt;
-}
-// Sinon, extraction par regex de texte libre
-var data={
-title:'',
-style:'',
-format:'',
-scenes:[]
-};
+if(jsonAttempt&&(jsonAttempt.scenes||jsonAttempt.title))return jsonAttempt;
+var data={title:'',style:'',format:'',scenes:[]};
 var titleMatch=text.match(/(?:titre|title)\s*[:=]\s*(.+)/i);
 if(titleMatch)data.title=titleMatch[1].trim();
 var styleMatch=text.match(/(?:style)\s*[:=]\s*(.+)/i);
 if(styleMatch)data.style=styleMatch[1].trim().toLowerCase();
 var formatMatch=text.match(/(?:format)\s*[:=]\s*(.+)/i);
 if(formatMatch)data.format=formatMatch[1].trim().toLowerCase();
-// Extraction des scènes
 var sceneRegex=/(?:scène|scene|plan)\s*(\d+)\s*[:：]?\s*([\s\S]*?)(?=(?:scène|scene|plan)\s*\d+|$)/gi;
 var match;
 while((match=sceneRegex.exec(text))!==null){
 var sceneText=match[2].trim();
 if(!sceneText)continue;
-var scene={
-number:parseInt(match[1],10),
-action:'',
-setting:'',
-camera:'',
-shot:'',
-dialogue:'',
-emotion:''
-};
+var scene={number:parseInt(match[1],10),action:'',setting:'',camera:'',shot:'',dialogue:'',emotion:''};
 var lines=sceneText.split(/\n/).map(function(l){return l.trim();}).filter(function(l){return l.length>0;});
 lines.forEach(function(line){
 var lower=line.toLowerCase();
@@ -1762,7 +2051,7 @@ else if(lower.match(/^(dialogue|parole|réplique)\s*[:：]/)){scene.dialogue=lin
 else if(lower.match(/^(émotion|emotion|ambiance)\s*[:：]/)){scene.emotion=line.replace(/^(émotion|emotion|ambiance)\s*[:：]\s*/i,'').trim().toLowerCase();}
 else if(!scene.action){scene.action=line;}
 });
-if(scene.action||scene.dialogue||scene.setting){data.scenes.push(scene);}
+if(scene.action||scene.dialogue||scene.setting)data.scenes.push(scene);
 }
 return data;
 }
@@ -1806,43 +2095,37 @@ return null;
 
 function applyProtocol(data){
 if(!data)return;
-// Style
 if(data.style){
 var styleId=detectStyleFromProtocol(data.style);
-if(styleId){
-state.selectedStyle=styleId;
-renderStyles();
+if(styleId){state.selectedStyle=styleId;renderStyles();}
 }
-}
-// Format
 if(data.format){
 var formatId=detectFormatFromProtocol(data.format);
-if(formatId){
-state.selectedFormat=formatId;
-renderFormats();
+if(formatId){state.selectedFormat=formatId;renderFormats();}
 }
+if(data.characters&&data.characters.length){
+state.characters=data.characters.map(function(c){return{name:c.name||'',description:c.description||'',role:c.role||'',locked:true};});
+saveStorage();renderCharacters();
 }
-// Première scène
 if(data.scenes&&data.scenes.length>0){
 var s=data.scenes[0];
-if(s.action){state.scene.action=s.action;$('scene-action').value=s.action;}
-if(s.setting){state.scene.setting=s.setting;$('scene-setting').value=s.setting;}
-if(s.dialogue){state.scene.dialogue=s.dialogue;$('scene-dialogue').value=s.dialogue;}
+if(s.action){state.scene.action=s.action;if($('scene-action'))$('scene-action').value=s.action;}
+if(s.setting){state.scene.setting=s.setting;if($('scene-setting'))$('scene-setting').value=s.setting;}
+if(s.dialogue){state.scene.dialogue=s.dialogue;if($('scene-dialogue'))$('scene-dialogue').value=s.dialogue;}
 if(s.camera){
 var camKey=String(s.camera).toLowerCase().replace(/\s+/g,'-');
-if(CAMERA_MAP[camKey]){state.scene.camera=camKey;$('scene-camera').value=camKey;}
+if(CAMERA_MAP[camKey]){state.scene.camera=camKey;if($('scene-camera'))$('scene-camera').value=camKey;}
 }
 if(s.shot){
 var shotKey=String(s.shot).toLowerCase().replace(/\s+/g,'-');
-if(SHOT_MAP[shotKey]){state.scene.shot=shotKey;$('scene-shot').value=shotKey;}
+if(SHOT_MAP[shotKey]){state.scene.shot=shotKey;if($('scene-shot'))$('scene-shot').value=shotKey;}
 }
 if(s.emotion){
 var emoKey=String(s.emotion).toLowerCase();
-if(EMOTION_MAP[emoKey]){state.scene.emotion=emoKey;$('scene-emotion').value=emoKey;}
+if(EMOTION_MAP[emoKey]){state.scene.emotion=emoKey;if($('scene-emotion'))$('scene-emotion').value=emoKey;}
 }
 }
-updateStoryboard();
-updateGenerateBtn();
+updateStoryboard();updateGenerateBtn();
 }
 
 function renderProtocolStatus(data,fileName){
@@ -1863,9 +2146,20 @@ status.classList.add('visible');
 }
 
 // ═══════════════════════════════════════════════════════════
-// AGENT SCENARIO
+// AGENT SCENARIO PROMPT
 // ═══════════════════════════════════════════════════════════
 function buildAgentScenarioPrompt(idea,sceneCount){
+var coherenceBlock='';
+if(state.coherence&&state.characters.length>0){
+var locked=state.characters.filter(function(c){return c.locked!==false&&(c.name||c.description);});
+if(locked.length>0){
+coherenceBlock='\n\nCOHÉRENCE VISUELLE STRICTE : les personnages suivants doivent rester IDENTIQUES (même visage, mêmes cheveux, mêmes vêtements, même morphologie) dans TOUTES les scènes :\n';
+locked.forEach(function(c){
+coherenceBlock+='- '+c.name+(c.description?' : '+c.description:'')+'\n';
+});
+coherenceBlock+='\nPour chaque scène, tu DOIS réutiliser EXACTEMENT la même description de personnage.\n';
+}
+}
 return [
 'Tu es un scénariste et directeur artistique de courts-métrages cinématographiques.',
 '',
@@ -1880,14 +2174,14 @@ return [
 '- "shot" : close-up, medium, wide, extreme-wide, low-angle, high-angle, over-the-shoulder, dutch-angle.',
 '- "emotion" : joie, tristesse, amour, colere, peur, surprise, nostalgie, serenite, determination, mystere.',
 '- "dialogue" : phrase courte en FRANÇAIS (max 12 mots) ou "".',
-'',
+coherenceBlock,
 'JSON valide uniquement.',
 '',
 'FORMAT :',
 '{',
 '  "title": "Titre",',
 '  "logline": "Résumé",',
-'  "characters": [ {"name": "Nom", "description": "Apparence"} ],',
+'  "characters": [ {"name": "Nom", "description": "Apparence détaillée"} ],',
 '  "scenes": [',
 '    { "scene_number": 1, "image_prompt": "...", "video_prompt": "...", "camera": "...", "shot": "...", "emotion": "...", "dialogue": "..." }',
 '  ]',
@@ -1900,15 +2194,12 @@ return [
 // ═══════════════════════════════════════════════════════════
 async function runAgent(){
 if(state.agent.isRunning||state.isRunning)return;
-
-// Si un protocole est chargé, on l'utilise
 if(state.protocol.loaded&&state.protocol.data){
 agentLog('Diana','✦ Protocole détecté — construction depuis le fichier…','thinking');
 await runAgentFromProtocol();
 return;
 }
-
-var idea=($('agent-idea').value||'').trim();
+var idea=($('agent-idea')?$('agent-idea').value:'').trim();
 if(idea.length<10){showToast('Décris ton idée (min 10 caractères)','error');return;}
 if(!getApiKey()){showToast('Ajoutez votre clé API','error');return;}
 
@@ -1941,9 +2232,9 @@ state.agent.scenario=scenario;
 agentLog('Diana','✓ Scénario « '+(scenario.title||'Sans titre')+' » — '+scenario.scenes.length+' scènes','success');
 
 if(scenario.characters&&scenario.characters.length){
-state.characters=scenario.characters.map(function(c){return{name:c.name||'',description:c.description||'',role:''};});
+state.characters=scenario.characters.map(function(c){return{name:c.name||'',description:c.description||'',role:'',locked:state.coherence};});
 saveStorage();renderCharacters();
-agentLog('Diana','✓ '+scenario.characters.length+' personnage(s) créé(s)','success');
+agentLog('Diana','✓ '+scenario.characters.length+' personnage(s) créé(s)'+(state.coherence?' 🔒 verrouillés':''),'success');
 }
 
 if(scenario.scenes[0]){
@@ -1972,7 +2263,7 @@ try{
 agentLog('Diana','Image '+(i+1)+'/'+scenario.scenes.length+'…','thinking');
 var url=await generateAgentImage(scenario.scenes[i].image_prompt);
 var finalUri=url.indexOf('data:')===0?url:await compressImageFromUrl(url);
-state.photos.push({id:Date.now()+Math.random(),dataUri:finalUri,thumbnail:finalUri});
+state.photos.push({id:Date.now()+Math.random(),dataUri:finalUri,thumbnail:finalUri,isGenerated:true});
 renderPhotoList();
 agentLog('Diana','✓ Image '+(i+1)+' générée','success');
 await sleep(1200);
@@ -1981,6 +2272,7 @@ agentLog('Diana','✕ Image '+(i+1)+' : '+e.message.slice(0,60),'error');
 }
 }
 updateGenerateBtn();
+renderStoryboardVisual();
 }
 
 if(state.stopRequested)throw new Error('Arrêt demandé');
@@ -1989,7 +2281,6 @@ agentLog('Diana','✓ Prête — lancement de la création','success');
 await sleep(700);
 
 await startGeneration();
-
 agentLog('Diana','✦ Mission accomplie ✦','success');
 showToast('✨ Diana a terminé ✦','success',4000);
 
@@ -2007,9 +2298,6 @@ await deactivateWakeLock();
 updateAgentBtn();
 }
 
-// ═══════════════════════════════════════════════════════════
-// AGENT FROM PROTOCOL
-// ═══════════════════════════════════════════════════════════
 async function runAgentFromProtocol(){
 var data=state.protocol.data;
 if(!data||!data.scenes||!data.scenes.length){
@@ -2035,29 +2323,26 @@ try{
 agentLog('Diana','📄 Protocole : '+(data.title||'Sans titre'),'thinking');
 await sleep(500);
 
-// Appliquer
 applyProtocol(data);
-agentLog('Diana','✓ Paramètres appliqués depuis le protocole','success');
+agentLog('Diana','✓ Paramètres appliqués','success');
 await sleep(400);
 
-// Extraire personnages si présents
 if(data.characters&&data.characters.length){
-state.characters=data.characters.map(function(c){return{name:c.name||'',description:c.description||'',role:''};});
+state.characters=data.characters.map(function(c){return{name:c.name||'',description:c.description||'',role:'',locked:state.coherence};});
 saveStorage();renderCharacters();
 agentLog('Diana','✓ '+data.characters.length+' personnage(s)','success');
 }
 
-// Générer les images
-if(state.agent.generateImages){
-agentLog('Diana','🎨 Génération des images depuis le protocole…','thinking');
+if(state.agent.generateImages||!state.photos.length){
+agentLog('Diana','🎨 Génération des images…','thinking');
 for(var i=0;i<data.scenes.length;i++){
 if(state.stopRequested)break;
 try{
-var prompt=data.scenes[i].image_prompt||data.scenes[i].action||'Cinematic portrait';
+var prompt=data.scenes[i].image_prompt||data.scenes[i].action||'Cinematic portrait scene';
 agentLog('Diana','Image '+(i+1)+'/'+data.scenes.length+'…','thinking');
 var url=await generateAgentImage(prompt);
 var finalUri=url.indexOf('data:')===0?url:await compressImageFromUrl(url);
-state.photos.push({id:Date.now()+Math.random(),dataUri:finalUri,thumbnail:finalUri});
+state.photos.push({id:Date.now()+Math.random(),dataUri:finalUri,thumbnail:finalUri,isGenerated:true});
 renderPhotoList();
 agentLog('Diana','✓ Image '+(i+1)+' générée','success');
 await sleep(1200);
@@ -2066,12 +2351,10 @@ agentLog('Diana','✕ Image '+(i+1)+' : '+e.message.slice(0,60),'error');
 }
 }
 updateGenerateBtn();
+renderStoryboardVisual();
 }
 
-if(!state.photos.length){
-agentLog('Diana','⚠️ Aucune image — ajoute des photos ou active "Tout générer"','error');
-throw new Error('Aucune image source');
-}
+if(!state.photos.length)throw new Error('Aucune image source');
 
 if(state.stopRequested)throw new Error('Arrêt demandé');
 
@@ -2079,7 +2362,6 @@ agentLog('Diana','✓ Prête — lancement de la création','success');
 await sleep(700);
 
 await startGeneration();
-
 agentLog('Diana','✦ Mission accomplie ✦','success');
 showToast('✨ Diana a terminé ✦','success',4000);
 
@@ -2107,6 +2389,25 @@ var hasProtocol=state.protocol.loaded;
 btn.disabled=!hasKey||state.agent.isRunning||state.isRunning||(!hasProtocol&&(idea.length<10||(!hasInput&&state.agent.usePhotos)));
 if(hasProtocol)btn.textContent='✨ Construire depuis le protocole';
 else btn.textContent='✨ Créer avec Diana';
+}
+
+// ═══════════════════════════════════════════════════════════
+// TTS
+// ═══════════════════════════════════════════════════════════
+function speakText(text){
+if(!state.tts||!text)return;
+if(!('speechSynthesis' in window))return;
+try{
+var u=new SpeechSynthesisUtterance(text);
+u.lang='fr-FR';
+u.rate=0.95;
+u.pitch=1.1;
+var voices=window.speechSynthesis.getVoices();
+var frVoice=voices.find(function(v){return v.lang&&v.lang.indexOf('fr')===0;});
+if(frVoice)u.voice=frVoice;
+window.speechSynthesis.cancel();
+window.speechSynthesis.speak(u);
+}catch(e){}
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -2162,6 +2463,10 @@ addToHistory(videoUrl,styleName,durLabel,sceneSummary,fmtLabel);
 renderGallery();
 setStatus('✦ '+successCount+'/'+state.queue.length+' prête'+(successCount>1?'s':'')+' ✦');
 showToast('Vidéo '+(i+1)+' prête ✦','success',3000);
+// TTS
+if(state.tts&&state.scene.dialogue){
+speakText(state.scene.dialogue);
+}
 }catch(e){
 if(e.message==='Arrêt demandé'){item.status='failed';item.errorMsg='Arrêté';break;}
 item.status='failed';
@@ -2220,31 +2525,31 @@ if(state.history.length>MAX_HISTORY)state.history=state.history.slice(0,MAX_HIST
 saveStorage();
 return entry.id;
 }
-
 function removeFromHistory(id){
 state.history=state.history.filter(function(h){return h.id!==id;});
 var favIdx=state.favorites.indexOf(id);
 if(favIdx!==-1)state.favorites.splice(favIdx,1);
 saveStorage();renderGallery();updateStats();
 }
-
 function toggleFavorite(id){
 var idx=state.favorites.indexOf(id);
 if(idx===-1)state.favorites.push(id);
 else state.favorites.splice(idx,1);
 saveStorage();renderGallery();updateStats();
 }
-
 function renderGallery(){
 var galleryGrid=$('gallery-grid');
 var empty=$('gallery-empty');
+var fusionPanel=$('fusion-panel');
 if(!galleryGrid)return;
 if(!state.history.length){
 galleryGrid.innerHTML='';
 if(empty)empty.style.display='block';
+if(fusionPanel)fusionPanel.style.display='none';
 return;
 }
 if(empty)empty.style.display='none';
+if(fusionPanel)fusionPanel.style.display='block';
 galleryGrid.innerHTML=state.history.map(function(h){
 var isFav=state.favorites.indexOf(h.id)!==-1;
 return '<div class="gallery-item'+(isFav?' favorite':'')+'">'+
@@ -2309,7 +2614,6 @@ document.body.appendChild(a);a.click();document.body.removeChild(a);
 });
 showToast('Téléchargement de '+state.history.length+' vidéo(s)…','success',3000);
 }
-
 function clearAll(){
 if(!state.history.length)return;
 if(!confirm('Effacer tout l\'historique ?'))return;
@@ -2317,7 +2621,6 @@ state.history=[];state.favorites=[];
 saveStorage();renderGallery();updateStats();
 showToast('Historique effacé','warn');
 }
-
 function resetApp(){
 if(!confirm('Réinitialiser l\'application ? Toutes tes données seront effacées.'))return;
 try{
@@ -2326,9 +2629,43 @@ localStorage.removeItem(API_KEY_STORAGE);
 localStorage.removeItem(HISTORY_KEY);
 localStorage.removeItem(FAVORITES_KEY);
 localStorage.removeItem(CHARS_KEY);
+localStorage.removeItem(PREFS_KEY);
 }
 }catch(e){}
 location.reload();
+}
+
+// ═══════════════════════════════════════════════════════════
+// FUSION (guide utilisateur)
+// ═══════════════════════════════════════════════════════════
+function fuseVideos(){
+if(state.history.length<2){
+showToast('Il faut au moins 2 vidéos','error');
+return;
+}
+showToast('Redirection vers le guide de fusion…','success',2500);
+var msg=[
+'🎬 FUSION DES VIDÉOS',
+'',
+'Pour assembler tes vidéos en un film, deux options :',
+'',
+'📱 iPhone (gratuit) :',
+'1. Ouvre iMovie',
+'2. Crée un nouveau projet',
+'3. Importe tes vidéos depuis Fichiers',
+'4. Glisse-les dans la timeline',
+'5. Exporte en 4K',
+'',
+'💻 Ordinateur (gratuit) :',
+'1. Ouvre CapCut ou DaVinci Resolve',
+'2. Importe les vidéos',
+'3. Ajoute des transitions',
+'4. Exporte',
+'',
+'💡 iOS ne permet pas la fusion automatique dans le navigateur.',
+'Tes vidéos sont déjà téléchargées dans Fichiers.'
+];
+alert(msg.join('\n'));
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -2342,8 +2679,7 @@ reader.onload=function(e){
 var text=e.target.result;
 var data=extractProtocolFromText(text);
 if(!data||(!data.scenes.length&&!data.title)){
-showToast('Protocole illisible','error');
-return;
+showToast('Protocole illisible','error');return;
 }
 state.protocol.loaded=true;
 state.protocol.raw=text;
@@ -2351,8 +2687,7 @@ state.protocol.data=data;
 var textarea=$('protocol-text');
 if(textarea)textarea.value=text;
 renderProtocolStatus(data,file.name);
-updateStoryboard();
-updateAgentBtn();
+updateStoryboard();updateAgentBtn();
 showToast('Protocole chargé ✦','success');
 };
 reader.onerror=function(){showToast('Erreur de lecture','error');};
@@ -2366,15 +2701,13 @@ var text=textarea.value.trim();
 if(text.length<10){showToast('Protocole trop court','error');return;}
 var data=extractProtocolFromText(text);
 if(!data||(!data.scenes.length&&!data.title)){
-showToast('Protocole illisible — vérifie le format','error');
-return;
+showToast('Protocole illisible — vérifie le format','error');return;
 }
 state.protocol.loaded=true;
 state.protocol.raw=text;
 state.protocol.data=data;
 renderProtocolStatus(data,'texte collé');
-updateStoryboard();
-updateAgentBtn();
+updateStoryboard();updateAgentBtn();
 showToast('Protocole analysé ✦ — '+data.scenes.length+' scène(s)','success');
 }
 
@@ -2384,9 +2717,21 @@ var textarea=$('protocol-text');
 if(textarea)textarea.value='';
 var status=$('protocol-status');
 if(status){status.classList.remove('visible');status.innerHTML='';}
-updateStoryboard();
-updateAgentBtn();
+updateStoryboard();updateAgentBtn();
 showToast('Protocole effacé','warn');
+}
+
+// ═══════════════════════════════════════════════════════════
+// TOGGLES
+// ═══════════════════════════════════════════════════════════
+function bindToggle(id,onChange){
+var el=$(id);
+if(!el)return;
+el.classList.toggle('on',state.coherence&&id.indexOf('coherence')!==-1||state.tts&&id.indexOf('tts')!==-1);
+el.addEventListener('click',function(){
+el.classList.toggle('on');
+onChange(el.classList.contains('on'));
+});
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -2405,6 +2750,29 @@ var hs=$('header-settings-btn');
 if(hs)hs.addEventListener('click',function(){switchTab('settings');});
 var ha=$('header-api-status');
 if(ha)ha.addEventListener('click',function(){switchTab('settings');});
+var hh=$('header-help-btn');
+if(hh)hh.addEventListener('click',function(){
+alert([
+'💋 DianaIA Studio Couture',
+'',
+'🎬 Créer ta vidéo :',
+'1. Choisis une inspiration (ou écris ton idée)',
+'2. Choisis un style',
+'3. Choisis une photo',
+'4. Clique sur "Créer"',
+'',
+'🤖 Agent Diana :',
+'Écris une idée, clique sur "Créer avec Diana"',
+'Elle écrit le scénario, génère les images et crée la vidéo.',
+'',
+'📄 Protocole :',
+'Charge un fichier .txt / .md / .json',
+'Diana extrait tout automatiquement.',
+'',
+'🔒 Cohérence visuelle :',
+'Active le verrou pour garder les personnages identiques.'
+].join('\n'));
+});
 
 // API
 var saveBtn=$('api-save-btn');
@@ -2504,10 +2872,62 @@ var exportBtn=$('export-all-btn');
 if(exportBtn)exportBtn.addEventListener('click',exportAll);
 var clearBtn=$('clear-all-btn');
 if(clearBtn)clearBtn.addEventListener('click',clearAll);
+var fusionBtn=$('fusion-btn');
+if(fusionBtn)fusionBtn.addEventListener('click',fuseVideos);
 
 // Reset
 var resetBtn=$('reset-app-btn');
 if(resetBtn)resetBtn.addEventListener('click',resetApp);
+
+// Toggles
+var coherenceAgent=$('coherence-toggle-agent');
+if(coherenceAgent){
+coherenceAgent.classList.toggle('on',state.coherence);
+coherenceAgent.addEventListener('click',function(){
+coherenceAgent.classList.toggle('on');
+state.coherence=coherenceAgent.classList.contains('on');
+var c2=$('coherence-toggle-settings');
+if(c2)c2.classList.toggle('on',state.coherence);
+saveStorage();updateStoryboard();
+showToast(state.coherence?'🔒 Cohérence visuelle activée':'Cohérence désactivée',state.coherence?'success':'warn',1800);
+});
+}
+var coherenceSettings=$('coherence-toggle-settings');
+if(coherenceSettings){
+coherenceSettings.classList.toggle('on',state.coherence);
+coherenceSettings.addEventListener('click',function(){
+coherenceSettings.classList.toggle('on');
+state.coherence=coherenceSettings.classList.contains('on');
+var c1=$('coherence-toggle-agent');
+if(c1)c1.classList.toggle('on',state.coherence);
+saveStorage();updateStoryboard();
+showToast(state.coherence?'🔒 Cohérence visuelle activée':'Cohérence désactivée',state.coherence?'success':'warn',1800);
+});
+}
+var ttsToggle=$('tts-toggle');
+if(ttsToggle){
+ttsToggle.classList.toggle('on',state.tts);
+ttsToggle.addEventListener('click',function(){
+ttsToggle.classList.toggle('on');
+state.tts=ttsToggle.classList.contains('on');
+var t2=$('tts-toggle-settings');
+if(t2)t2.classList.toggle('on',state.tts);
+saveStorage();updateStoryboard();
+showToast(state.tts?'🗣️ Voix off activée':'Voix off désactivée',state.tts?'success':'warn',1800);
+});
+}
+var ttsSettings=$('tts-toggle-settings');
+if(ttsSettings){
+ttsSettings.classList.toggle('on',state.tts);
+ttsSettings.addEventListener('click',function(){
+ttsSettings.classList.toggle('on');
+state.tts=ttsSettings.classList.contains('on');
+var t1=$('tts-toggle');
+if(t1)t1.classList.toggle('on',state.tts);
+saveStorage();updateStoryboard();
+showToast(state.tts?'🗣️ Voix off activée':'Voix off désactivée',state.tts?'success':'warn',1800);
+});
+}
 
 // Wake lock pref
 try{wakeLockEnabled=localStorage.getItem(WAKE_LOCK_PREF)==='1';}catch(e){}
@@ -2520,12 +2940,14 @@ renderFormats();
 renderDurations();
 renderIntensity();
 renderShootingMode();
+renderInspirations();
 renderPhotoList();
 renderCharacters();
 renderGallery();
 updateGenerateBtn();
 updateAgentBtn();
 updateStoryboard();
+renderStoryboardVisual();
 updateStats();
 
 // Welcome
@@ -2534,7 +2956,7 @@ var key=getApiKey();
 if(!key)showToast('Ajoutez votre clé API dans Réglages ✦','warn',4000);
 },1000);
 
-console.log('[DianaIA v8] Studio Couture + Protocole prêt ✦ localStorage:',localStorageAvailable?'OK':'session');
+console.log('[DianaIA v9.0] Studio Couture complet ✦ localStorage:',localStorageAvailable?'OK':'session');
 });
 })();
 </script>
