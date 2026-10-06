@@ -42,20 +42,10 @@ radial-gradient(circle at 80% 20%, rgba(26,188,156,0.05) 0%, transparent 50%);
 background-attachment: fixed; color: var(--ink); min-height: 100vh;
 padding: calc(1.2rem + env(safe-area-inset-top)) 1rem calc(3rem + env(safe-area-inset-bottom));
 font-size: 14px; line-height: 1.6; max-width: 760px; margin: 0 auto;
-letter-spacing: 0.015em; -webkit-font-smoothing: antialiased;
-overflow-x: hidden;
+letter-spacing: 0.015em; -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
-
-/* ═══ MOTIFS DÉCORATIFS EN FOND ═══ */
-.bg-decor {
-position: fixed; inset: 0; pointer-events: none; z-index: 0;
-overflow: hidden; opacity: 0.35;
-}
-.bg-decor .deco-item {
-position: absolute; font-size: 2.2rem; opacity: 0.15;
-animation: floatDecor 20s ease-in-out infinite;
-user-select: none;
-}
+.bg-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; opacity: 0.35; }
+.bg-decor .deco-item { position: absolute; font-size: 2.2rem; opacity: 0.15; animation: floatDecor 20s ease-in-out infinite; user-select: none; }
 .bg-decor .deco-item:nth-child(1) { top: 8%; left: 6%; animation-delay: 0s; }
 .bg-decor .deco-item:nth-child(2) { top: 22%; right: 8%; animation-delay: 2s; }
 .bg-decor .deco-item:nth-child(3) { top: 45%; left: 4%; animation-delay: 4s; }
@@ -64,611 +54,182 @@ user-select: none;
 .bg-decor .deco-item:nth-child(6) { top: 92%; right: 10%; animation-delay: 10s; }
 .bg-decor .deco-item:nth-child(7) { top: 35%; left: 50%; animation-delay: 3s; opacity: 0.08; font-size: 3.5rem; }
 .bg-decor .deco-item:nth-child(8) { top: 70%; left: 45%; animation-delay: 7s; opacity: 0.08; font-size: 3rem; }
-@keyframes floatDecor {
-0%, 100% { transform: translateY(0) rotate(0deg); }
-50% { transform: translateY(-25px) rotate(10deg); }
-}
+@keyframes floatDecor { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-25px) rotate(10deg); } }
 body > *:not(.bg-decor) { position: relative; z-index: 1; }
-
-/* ═══ HEADER ═══ */
 header { margin-bottom: 2rem; text-align: center; position: relative; padding: 1.2rem 0 1.6rem; }
-header::before {
-content: '💋';
-position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-font-size: 1.4rem; opacity: 0.9; filter: drop-shadow(0 0 12px rgba(214,51,108,0.6));
-}
-header::after {
-content: '';
-position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-width: 180px; height: 2px;
-background: linear-gradient(90deg, transparent, var(--rouge), var(--or), var(--emeraude), var(--or), var(--rouge), transparent);
-opacity: 0.85; border-radius: 2px;
-box-shadow: 0 0 20px rgba(212,175,55,0.4);
-}
-.brand-mark {
-display: inline-flex; align-items: center; gap: 0.6rem;
-font-family: var(--font-body); font-size: 0.65rem; font-weight: 500;
-letter-spacing: 0.55em; color: var(--or); text-transform: uppercase;
-margin-bottom: 0.7rem; opacity: 0.95;
-}
+header::before { content: '💋'; position: absolute; top: 0; left: 50%; transform: translateX(-50%); font-size: 1.4rem; opacity: 0.9; filter: drop-shadow(0 0 12px rgba(214,51,108,0.6)); }
+header::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 180px; height: 2px; background: linear-gradient(90deg, transparent, var(--rouge), var(--or), var(--emeraude), var(--or), var(--rouge), transparent); opacity: 0.85; border-radius: 2px; box-shadow: 0 0 20px rgba(212,175,55,0.4); }
+.brand-mark { display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-body); font-size: 0.65rem; font-weight: 500; letter-spacing: 0.55em; color: var(--or); text-transform: uppercase; margin-bottom: 0.7rem; opacity: 0.95; }
 .brand-mark::before, .brand-mark::after { content: '✦'; color: var(--rouge-soft); font-size: 0.7rem; }
-h1 {
-font-family: var(--font-display); font-size: 3.2rem; font-weight: 500;
-letter-spacing: 0.015em; margin-bottom: 0.5rem;
-background: linear-gradient(135deg, var(--satin) 0%, var(--or-soft) 30%, var(--rouge-soft) 55%, var(--champagne) 80%, var(--or) 100%);
--webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-line-height: 1; font-style: italic;
-filter: drop-shadow(0 4px 20px rgba(214,51,108,0.25));
-}
-.subtitle {
-font-family: var(--font-display); font-size: 1rem; color: var(--ink-dim);
-font-style: italic; letter-spacing: 0.15em; font-weight: 300;
-}
-
-/* ═══ TOAST ═══ */
-.toast {
-position: fixed; top: calc(1.5rem + env(safe-area-inset-top)); left: 50%;
-transform: translateX(-50%) translateY(-140px);
-background: linear-gradient(135deg, var(--panel), var(--panel-2));
-color: var(--ink);
-border: 1px solid var(--or-deep); border-left: 4px solid var(--or);
-padding: 1rem 1.5rem; border-radius: var(--radius-sm);
-font-size: 0.85rem; font-weight: 500; font-family: var(--font-body);
-box-shadow: var(--shadow-soft), var(--shadow-lux);
-z-index: 1000; opacity: 0; max-width: 90vw; text-align: center;
-transition: transform 0.4s cubic-bezier(0.2,0.9,0.3,1.2), opacity 0.4s ease;
-display: flex; align-items: center; gap: 0.7rem;
-}
+h1 { font-family: var(--font-display); font-size: 3.2rem; font-weight: 500; letter-spacing: 0.015em; margin-bottom: 0.5rem; background: linear-gradient(135deg, var(--satin) 0%, var(--or-soft) 30%, var(--rouge-soft) 55%, var(--champagne) 80%, var(--or) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; font-style: italic; filter: drop-shadow(0 4px 20px rgba(214,51,108,0.25)); }
+.subtitle { font-family: var(--font-display); font-size: 1rem; color: var(--ink-dim); font-style: italic; letter-spacing: 0.15em; font-weight: 300; }
+.toast { position: fixed; top: calc(1.5rem + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%) translateY(-140px); background: linear-gradient(135deg, var(--panel), var(--panel-2)); color: var(--ink); border: 1px solid var(--or-deep); border-left: 4px solid var(--or); padding: 1rem 1.5rem; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; box-shadow: var(--shadow-soft), var(--shadow-lux); z-index: 1000; opacity: 0; max-width: 90vw; text-align: center; transition: transform 0.4s cubic-bezier(0.2,0.9,0.3,1.2), opacity 0.4s ease; display: flex; align-items: center; gap: 0.7rem; }
 .toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
 .toast.success { border-left-color: var(--success); }
 .toast.error { border-left-color: var(--error); }
 .toast.warn { border-left-color: var(--warn); }
 .toast .toast-icon { font-size: 1.1rem; color: var(--or); filter: drop-shadow(0 0 6px var(--or-soft)); }
-
-/* ═══ INFO BANNER ═══ */
-.info-banner {
-background: linear-gradient(135deg, rgba(214,51,108,0.10), rgba(212,175,55,0.06));
-border: 1px solid var(--border); border-left: 3px solid var(--rouge);
-padding: 1.15rem 1.3rem; border-radius: var(--radius-sm);
-font-size: 0.82rem; color: var(--ink-dim); margin-bottom: 1.4rem; line-height: 1.65;
-position: relative; font-family: var(--font-display); font-style: italic;
-box-shadow: inset 0 0 24px rgba(214,51,108,0.04);
-}
-.info-banner::before {
-content: '👑'; position: absolute; top: 0.6rem; right: 1rem;
-font-size: 1.3rem; opacity: 0.5;
-filter: drop-shadow(0 0 8px rgba(212,175,55,0.5));
-}
+.info-banner { background: linear-gradient(135deg, rgba(214,51,108,0.10), rgba(212,175,55,0.06)); border: 1px solid var(--border); border-left: 3px solid var(--rouge); padding: 1.15rem 1.3rem; border-radius: var(--radius-sm); font-size: 0.82rem; color: var(--ink-dim); margin-bottom: 1.4rem; line-height: 1.65; position: relative; font-family: var(--font-display); font-style: italic; box-shadow: inset 0 0 24px rgba(214,51,108,0.04); }
+.info-banner::before { content: '👑'; position: absolute; top: 0.6rem; right: 1rem; font-size: 1.3rem; opacity: 0.5; filter: drop-shadow(0 0 8px rgba(212,175,55,0.5)); }
 .info-banner strong { color: var(--or-soft); font-weight: 500; font-style: normal; }
-
-/* ═══ SECTIONS ═══ */
-.section {
-background: linear-gradient(180deg, var(--panel), var(--panel-2));
-border: 1px solid var(--border); border-radius: var(--radius);
-margin-bottom: 1.1rem; overflow: hidden;
-transition: border-color 0.3s, box-shadow 0.3s, transform 0.15s;
-}
+.section { background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s, transform 0.15s; }
 .section.open { border-color: var(--or-deep); box-shadow: var(--shadow-lux); }
-.section-header {
-padding: 1.1rem 1.3rem; cursor: pointer; user-select: none;
-display: flex; justify-content: space-between; align-items: center;
-transition: background 0.2s;
-}
+.section-header { padding: 1.1rem 1.3rem; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
 .section-header:active { background: rgba(212,175,55,0.04); }
-.section-title {
-font-family: var(--font-display); font-size: 0.9rem; font-weight: 500;
-text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink);
-display: flex; align-items: center; gap: 0.7rem;
-}
-.section-title .badge {
-display: inline-block; padding: 0.18rem 0.6rem;
-background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(214,51,108,0.10));
-color: var(--or-soft); border: 1px solid var(--or-deep); border-radius: 3px;
-font-size: 0.6rem; letter-spacing: 0.18em; font-family: var(--font-body);
-font-weight: 600; font-style: normal;
-}
+.section-title { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.22em; color: var(--ink); display: flex; align-items: center; gap: 0.7rem; }
+.section-title .badge { display: inline-block; padding: 0.18rem 0.6rem; background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(214,51,108,0.10)); color: var(--or-soft); border: 1px solid var(--or-deep); border-radius: 3px; font-size: 0.6rem; letter-spacing: 0.18em; font-family: var(--font-body); font-weight: 600; font-style: normal; }
 .section-title .badge.soft { color: var(--satin); border-color: var(--rouge-deep); }
 .section-title .badge.plum { color: var(--plum-soft); border-color: var(--plum); }
 .section-title .badge.mint { color: var(--emeraude-soft); border-color: var(--emeraude); }
-.section-header .chevron {
-font-size: 0.75rem; color: var(--or-deep); transition: transform 0.3s;
-font-weight: 700;
-}
+.section-title .badge.agent { color: #fff; background: linear-gradient(135deg, var(--rouge), var(--or)); border-color: var(--or-soft); animation: pulseBadge 2s ease-in-out infinite; }
+@keyframes pulseBadge { 0%, 100% { box-shadow: 0 0 0 rgba(212,175,55,0); } 50% { box-shadow: 0 0 16px rgba(212,175,55,0.6); } }
+.section-header .chevron { font-size: 0.75rem; color: var(--or-deep); transition: transform 0.3s; font-weight: 700; }
 .section.open .section-header .chevron { transform: rotate(180deg); color: var(--or); }
 .section-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
-.section.open .section-body { max-height: 25000px; }
+.section.open .section-body { max-height: 30000px; }
 .section-content { padding: 0 1.3rem 1.3rem; }
-
-/* ═══ API PANEL ═══ */
-.api-panel {
-background: linear-gradient(180deg, var(--panel), var(--panel-2));
-border: 1px solid var(--border); border-radius: var(--radius);
-padding: 1.3rem 1.4rem; margin-bottom: 1.1rem;
-transition: border-color 0.3s, box-shadow 0.3s;
-position: relative; overflow: hidden;
-}
-.api-panel::before {
-content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-background: linear-gradient(90deg, var(--rouge), var(--or), var(--emeraude), var(--or), var(--rouge));
-opacity: 0.6;
-}
+.api-panel { background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem 1.4rem; margin-bottom: 1.1rem; transition: border-color 0.3s, box-shadow 0.3s; position: relative; overflow: hidden; }
+.api-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--rouge), var(--or), var(--emeraude), var(--or), var(--rouge)); opacity: 0.6; }
 .api-panel.ok { box-shadow: inset 4px 0 0 var(--success), var(--shadow-lux); }
-.api-key-input {
-width: 100%; padding: 1rem 1.1rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border); background: var(--velvet-2);
-color: var(--ink); font-family: var(--font-mono); font-size: 0.8rem;
-margin-bottom: 0.7rem; transition: border-color 0.2s, box-shadow 0.2s;
-}
+.api-key-input { width: 100%; padding: 1rem 1.1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink); font-family: var(--font-mono); font-size: 0.8rem; margin-bottom: 0.7rem; }
 .api-key-input:focus { outline: none; border-color: var(--or); box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
-.api-save-btn {
-width: 100%; padding: 1rem 1.3rem; border-radius: var(--radius-sm);
-border: 1px solid var(--or-deep);
-background: linear-gradient(135deg, rgba(214,51,108,0.20), rgba(212,175,55,0.15));
-color: var(--champagne-soft); font-size: 0.82rem; font-weight: 600;
-letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer;
-margin-bottom: 0.8rem; transition: transform 0.1s, box-shadow 0.2s;
-font-family: var(--font-body);
-}
+.api-save-btn { width: 100%; padding: 1rem 1.3rem; border-radius: var(--radius-sm); border: 1px solid var(--or-deep); background: linear-gradient(135deg, rgba(214,51,108,0.20), rgba(212,175,55,0.15)); color: var(--champagne-soft); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; margin-bottom: 0.8rem; font-family: var(--font-body); }
 .api-save-btn:active { transform: scale(0.98); }
-.api-save-btn:hover { box-shadow: var(--glow-or); }
-.api-status-line {
-font-size: 0.75rem; padding: 0.7rem 1rem; border-radius: var(--radius-sm);
-margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.7rem;
-background: var(--velvet-2); color: var(--ink-dim);
-border: 1px solid var(--border-soft);
-}
-.api-status-line.ok {
-background: rgba(46,204,113,0.08); color: var(--success);
-border-color: rgba(46,204,113,0.35); font-weight: 500;
-}
-.api-status-line .status-dot {
-width: 8px; height: 8px; border-radius: 50%;
-background: var(--ink-faint); flex-shrink: 0;
-}
-.api-status-line.ok .status-dot {
-background: var(--success); box-shadow: 0 0 10px var(--success);
-}
-.api-hint {
-font-size: 0.72rem; color: var(--ink-dim); margin-top: 0.6rem;
-font-family: var(--font-display); font-style: italic;
-}
+.api-status-line { font-size: 0.75rem; padding: 0.7rem 1rem; border-radius: var(--radius-sm); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.7rem; background: var(--velvet-2); color: var(--ink-dim); border: 1px solid var(--border-soft); }
+.api-status-line.ok { background: rgba(46,204,113,0.08); color: var(--success); border-color: rgba(46,204,113,0.35); font-weight: 500; }
+.api-status-line .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-faint); flex-shrink: 0; }
+.api-status-line.ok .status-dot { background: var(--success); box-shadow: 0 0 10px var(--success); }
+.api-hint { font-size: 0.72rem; color: var(--ink-dim); margin-top: 0.6rem; font-family: var(--font-display); font-style: italic; }
 .api-hint a { color: var(--or-soft); text-decoration: none; border-bottom: 1px dotted var(--or-deep); }
-
-/* ═══ UPLOAD ═══ */
-.upload-zone {
-position: relative; border: 2px dashed var(--or-deep); border-radius: var(--radius);
-padding: 2.4rem 1.2rem; text-align: center; cursor: pointer;
-transition: all 0.25s; background: var(--velvet-2); display: block;
-}
-.upload-zone:active {
-border-color: var(--rouge); background: rgba(214,51,108,0.05);
-transform: scale(0.99);
-}
-.upload-zone input[type=file] {
-position: absolute; width: 1px; height: 1px; opacity: 0;
-overflow: hidden; clip: rect(0 0 0 0); pointer-events: none;
-}
-.upload-zone .icon {
-font-size: 2.8rem; margin-bottom: 0.8rem; display: block;
-filter: drop-shadow(0 0 16px rgba(212,175,55,0.4));
-}
-.upload-zone .t1 {
-font-family: var(--font-display); font-size: 1.25rem; font-style: italic;
-color: var(--ink); margin-bottom: 0.4rem; font-weight: 500;
-}
+.upload-zone { position: relative; border: 2px dashed var(--or-deep); border-radius: var(--radius); padding: 2.4rem 1.2rem; text-align: center; cursor: pointer; background: var(--velvet-2); display: block; }
+.upload-zone:active { border-color: var(--rouge); background: rgba(214,51,108,0.05); transform: scale(0.99); }
+.upload-zone input[type=file] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; clip: rect(0 0 0 0); pointer-events: none; }
+.upload-zone .icon { font-size: 2.8rem; margin-bottom: 0.8rem; display: block; filter: drop-shadow(0 0 16px rgba(212,175,55,0.4)); }
+.upload-zone .t1 { font-family: var(--font-display); font-size: 1.25rem; font-style: italic; color: var(--ink); margin-bottom: 0.4rem; font-weight: 500; }
 .upload-zone .t2 { font-size: 0.75rem; color: var(--ink-dim); letter-spacing: 0.05em; }
-
-/* ═══ STYLE CARDS ═══ */
-.style-grid {
-display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-gap: 0.7rem; margin-top: 0.5rem;
-}
-.style-card {
-padding: 1rem 0.8rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border); background: var(--velvet-2);
-cursor: pointer; transition: all 0.2s; text-align: center;
-position: relative; overflow: hidden;
-}
-.style-card::before {
-content: ''; position: absolute; inset: 0;
-background: linear-gradient(135deg, transparent, rgba(212,175,55,0.04), transparent);
-opacity: 0; transition: opacity 0.3s;
-}
-.style-card:hover::before { opacity: 1; }
+.style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.7rem; margin-top: 0.5rem; }
+.style-card { padding: 1rem 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); cursor: pointer; text-align: center; position: relative; overflow: hidden; }
 .style-card:active { transform: scale(0.96); }
-.style-card.selected {
-background: linear-gradient(135deg, rgba(214,51,108,0.15), rgba(212,175,55,0.10));
-border-color: var(--or); box-shadow: 0 0 0 1px var(--or), var(--glow-or);
-}
-.style-card.selected::after {
-content: '✦'; position: absolute; top: 0.5rem; right: 0.6rem;
-color: var(--or-soft); font-size: 0.9rem;
-filter: drop-shadow(0 0 6px var(--or-soft));
-}
-.style-card .style-emoji {
-font-size: 1.8rem; display: block; margin-bottom: 0.4rem;
-filter: drop-shadow(0 2px 8px rgba(214,51,108,0.3));
-}
-.style-card .style-name {
-font-family: var(--font-display); font-size: 0.92rem; font-weight: 500;
-color: var(--ink); font-style: italic; display: block;
-}
-.style-card .style-desc {
-font-size: 0.62rem; color: var(--ink-dim); margin-top: 0.25rem;
-letter-spacing: 0.08em; display: block;
-}
-
-/* ═══ FORM CONTROLS ═══ */
+.style-card.selected { background: linear-gradient(135deg, rgba(214,51,108,0.15), rgba(212,175,55,0.10)); border-color: var(--or); box-shadow: 0 0 0 1px var(--or), var(--glow-or); }
+.style-card.selected::after { content: '✦'; position: absolute; top: 0.5rem; right: 0.6rem; color: var(--or-soft); font-size: 0.9rem; filter: drop-shadow(0 0 6px var(--or-soft)); }
+.style-card .style-emoji { font-size: 1.8rem; display: block; margin-bottom: 0.4rem; }
+.style-card .style-name { font-family: var(--font-display); font-size: 0.92rem; font-weight: 500; color: var(--ink); font-style: italic; display: block; }
+.style-card .style-desc { font-size: 0.62rem; color: var(--ink-dim); margin-top: 0.25rem; letter-spacing: 0.08em; display: block; }
 .control-row { margin-bottom: 1.1rem; }
 .control-row:last-child { margin-bottom: 0; }
-.control-label {
-display: block; font-family: var(--font-display); font-size: 0.82rem;
-color: var(--ink-dim); margin-bottom: 0.55rem;
-text-transform: uppercase; letter-spacing: 0.18em;
-font-weight: 500; font-style: italic;
-}
-select, .text-input {
-width: 100%; padding: 0.95rem 1.1rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border); background: var(--velvet-2);
-color: var(--ink); font-family: var(--font-body); font-size: 0.9rem;
-transition: border-color 0.2s, box-shadow 0.2s;
-}
-select {
--webkit-appearance: none; appearance: none;
-background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'><path fill='%23d4af37' d='M0 0l6 7 6-7z'/></svg>");
-background-repeat: no-repeat; background-position: right 1.1rem center;
-background-size: 11px; cursor: pointer;
-}
-select:focus, .text-input:focus, textarea:focus {
-outline: none; border-color: var(--or);
-box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
-}
+.control-label { display: block; font-family: var(--font-display); font-size: 0.82rem; color: var(--ink-dim); margin-bottom: 0.55rem; text-transform: uppercase; letter-spacing: 0.18em; font-weight: 500; font-style: italic; }
+select, .text-input { width: 100%; padding: 0.95rem 1.1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink); font-family: var(--font-body); font-size: 0.9rem; }
+select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'><path fill='%23d4af37' d='M0 0l6 7 6-7z'/></svg>"); background-repeat: no-repeat; background-position: right 1.1rem center; background-size: 11px; cursor: pointer; }
+select:focus, .text-input:focus, textarea:focus { outline: none; border-color: var(--or); box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
 select option { background: var(--velvet-3); color: var(--ink); }
-textarea {
-width: 100%; padding: 0.95rem 1.1rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border); background: var(--velvet-2);
-color: var(--ink); font-family: var(--font-body); font-size: 0.9rem;
-line-height: 1.55; resize: vertical; min-height: 80px;
-transition: border-color 0.2s, box-shadow 0.2s;
-}
-textarea::placeholder, .text-input::placeholder {
-color: var(--ink-faint); font-style: italic;
-}
-
-/* ═══ DURATION GRID ═══ */
+optgroup { background: var(--velvet-3); color: var(--or-soft); font-style: italic; font-weight: 600; }
+textarea { width: 100%; padding: 0.95rem 1.1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink); font-family: var(--font-body); font-size: 0.9rem; line-height: 1.55; resize: vertical; min-height: 80px; }
+textarea::placeholder, .text-input::placeholder { color: var(--ink-faint); font-style: italic; }
 .duration-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.55rem; }
-.duration-btn {
-padding: 0.95rem 0.4rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border); background: var(--velvet-2);
-color: var(--ink-dim); cursor: pointer; text-align: center;
-transition: all 0.18s;
-}
+.duration-btn { padding: 0.95rem 0.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink-dim); cursor: pointer; text-align: center; transition: all 0.18s; }
 .duration-btn:active { transform: scale(0.95); }
-.duration-btn.selected {
-background: linear-gradient(135deg, rgba(214,51,108,0.18), rgba(212,175,55,0.12));
-border-color: var(--or); color: var(--or-soft);
-box-shadow: var(--glow-or);
-}
-.duration-btn .dur-val {
-font-family: var(--font-display); font-size: 1.3rem; font-weight: 500;
-font-style: italic; display: block;
-}
-.duration-btn .dur-lbl {
-font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
-opacity: 0.7; margin-top: 0.15rem; display: block;
-}
-
-/* ═══ SEGMENT GRID ═══ */
+.duration-btn.selected { background: linear-gradient(135deg, rgba(214,51,108,0.18), rgba(212,175,55,0.12)); border-color: var(--or); color: var(--or-soft); box-shadow: var(--glow-or); }
+.duration-btn .dur-val { font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; font-style: italic; display: block; }
+.duration-btn .dur-lbl { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-top: 0.15rem; display: block; }
+.format-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.55rem; }
+.format-btn { padding: 0.9rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink-dim); cursor: pointer; text-align: center; position: relative; }
+.format-btn:active { transform: scale(0.96); }
+.format-btn.selected { background: linear-gradient(135deg, rgba(214,51,108,0.18), rgba(212,175,55,0.12)); border-color: var(--or); color: var(--or-soft); box-shadow: var(--glow-or); }
+.format-btn .fmt-icon { font-size: 1.4rem; display: block; margin-bottom: 0.3rem; }
+.format-btn .fmt-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; font-style: italic; display: block; }
+.format-btn .fmt-ratio { font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; margin-top: 0.15rem; display: block; font-family: var(--font-mono); }
+.format-btn .fmt-use { font-size: 0.6rem; opacity: 0.55; margin-top: 0.2rem; display: block; font-style: italic; }
 .segment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
 .segment-grid.full { grid-template-columns: 1fr; }
 .segment-grid.two { grid-template-columns: repeat(2, 1fr); }
-.segment-btn {
-padding: 0.75rem 0.6rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border); background: var(--velvet-2);
-color: var(--ink-dim); cursor: pointer; text-align: center;
-font-size: 0.75rem; letter-spacing: 0.05em; transition: all 0.18s;
-line-height: 1.3;
-}
+.segment-btn { padding: 0.75rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink-dim); cursor: pointer; text-align: center; font-size: 0.75rem; letter-spacing: 0.05em; line-height: 1.3; }
 .segment-btn:active { transform: scale(0.96); }
-.segment-btn.selected {
-background: linear-gradient(135deg, rgba(214,51,108,0.15), rgba(212,175,55,0.10));
-border-color: var(--or); color: var(--or-soft); font-weight: 600;
-box-shadow: 0 0 0 1px var(--or-deep);
-}
-
-/* ═══ CHARACTER CARDS ═══ */
-.char-card {
-background: var(--velvet-2); border: 1px solid var(--border);
-border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 0.7rem;
-position: relative; transition: border-color 0.2s;
-}
+.segment-btn.selected { background: linear-gradient(135deg, rgba(214,51,108,0.15), rgba(212,175,55,0.10)); border-color: var(--or); color: var(--or-soft); font-weight: 600; box-shadow: 0 0 0 1px var(--or-deep); }
+.char-card { background: var(--velvet-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 0.7rem; position: relative; }
 .char-card:hover { border-color: var(--or-deep); }
-.char-card-header {
-display: flex; justify-content: space-between; align-items: center;
-margin-bottom: 0.6rem;
-}
-.char-card-name {
-font-family: var(--font-display); font-size: 1rem; font-style: italic;
-color: var(--or-soft); font-weight: 500;
-}
-.char-card-remove {
-background: transparent; border: 1px solid var(--error); color: var(--error);
-width: 28px; height: 28px; border-radius: 50%; font-size: 0.75rem;
-cursor: pointer; display: flex; align-items: center; justify-content: center;
-transition: all 0.15s;
-}
+.char-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.char-card-name { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--or-soft); font-weight: 500; }
+.char-card-remove { background: transparent; border: 1px solid var(--error); color: var(--error); width: 28px; height: 28px; border-radius: 50%; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 .char-card-remove:active { background: rgba(231,76,60,0.15); transform: scale(0.92); }
 .char-card input, .char-card textarea { margin-bottom: 0.5rem; font-size: 0.85rem; }
 .char-card input:last-child, .char-card textarea:last-child { margin-bottom: 0; }
-.add-char-btn {
-width: 100%; padding: 1rem; border-radius: var(--radius-sm);
-border: 1px dashed var(--or-deep); background: transparent;
-color: var(--or-soft); font-family: var(--font-display);
-font-size: 0.9rem; font-style: italic; letter-spacing: 0.12em;
-cursor: pointer; transition: all 0.2s;
-}
+.add-char-btn { width: 100%; padding: 1rem; border-radius: var(--radius-sm); border: 1px dashed var(--or-deep); background: transparent; color: var(--or-soft); font-family: var(--font-display); font-size: 0.9rem; font-style: italic; letter-spacing: 0.12em; cursor: pointer; }
 .add-char-btn:active { background: rgba(212,175,55,0.08); transform: scale(0.99); }
-
-/* ═══ PRESET CHIPS ═══ */
 .preset-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.6rem; }
-.preset-chip {
-padding: 0.4rem 0.85rem; border-radius: 999px;
-border: 1px solid var(--border); background: var(--velvet-2);
-color: var(--ink-dim); font-size: 0.72rem; cursor: pointer;
-font-style: italic; font-family: var(--font-display);
-transition: all 0.18s;
-}
-.preset-chip:active {
-background: rgba(214,51,108,0.12); color: var(--satin);
-border-color: var(--rouge-deep);
-}
-
-/* ═══ BUTTONS ═══ */
-.btn-primary {
-width: 100%; padding: 1.4rem; border-radius: var(--radius);
-border: 1px solid var(--or-deep);
-background: linear-gradient(135deg, rgba(214,51,108,0.28) 0%, rgba(212,175,55,0.22) 50%, rgba(26,188,156,0.18) 100%);
-color: var(--champagne-soft); font-family: var(--font-display);
-font-size: 1.15rem; font-weight: 500; letter-spacing: 0.25em;
-text-transform: uppercase; cursor: pointer;
-margin-bottom: 1.1rem; transition: transform 0.1s, box-shadow 0.25s;
-box-shadow: var(--shadow-lux);
-position: relative; overflow: hidden;
-}
-.btn-primary::before {
-content: ''; position: absolute; top: 0; left: -100%;
-width: 100%; height: 100%;
-background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-transition: left 0.6s;
-}
+.preset-chip { padding: 0.4rem 0.85rem; border-radius: 999px; border: 1px solid var(--border); background: var(--velvet-2); color: var(--ink-dim); font-size: 0.72rem; cursor: pointer; font-style: italic; font-family: var(--font-display); }
+.preset-chip:active { background: rgba(214,51,108,0.12); color: var(--satin); border-color: var(--rouge-deep); }
+.btn-primary { width: 100%; padding: 1.4rem; border-radius: var(--radius); border: 1px solid var(--or-deep); background: linear-gradient(135deg, rgba(214,51,108,0.28) 0%, rgba(212,175,55,0.22) 50%, rgba(26,188,156,0.18) 100%); color: var(--champagne-soft); font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; margin-bottom: 1.1rem; box-shadow: var(--shadow-lux); position: relative; overflow: hidden; }
+.btn-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent); transition: left 0.6s; }
 .btn-primary:hover::before { left: 100%; }
 .btn-primary:active:not(:disabled) { transform: scale(0.98); }
 .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; box-shadow: none; }
-
-.btn-stop {
-width: 100%; padding: 1rem; border-radius: var(--radius-sm);
-border: 1px solid var(--error); background: transparent;
-color: var(--error); font-family: var(--font-display);
-font-size: 0.9rem; font-weight: 500; letter-spacing: 0.2em;
-text-transform: uppercase; cursor: pointer; margin-bottom: 1.1rem;
-display: none; font-style: italic;
-transition: all 0.2s;
-}
+.btn-agent { width: 100%; padding: 1.4rem; border-radius: var(--radius); border: 1px solid var(--rouge-deep); background: linear-gradient(135deg, rgba(214,51,108,0.35) 0%, rgba(139,46,92,0.28) 100%); color: #fff; font-family: var(--font-display); font-size: 1.15rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; margin-bottom: 1.1rem; box-shadow: var(--shadow-lux), var(--glow-rouge); position: relative; overflow: hidden; }
+.btn-agent::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition: left 0.8s; }
+.btn-agent:hover::before { left: 100%; }
+.btn-agent:active:not(:disabled) { transform: scale(0.98); }
+.btn-agent:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
+.btn-stop { width: 100%; padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--error); background: transparent; color: var(--error); font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; margin-bottom: 1.1rem; display: none; font-style: italic; }
 .btn-stop.visible { display: block; }
 .btn-stop:active { background: rgba(231,76,60,0.10); }
-
-/* ═══ QUEUE ═══ */
 .queue { margin-top: 1.2rem; }
-.queue-item {
-display: flex; align-items: center; gap: 1rem;
-padding: 1.1rem 1.2rem; border-radius: var(--radius-sm);
-border: 1px solid var(--border-soft); margin-bottom: 0.6rem;
-background: linear-gradient(180deg, var(--panel), var(--panel-2));
-font-size: 0.85rem; transition: border-color 0.3s, box-shadow 0.3s;
-}
-.queue-item.processing {
-border-color: var(--or-deep); background: linear-gradient(90deg, rgba(212,175,55,0.06), var(--panel));
-box-shadow: var(--glow-or);
-}
-.queue-item.done {
-border-color: var(--success); background: linear-gradient(90deg, rgba(46,204,113,0.05), var(--panel));
-}
-.queue-item.failed {
-border-color: var(--error); background: linear-gradient(90deg, rgba(231,76,60,0.05), var(--panel));
-}
-.queue-item .q-icon {
-font-size: 1.2rem; width: 1.8rem; text-align: center; flex-shrink: 0;
-}
+.queue-item { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.2rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft); margin-bottom: 0.6rem; background: linear-gradient(180deg, var(--panel), var(--panel-2)); font-size: 0.85rem; }
+.queue-item.processing { border-color: var(--or-deep); background: linear-gradient(90deg, rgba(212,175,55,0.06), var(--panel)); box-shadow: var(--glow-or); }
+.queue-item.done { border-color: var(--success); background: linear-gradient(90deg, rgba(46,204,113,0.05), var(--panel)); }
+.queue-item.failed { border-color: var(--error); background: linear-gradient(90deg, rgba(231,76,60,0.05), var(--panel)); }
+.queue-item .q-icon { font-size: 1.2rem; width: 1.8rem; text-align: center; flex-shrink: 0; }
 .queue-item.processing .q-icon { color: var(--or-soft); animation: spin 2s linear infinite; }
 .queue-item.done .q-icon { color: var(--success); }
 .queue-item.failed .q-icon { color: var(--error); }
-.queue-item .q-name {
-flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis;
-white-space: nowrap; font-family: var(--font-display); font-style: italic;
-font-size: 0.95rem;
-}
-.queue-item .q-status {
-font-size: 0.7rem; color: var(--ink-dim); text-align: right;
-max-width: 55%; overflow: hidden; text-overflow: ellipsis;
-white-space: nowrap; font-family: var(--font-mono);
-}
+.queue-item .q-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-display); font-style: italic; font-size: 0.95rem; }
+.queue-item .q-status { font-size: 0.7rem; color: var(--ink-dim); text-align: right; max-width: 55%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-mono); }
 @keyframes spin { to { transform: rotate(360deg); } }
-
-/* ═══ STORYBOARD ═══ */
-.storyboard {
-background: var(--velvet-2); border: 1px solid var(--border);
-border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.1rem;
-}
-.storyboard-title {
-font-family: var(--font-display); font-size: 1.05rem; font-style: italic;
-color: var(--or-soft); margin-bottom: 0.8rem; letter-spacing: 0.12em;
-display: flex; align-items: center; gap: 0.5rem;
-}
-.storyboard-scene {
-font-size: 0.78rem; color: var(--ink-dim);
-padding: 0.6rem 0.85rem;
-border-left: 2px solid var(--rouge-deep);
-margin-bottom: 0.45rem;
-border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-background: rgba(214,51,108,0.04);
-line-height: 1.5;
-}
-.storyboard-scene strong {
-color: var(--or-soft); font-family: var(--font-display);
-font-style: italic; font-weight: 500; margin-right: 0.3rem;
-}
-
-/* ═══ GALLERY ═══ */
+.storyboard { background: var(--velvet-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1.2rem; margin-bottom: 1.1rem; }
+.storyboard-title { font-family: var(--font-display); font-size: 1.05rem; font-style: italic; color: var(--or-soft); margin-bottom: 0.8rem; letter-spacing: 0.12em; }
+.storyboard-scene { font-size: 0.78rem; color: var(--ink-dim); padding: 0.6rem 0.85rem; border-left: 2px solid var(--rouge-deep); margin-bottom: 0.45rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: rgba(214,51,108,0.04); line-height: 1.5; }
+.storyboard-scene strong { color: var(--or-soft); font-family: var(--font-display); font-style: italic; font-weight: 500; margin-right: 0.3rem; }
+.agent-log { background: #0a0508; border: 1px solid var(--rouge-deep); border-radius: var(--radius-sm); padding: 1rem 1.1rem; margin-bottom: 1.1rem; max-height: 300px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.72rem; line-height: 1.6; }
+.agent-log .log-entry { padding: 0.3rem 0; border-bottom: 1px solid rgba(212,175,55,0.1); }
+.agent-log .log-entry:last-child { border-bottom: none; }
+.agent-log .log-time { color: var(--ink-faint); margin-right: 0.6rem; }
+.agent-log .log-step { color: var(--or-soft); font-weight: 600; margin-right: 0.5rem; }
+.agent-log .log-text { color: var(--satin); }
+.agent-log .log-success { color: var(--success); }
+.agent-log .log-error { color: var(--error); }
+.agent-log .log-thinking { color: var(--emeraude-soft); font-style: italic; }
 .gallery { margin-top: 2rem; }
-.gallery-title {
-font-family: var(--font-display); font-size: 1.5rem; color: var(--ink);
-margin-bottom: 1.2rem; letter-spacing: 0.25em; text-transform: uppercase;
-text-align: center; position: relative; padding-bottom: 1rem;
-font-weight: 500; font-style: italic;
-}
-.gallery-title::after {
-content: ''; position: absolute; bottom: 0; left: 50%;
-transform: translateX(-50%); width: 100px; height: 1px;
-background: linear-gradient(90deg, transparent, var(--rouge), var(--or), transparent);
-}
-.gallery-actions {
-display: flex; gap: 0.6rem; justify-content: center;
-margin-top: 0.8rem; flex-wrap: wrap;
-}
-.gallery-actions button {
-padding: 0.5rem 1.1rem; border-radius: var(--radius-sm);
-border: 1px solid var(--or-deep); background: var(--velvet-2);
-color: var(--or-soft); font-size: 0.7rem; letter-spacing: 0.12em;
-text-transform: uppercase; cursor: pointer;
-font-family: var(--font-body); font-weight: 500;
-transition: all 0.2s;
-}
+.gallery-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); margin-bottom: 1.2rem; letter-spacing: 0.25em; text-transform: uppercase; text-align: center; position: relative; padding-bottom: 1rem; font-weight: 500; font-style: italic; }
+.gallery-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100px; height: 1px; background: linear-gradient(90deg, transparent, var(--rouge), var(--or), transparent); }
+.gallery-actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 0.8rem; flex-wrap: wrap; }
+.gallery-actions button { padding: 0.5rem 1.1rem; border-radius: var(--radius-sm); border: 1px solid var(--or-deep); background: var(--velvet-2); color: var(--or-soft); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; font-family: var(--font-body); font-weight: 500; }
 .gallery-actions button:active { transform: scale(0.97); }
-.gallery-actions button:hover { box-shadow: var(--glow-or); }
 .gallery-grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; }
-.gallery-item {
-border-radius: var(--radius); overflow: hidden;
-border: 1px solid var(--border); background: #000;
-box-shadow: var(--shadow-soft); animation: fadeIn 0.5s ease;
-position: relative;
-}
-.gallery-item.favorite {
-border-color: var(--or); box-shadow: 0 0 32px rgba(212,175,55,0.35);
-}
-.gallery-item video {
-width: 100%; display: block; aspect-ratio: 9/16;
-object-fit: cover; background: #000;
-}
-.gallery-item .g-caption {
-padding: 1.1rem 1.3rem; background: var(--panel);
-display: flex; flex-direction: column; gap: 0.6rem;
-border-top: 1px solid var(--border);
-}
-.gallery-item .g-caption strong {
-font-family: var(--font-display); color: var(--or-soft);
-font-size: 1.1rem; font-weight: 500; font-style: italic;
-}
-.gallery-item .g-caption .g-meta {
-font-size: 0.68rem; color: var(--ink-dim);
-letter-spacing: 0.12em; text-transform: uppercase;
-font-family: var(--font-mono);
-}
+.gallery-item { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #000; box-shadow: var(--shadow-soft); animation: fadeIn 0.5s ease; position: relative; }
+.gallery-item.favorite { border-color: var(--or); box-shadow: 0 0 32px rgba(212,175,55,0.35); }
+.gallery-item video { width: 100%; display: block; object-fit: contain; background: #000; max-height: 70vh; }
+.gallery-item .g-caption { padding: 1.1rem 1.3rem; background: var(--panel); display: flex; flex-direction: column; gap: 0.6rem; border-top: 1px solid var(--border); }
+.gallery-item .g-caption strong { font-family: var(--font-display); color: var(--or-soft); font-size: 1.1rem; font-weight: 500; font-style: italic; }
+.gallery-item .g-caption .g-meta { font-size: 0.68rem; color: var(--ink-dim); letter-spacing: 0.12em; text-transform: uppercase; font-family: var(--font-mono); }
 .gallery-item .g-buttons { display: flex; gap: 0.5rem; margin-top: 0.5rem; }
-.gallery-item .g-download, .gallery-item .g-fav {
-flex: 1; padding: 0.8rem 0.6rem; border-radius: var(--radius-sm);
-border: 1px solid var(--or-deep);
-background: linear-gradient(135deg, rgba(212,175,55,0.18), rgba(214,51,108,0.12));
-color: var(--champagne-soft); font-family: var(--font-display);
-font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
-text-transform: uppercase; text-decoration: none; text-align: center;
-cursor: pointer; font-style: italic;
-display: inline-flex; align-items: center; justify-content: center;
-gap: 0.35rem; transition: transform 0.1s, box-shadow 0.2s;
-}
-.gallery-item .g-download:hover, .gallery-item .g-fav:hover { box-shadow: var(--glow-or); }
-.gallery-item .g-fav {
-background: transparent; color: var(--ink-dim);
-border-color: var(--border); flex: 0 0 auto; padding: 0.8rem 0.9rem;
-}
-.gallery-item .g-fav.active {
-color: var(--or); border-color: var(--or); background: rgba(212,175,55,0.1);
-}
+.gallery-item .g-download, .gallery-item .g-fav { flex: 1; padding: 0.8rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--or-deep); background: linear-gradient(135deg, rgba(212,175,55,0.18), rgba(214,51,108,0.12)); color: var(--champagne-soft); font-family: var(--font-display); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; text-align: center; cursor: pointer; font-style: italic; display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; }
+.gallery-item .g-fav { background: transparent; color: var(--ink-dim); border-color: var(--border); flex: 0 0 auto; padding: 0.8rem 0.9rem; }
+.gallery-item .g-fav.active { color: var(--or); border-color: var(--or); background: rgba(212,175,55,0.1); }
 .gallery-item .g-download:active, .gallery-item .g-fav:active { transform: scale(0.97); }
-.gallery-item .g-remove {
-position: absolute; top: 0.6rem; right: 0.6rem; width: 34px; height: 34px;
-border-radius: 50%; background: rgba(231,76,60,0.9); color: #fff;
-border: none; font-size: 0.95rem; cursor: pointer;
-display: flex; align-items: center; justify-content: center;
-z-index: 2; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-}
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(15px); }
-to { opacity: 1; transform: translateY(0); }
-}
-
-/* ═══ STATUS BAR ═══ */
-.status-bar {
-position: fixed; bottom: 0; left: 0; right: 0;
-background: linear-gradient(180deg, var(--velvet-3), var(--velvet-2));
-border-top: 1px solid var(--or-deep); color: var(--ink);
-padding: calc(1rem + env(safe-area-inset-bottom)) 1.2rem 1rem;
-font-size: 0.8rem; display: flex; align-items: center; gap: 0.8rem;
-transform: translateY(100%);
-transition: transform 0.4s cubic-bezier(0.2,0.9,0.3,1);
-z-index: 100; font-family: var(--font-mono);
-box-shadow: 0 -8px 32px rgba(0,0,0,0.6);
-}
+.gallery-item .g-remove { position: absolute; top: 0.6rem; right: 0.6rem; width: 34px; height: 34px; border-radius: 50%; background: rgba(231,76,60,0.9); color: #fff; border: none; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(180deg, var(--velvet-3), var(--velvet-2)); border-top: 1px solid var(--or-deep); color: var(--ink); padding: calc(1rem + env(safe-area-inset-bottom)) 1.2rem 1rem; font-size: 0.8rem; display: flex; align-items: center; gap: 0.8rem; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.2,0.9,0.3,1); z-index: 100; font-family: var(--font-mono); box-shadow: 0 -8px 32px rgba(0,0,0,0.6); }
 .status-bar.visible { transform: translateY(0); }
-.status-bar .spinner {
-width: 16px; height: 16px;
-border: 2px solid rgba(212,175,55,0.25);
-border-top-color: var(--or); border-radius: 50%;
-animation: spin 0.8s linear infinite; flex-shrink: 0;
-}
-
-/* ═══ PHOTO GRID ═══ */
-.photo-grid {
-display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr));
-gap: 0.55rem; margin-top: 0.9rem;
-}
-.photo-card {
-position: relative; border-radius: var(--radius-sm);
-overflow: hidden; border: 1px solid var(--border);
-aspect-ratio: 9/16; transition: transform 0.2s;
-}
-.photo-card:hover { transform: scale(1.02); }
+.status-bar .spinner { width: 16px; height: 16px; border: 2px solid rgba(212,175,55,0.25); border-top-color: var(--or); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(85px, 1fr)); gap: 0.55rem; margin-top: 0.9rem; }
+.photo-card { position: relative; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); aspect-ratio: 9/16; }
 .photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.photo-card .rm {
-position: absolute; top: 4px; right: 4px; width: 24px; height: 24px;
-border-radius: 50%; background: rgba(231,76,60,0.92); color: #fff;
-border: none; font-size: 0.72rem; cursor: pointer;
-display: flex; align-items: center; justify-content: center;
-}
-
-/* ═══ HELP TEXT ═══ */
-.help-text {
-font-size: 0.72rem; color: var(--ink-faint); font-style: italic;
-margin-top: 0.45rem; font-family: var(--font-display);
-line-height: 1.5;
-}
-
-/* ═══ NO SLEEP ═══ */
-#noSleepCanvas, #noSleepVideo {
-position: fixed; top: 0; left: 0; width: 1px; height: 1px;
-opacity: 0.01; pointer-events: none; z-index: -1;
-}
-
-/* ═══ RESPONSIVE ═══ */
-@media (min-width: 640px) {
-.gallery-grid { grid-template-columns: repeat(2, 1fr); }
-h1 { font-size: 4rem; }
-.info-banner { font-size: 0.88rem; }
-}
+.photo-card .rm { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border-radius: 50%; background: rgba(231,76,60,0.92); color: #fff; border: none; font-size: 0.72rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.help-text { font-size: 0.72rem; color: var(--ink-faint); font-style: italic; margin-top: 0.45rem; font-family: var(--font-display); line-height: 1.5; }
+#noSleepCanvas, #noSleepVideo { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -1; }
+@media (min-width: 640px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 4rem; } }
 </style>
 </head>
 <body>
 
-<!-- Décorations de fond -->
 <div class="bg-decor" aria-hidden="true">
 <div class="deco-item">💋</div>
 <div class="deco-item">💰</div>
@@ -679,14 +240,15 @@ h1 { font-size: 4rem; }
 <div class="deco-item">👑</div>
 <div class="deco-item">💎</div>
 </div>
-  <header>
+
+<header>
 <div class="brand-mark">Diana Studio</div>
 <h1>DianaIA</h1>
 <p class="subtitle">Votre photo devient couture</p>
 </header>
 
 <div class="info-banner">
-Bienvenue dans <strong>Diana Studio</strong>. Déposez vos <strong>photos</strong>, décrivez vos <strong>personnages</strong>, composez votre <strong>scène</strong> (action, décor, caméra, dialogues), choisissez un <strong>style</strong> et une <strong>durée</strong>. DianaIA orchestre tout — image, mouvement, lumière, ambiance. Format 9:16.
+Bienvenue dans <strong>Diana Studio</strong>. Utilisez l'<strong>Agent IA</strong> pour qu'il crée tout seul votre vidéo à partir d'une simple idée. Ou composez manuellement votre scène : photos, personnages, action, caméra, format, effets.
 </div>
 
 <div class="api-panel" id="api-panel">
@@ -699,6 +261,37 @@ Bienvenue dans <strong>Diana Studio</strong>. Déposez vos <strong>photos</stron
 <div class="api-hint">
 Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="noopener">platform.agnes-ai.com</a> → Settings → API Keys
 </div>
+</div>
+
+<!-- ═══════════ AGENT IA ═══════════ -->
+<div class="section open" id="section-agent">
+<div class="section-header" data-toggle="section-agent">
+<span class="section-title">🤖 Agent IA <span class="badge agent">Autonome</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="help-text" style="margin-bottom:0.9rem;">Décris ton idée. L'agent écrit le scénario, génère les images, puis crée la vidéo complète — sans que tu aies à tout configurer.</div>
+<div class="control-row">
+<label class="control-label">Ton idée en quelques mots</label>
+<textarea id="agent-idea" placeholder="Ex : Une femme en robe rouge marche sous la pluie à Paris, elle tient une rose. Cinématique, romantique, ambiance de film français."></textarea>
+</div>
+<div class="control-row">
+<label class="control-label">Nombre de plans</label>
+<select id="agent-scenes">
+<option value="3">3 plans — court (~20s)</option>
+<option value="5" selected>5 plans — moyen (~35s)</option>
+<option value="8">8 plans — long (~60s)</option>
+</select>
+</div>
+<div class="control-row">
+<div class="segment-grid two">
+<div class="segment-btn" id="agent-generate-images" data-active="true">🎨 Générer les images</div>
+<div class="segment-btn selected" id="agent-use-photo" data-active="false">📸 Utiliser mes photos</div>
+</div>
+</div>
+<button type="button" class="btn-agent" id="agent-launch-btn" disabled>🤖 Lancer l'Agent</button>
+<div class="agent-log" id="agent-log" style="display:none;"></div>
+</div></div>
 </div>
 
 <!-- ═══════════ PHOTOS ═══════════ -->
@@ -726,7 +319,7 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <span class="chevron">▼</span>
 </div>
 <div class="section-body"><div class="section-content">
-<div class="help-text" style="margin-bottom:0.8rem;">Décris tes personnages une fois — DianaIA les garde en mémoire pour toutes tes vidéos.</div>
+<div class="help-text" style="margin-bottom:0.8rem;">Décris tes personnages une fois — DianaIA les garde en mémoire.</div>
 <div id="char-list"></div>
 <button type="button" class="add-char-btn" id="add-char-btn">+ Ajouter un personnage</button>
 </div></div>
@@ -739,23 +332,19 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <span class="chevron">▼</span>
 </div>
 <div class="section-body"><div class="section-content">
-
 <div class="control-row">
 <label class="control-label">Que se passe-t-il dans la scène ?</label>
-<textarea id="scene-action" placeholder="Ex : Marie court vers Pierre sous la pluie, ils se prennent dans les bras. Pierre la fait tourner. La pluie ruisselle sur leurs visages."></textarea>
+<textarea id="scene-action" placeholder="Ex : Marie court vers Pierre sous la pluie, ils se prennent dans les bras."></textarea>
 <div class="preset-chips" id="action-presets"></div>
 </div>
-
 <div class="control-row">
 <label class="control-label">Décor (optionnel)</label>
-<input type="text" class="text-input" id="scene-setting" placeholder="Ex : rue pavée de Montmartre la nuit, lampadaires dorés">
+<input type="text" class="text-input" id="scene-setting" placeholder="Ex : rue pavée de Montmartre la nuit">
 </div>
-
 <div class="control-row">
 <label class="control-label">Ambiance (optionnel)</label>
-<input type="text" class="text-input" id="scene-mood" placeholder="Ex : romantique, cinématographique, pluie scintillante">
+<input type="text" class="text-input" id="scene-mood" placeholder="Ex : romantique, cinématographique">
 </div>
-
 <div class="control-row">
 <label class="control-label">Émotion dominante</label>
 <select id="scene-emotion">
@@ -772,7 +361,6 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <option value="mystere">Mystère · étrange</option>
 </select>
 </div>
-
 <div class="control-row">
 <label class="control-label">Type de plan</label>
 <select id="scene-shot">
@@ -783,40 +371,39 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <option value="extreme-wide">Très large — paysage vaste</option>
 <option value="low-angle">Contre-plongée — héroïque</option>
 <option value="high-angle">Plongée — vulnérable</option>
-<option value="over-the-shoulder">Par-dessus l'épaule — champ-contrechamp</option>
+<option value="over-the-shoulder">Par-dessus l'épaule</option>
 <option value="dutch-angle">Plan incliné — tension</option>
 </select>
 </div>
-
 <div class="control-row">
 <label class="control-label">Mouvement de caméra</label>
 <select id="scene-camera">
 <option value="auto">Automatique — DianaIA choisit</option>
 <optgroup label="Plans classiques">
 <option value="static">Fixe — plan immobile</option>
-<option value="dolly-in">Travelling avant — zoom lent</option>
-<option value="dolly-out">Travelling arrière — dézoom lent</option>
+<option value="dolly-in">Travelling avant</option>
+<option value="dolly-out">Travelling arrière</option>
 <option value="pan-left">Panoramique gauche</option>
 <option value="pan-right">Panoramique droite</option>
 <option value="tilt-up">Tilt vertical montant</option>
 <option value="tilt-down">Tilt vertical descendant</option>
 </optgroup>
 <optgroup label="Plans qui suivent le sujet">
-<option value="tracking-lateral">Suivi latéral — la caméra suit le sujet</option>
-<option value="tracking-frontal">Suivi frontal — devant le sujet</option>
-<option value="tracking-dorsal">Suivi dorsal — dans le dos</option>
-<option value="orbit">Orbite — caméra tourne autour</option>
+<option value="tracking-lateral">Suivi latéral</option>
+<option value="tracking-frontal">Suivi frontal</option>
+<option value="tracking-dorsal">Suivi dorsal</option>
+<option value="orbit">Orbite — caméra tourne</option>
 <option value="handheld-follow">Caméra portée qui suit</option>
 <option value="steadicam">Steadicam fluide</option>
 </optgroup>
 <optgroup label="Plans dynamiques">
-<option value="crane-up">Grue montante — révélation</option>
-<option value="crane-down">Grue descendante — arrivée</option>
-<option value="aerial">Drone aérien — vue du ciel</option>
+<option value="crane-up">Grue montante</option>
+<option value="crane-down">Grue descendante</option>
+<option value="aerial">Drone aérien</option>
 <option value="crash-zoom">Zoom rapide — impact</option>
-<option value="dolly-zoom">Dolly zoom — effet Vertigo</option>
+<option value="dolly-zoom">Dolly zoom — Vertigo</option>
 <option value="whip-pan">Whip pan — rotation rapide</option>
-<option value="snorricam">Snorricam — caméra fixée au sujet</option>
+<option value="snorricam">Snorricam</option>
 </optgroup>
 <optgroup label="Plans émotionnels">
 <option value="rack-focus">Rack focus — net/flou</option>
@@ -827,7 +414,6 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 </optgroup>
 </select>
 </div>
-
 <div class="control-row">
 <label class="control-label">Rythme du montage</label>
 <select id="scene-rhythm">
@@ -835,15 +421,11 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <option value="multi-3">Multi-plans — 3 plans cinématographiques</option>
 <option value="multi-5">Multi-plans — 5 plans (nécessite 15s)</option>
 </select>
-<div class="help-text">Le mode multi-plans enchaîne plusieurs prises de vue dans la même vidéo pour un vrai langage cinéma.</div>
 </div>
-
 <div class="control-row">
 <label class="control-label">Dialogue / voix (optionnel)</label>
 <textarea id="scene-dialogue" placeholder="Ex : Marie murmure : « Je t'ai attendu si longtemps… »" style="min-height:60px;"></textarea>
-<div class="help-text">Le dialogue sera murmuré en voix off douce, sans synchronisation labiale forcée.</div>
 </div>
-
 <div class="control-row">
 <label class="control-label">Intensité du mouvement</label>
 <div class="segment-grid" id="intensity-grid">
@@ -852,16 +434,14 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <div class="segment-btn" data-intensity="strong">Forte</div>
 </div>
 </div>
-
 <div class="control-row">
 <label class="control-label">Ambiance sonore</label>
 <select id="scene-sound">
-<option value="ambient">Ambiance naturelle (vent, pas, pluie…)</option>
+<option value="ambient">Ambiance naturelle</option>
 <option value="dialogue">Ambiance + voix murmurée</option>
-<option value="silent">Silence total — pur visuel</option>
+<option value="silent">Silence total</option>
 </select>
 </div>
-
 <div class="control-row">
 <label class="control-label">Sous-titres (optionnel)</label>
 <select id="scene-subtitles">
@@ -871,7 +451,6 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <option value="top">En haut</option>
 </select>
 </div>
-
 </div></div>
 </div>
 
@@ -900,7 +479,6 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <div class="segment-btn" data-mode="create">🎭 Créer une scène — l'IA ajoute tes personnages</div>
 </div>
 </div>
-<div class="help-text">Animer : ta photo reste fidèle. Transformer : change le style. Créer : refait la scène avec tes personnages.</div>
 </div></div>
 </div>
 
@@ -921,8 +499,19 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 <option value="morph">Morphing fluide</option>
 <option value="flash">Flash blanc</option>
 </select>
-<div class="help-text">Utilisé quand tu génères plusieurs vidéos à partir de plusieurs photos.</div>
 </div>
+</div></div>
+</div>
+
+<!-- ═══════════ FORMAT ═══════════ -->
+<div class="section open" id="section-format">
+<div class="section-header" data-toggle="section-format">
+<span class="section-title">📐 Format <span class="badge" id="format-badge">9:16</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="format-grid" id="format-grid"></div>
+<div class="help-text" style="margin-top:0.7rem;">Choisis le format adapté à ta plateforme : portrait pour TikTok, paysage pour YouTube.</div>
 </div></div>
 </div>
 
@@ -934,18 +523,17 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 </div>
 <div class="section-body"><div class="section-content">
 <div class="duration-grid" id="duration-grid"></div>
-<div class="help-text" style="margin-top:0.7rem;">Plus c'est long, plus Agnes met de temps. 5-10s recommandé pour tester.</div>
 </div></div>
 </div>
 
-<!-- ═══════════ EFFETS SPÉCIAUX ═══════════ -->
+<!-- ═══════════ EFFETS ═══════════ -->
 <div class="section" id="section-effects">
 <div class="section-header" data-toggle="section-effects">
 <span class="section-title">✨ Effets spéciaux <span class="badge" id="effects-badge">0</span></span>
 <span class="chevron">▼</span>
 </div>
 <div class="section-body"><div class="section-content">
-<div class="help-text" style="margin-bottom:0.7rem;">Ajoute des effets visuels magiques à ta scène (cumulables).</div>
+<div class="help-text" style="margin-bottom:0.7rem;">Ajoute des effets visuels magiques (cumulables).</div>
 <div class="style-grid" id="effects-grid"></div>
 </div></div>
 </div>
@@ -987,24 +575,26 @@ Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="n
 
 <canvas id="noSleepCanvas" width="2" height="2"></canvas>
 <video id="noSleepVideo" playsinline muted loop></video>
+
 <script>
 // ══════════════════════════════════════════════════════════════════
-// DIANA STUDIO v5.0 — Studio Couture
-// Personnages · Scène · 20 Caméras · Multi-plans · Effets · Transitions
+// DIANA STUDIO v6.0 — Studio Couture avec Agent IA
 // ══════════════════════════════════════════════════════════════════
 
 const API_BASE = 'https://apihub.agnes-ai.com/v1';
 const POLL_BASE = 'https://apihub.agnes-ai.com/agnesapi';
 const MODEL_VIDEO = 'agnes-video-v2.0';
+const MODEL_TEXT = 'agnes-2.5-flash';
+const MODEL_IMAGE = 'agnes-image-2.1-flash';
 const FRAME_RATE = 24;
 const POLL_INTERVAL_SEC = 8;
 const POLL_INITIAL_WAIT_SEC = 80;
 const MAX_POLL_ATTEMPTS = 100;
-const API_KEY_STORAGE = 'dianaia_api_key_v5';
-const WAKE_LOCK_PREF = 'dianaia_wakelock_v5';
-const HISTORY_KEY = 'dianaia_history_v5';
-const FAVORITES_KEY = 'dianaia_favorites_v5';
-const CHARS_KEY = 'dianaia_characters_v5';
+const API_KEY_STORAGE = 'dianaia_api_key_v6';
+const WAKE_LOCK_PREF = 'dianaia_wakelock_v6';
+const HISTORY_KEY = 'dianaia_history_v6';
+const FAVORITES_KEY = 'dianaia_favorites_v6';
+const CHARS_KEY = 'dianaia_characters_v6';
 const MAX_IMAGE_SIZE = 12 * 1024 * 1024;
 const MAX_IMAGE_SIDE = 1280;
 const MAX_HISTORY = 100;
@@ -1015,58 +605,38 @@ let memoryFavorites = new Set();
 let memoryChars = [];
 let localStorageAvailable = true;
 try {
-  const test = '__dianaia_test_v5__';
+  const test = '__dianaia_test_v6__';
   localStorage.setItem(test, '1');
   localStorage.removeItem(test);
 } catch (e) { localStorageAvailable = false; }
 
-// ═══ STYLES VISUELS ═══
+// ═══ FORMATS ═══
+const FORMATS = [
+{ id: 'portrait', name: 'Portrait', icon: '📱', ratio: '9:16', width: 576, height: 1024, use: 'TikTok · Reels · Shorts' },
+{ id: 'youtube', name: 'YouTube', icon: '🎬', ratio: '16:9', width: 1024, height: 576, use: 'YouTube · TV · Cinéma' },
+{ id: 'square', name: 'Carré', icon: '⬛', ratio: '1:1', width: 768, height: 768, use: 'Instagram · Facebook' },
+{ id: 'cinema', name: 'Cinéma', icon: '🎞️', ratio: '21:9', width: 1344, height: 576, use: 'Films · Trailers' },
+{ id: 'classic', name: 'Classique', icon: '📺', ratio: '4:3', width: 768, height: 576, use: 'Rétro · Vintage' },
+{ id: 'vertical', name: 'Vertical', icon: '📸', ratio: '4:5', width: 864, height: 1080, use: 'Instagram portrait' }
+];
+
+// ═══ STYLES ═══
 const STYLES = [
-{ id: 'realistic', name: 'Réaliste', emoji: '📷', desc: 'Photo vivante',
-style: 'Photorealistic continuation, same camera, same lens, same lighting. Do NOT stylize.',
-motion: 'natural breathing, subtle head movement, blinking, micro-expressions, lifelike physics' },
-{ id: 'cinematic', name: 'Cinématique', emoji: '🎬', desc: 'Film de cinéma',
-style: 'Cinematic film look, dramatic lighting, shallow depth of field, professional color grading, film grain, anamorphic feel.',
-motion: 'cinematic camera movement, dramatic light shifts, depth of field rack focus, cinematic parallax' },
-{ id: 'anime', name: 'Anime', emoji: '🌸', desc: 'Dessin japonais',
-style: 'High-quality Japanese anime style, hand-drawn cel-shading, vibrant colors, expressive eyes, Ghibli-inspired atmosphere.',
-motion: 'subtle anime animation, hair flowing, eyes blinking slowly, cherry blossom petals drifting' },
-{ id: 'cartoon', name: 'Cartoon', emoji: '🎨', desc: 'Dessin animé',
-style: 'Western cartoon animation style, bold outlines, flat saturated colors, playful Pixar/Disney-inspired aesthetic.',
-motion: 'bouncy playful movement, exaggerated expressions, lively gestures, cartoon physics' },
-{ id: 'documentary', name: 'Documentaire', emoji: '📽️', desc: 'Reportage vivant',
-style: 'Documentary film style, natural available light, handheld camera feel, authentic observational tone.',
-motion: 'gentle handheld movement, natural ambient motion, candid authentic moment' },
-{ id: 'pedagogue', name: 'Pédagogue', emoji: '📚', desc: 'Éducatif clair',
-style: 'Educational clear visual style, well-lit, high legibility, smooth professional e-learning aesthetic.',
-motion: 'smooth slow camera pan, gentle zoom on key details, informative reveal' },
-{ id: 'bw', name: 'Noir & Blanc', emoji: '⚫', desc: 'Monochrome élégant',
-style: 'Elegant black and white, high contrast monochrome, deep blacks, luminous whites, classic photography.',
-motion: 'slow deliberate movement, dramatic shadow play, cinematic monochrome' },
-{ id: 'vintage', name: 'Vintage Super 8', emoji: '📽️', desc: 'Rétro années 70',
-style: 'Vintage Super 8 film aesthetic, grainy texture, subtle vignette, warm faded colors, soft focus edges.',
-motion: 'gentle film-like movement, organic grain, warm faded tones' },
-{ id: 'cyberpunk', name: 'Cyberpunk', emoji: '🌃', desc: 'Futuriste néon',
-style: 'Cyberpunk futuristic aesthetic, neon pink and cyan lighting, holographic ads, Blade Runner atmosphere.',
-motion: 'neon reflections shifting, rain, holographic light, futuristic atmosphere' },
-{ id: 'fantasy', name: 'Fantastique', emoji: '🧙', desc: 'Monde magique',
-style: 'Epic fantasy aesthetic, magical atmosphere, glowing particles, enchanted forest or ancient castle mood.',
-motion: 'magical particles floating, glowing aura, ethereal movement' },
-{ id: 'horror', name: 'Horreur', emoji: '🕯️', desc: 'Ambiance sombre',
-style: 'Horror film aesthetic, dark shadows, deep contrast, unsettling atmosphere, cold color palette.',
-motion: 'creeping shadows, unsettling subtle movement, cold atmosphere' },
-{ id: 'watercolor', name: 'Aquarelle', emoji: '🖼️', desc: 'Peinture douce',
-style: 'Dreamy watercolor painting aesthetic, soft bleeding edges, translucent washes, paper texture.',
-motion: 'soft watercolor flow, gentle bleeding colors, dreamy painterly movement' },
-{ id: 'luxury', name: 'Luxe Couture', emoji: '💎', desc: 'Haute couture',
-style: 'Luxury fashion editorial aesthetic, gold and velvet tones, high-end couture, glossy magazine photography, elegant glamour.',
-motion: 'elegant gliding camera, luxury shimmer, glamorous slow movement' },
-{ id: 'romantic', name: 'Romantique', emoji: '💋', desc: 'Rose & or',
-style: 'Romantic dreamy aesthetic, soft pink and gold tones, bokeh lights, soft focus, intimate warm atmosphere.',
-motion: 'gentle floating movement, soft light shifts, romantic glow' },
-{ id: 'noir-luxe', name: 'Noir Velours', emoji: '🖤', desc: 'Velours profond',
-style: 'Deep velvet noir aesthetic, black and gold, dramatic shadows, luxurious dark mood, elegant mystery.',
-motion: 'slow luxurious movement, dramatic shadow play, golden highlights' }
+{ id: 'realistic', name: 'Réaliste', emoji: '📷', desc: 'Photo vivante', style: 'Photorealistic continuation, same camera, same lens, same lighting.', motion: 'natural breathing, subtle movement, blinking, micro-expressions' },
+{ id: 'cinematic', name: 'Cinématique', emoji: '🎬', desc: 'Film de cinéma', style: 'Cinematic film look, dramatic lighting, shallow depth of field, professional color grading.', motion: 'cinematic camera movement, dramatic light shifts' },
+{ id: 'anime', name: 'Anime', emoji: '🌸', desc: 'Dessin japonais', style: 'High-quality Japanese anime style, hand-drawn cel-shading, Ghibli-inspired.', motion: 'subtle anime animation, hair flowing, petals drifting' },
+{ id: 'cartoon', name: 'Cartoon', emoji: '🎨', desc: 'Dessin animé', style: 'Western cartoon animation style, bold outlines, flat saturated colors.', motion: 'bouncy playful movement, exaggerated expressions' },
+{ id: 'documentary', name: 'Documentaire', emoji: '📽️', desc: 'Reportage', style: 'Documentary film style, natural available light, handheld camera feel.', motion: 'gentle handheld movement, natural ambient motion' },
+{ id: 'pedagogue', name: 'Pédagogue', emoji: '📚', desc: 'Éducatif', style: 'Educational clear visual style, well-lit, high legibility.', motion: 'smooth slow camera pan, informative reveal' },
+{ id: 'bw', name: 'Noir & Blanc', emoji: '⚫', desc: 'Monochrome', style: 'Elegant black and white, high contrast monochrome.', motion: 'slow deliberate movement, dramatic shadow play' },
+{ id: 'vintage', name: 'Vintage Super 8', emoji: '📽️', desc: 'Rétro 70s', style: 'Vintage Super 8 film aesthetic, grainy texture, warm faded colors.', motion: 'gentle film-like movement, organic grain' },
+{ id: 'cyberpunk', name: 'Cyberpunk', emoji: '🌃', desc: 'Futuriste', style: 'Cyberpunk futuristic aesthetic, neon pink and cyan lighting.', motion: 'neon reflections shifting, holographic light' },
+{ id: 'fantasy', name: 'Fantastique', emoji: '🧙', desc: 'Magique', style: 'Epic fantasy aesthetic, magical atmosphere, glowing particles.', motion: 'magical particles floating, ethereal movement' },
+{ id: 'horror', name: 'Horreur', emoji: '🕯️', desc: 'Sombre', style: 'Horror film aesthetic, dark shadows, unsettling atmosphere.', motion: 'creeping shadows, unsettling movement' },
+{ id: 'watercolor', name: 'Aquarelle', emoji: '🖼️', desc: 'Peinture douce', style: 'Dreamy watercolor painting aesthetic, soft bleeding edges.', motion: 'soft watercolor flow, gentle bleeding colors' },
+{ id: 'luxury', name: 'Luxe Couture', emoji: '💎', desc: 'Haute couture', style: 'Luxury fashion editorial aesthetic, gold and velvet tones, high-end couture.', motion: 'elegant gliding camera, luxury shimmer' },
+{ id: 'romantic', name: 'Romantique', emoji: '💋', desc: 'Rose & or', style: 'Romantic dreamy aesthetic, soft pink and gold tones, bokeh lights.', motion: 'gentle floating movement, soft light shifts' },
+{ id: 'noir-luxe', name: 'Noir Velours', emoji: '🖤', desc: 'Velours', style: 'Deep velvet noir aesthetic, black and gold, dramatic shadows.', motion: 'slow luxurious movement, golden highlights' }
 ];
 
 // ═══ DURÉES ═══
@@ -1077,23 +647,22 @@ const DURATIONS = [
 { seconds: 15, frames: 361, label: '15s' }
 ];
 
-// ═══ EFFETS SPÉCIAUX ═══
+// ═══ EFFETS ═══
 const EFFECTS = [
-{ id: 'particles', name: 'Particules', emoji: '✨', desc: 'Poussière dorée', prompt: 'golden floating particles, dust motes in light beams, magical shimmer' },
-{ id: 'petals', name: 'Pétales', emoji: '🌸', desc: 'Fleurs qui volent', prompt: 'cherry blossom petals drifting slowly in the air, soft romantic atmosphere' },
-{ id: 'rain', name: 'Pluie', emoji: '🌧️', desc: 'Pluie fine', prompt: 'gentle rain falling, wet surfaces reflecting light, cinematic raindrops' },
-{ id: 'snow', name: 'Neige', emoji: '❄️', desc: 'Flocons lents', prompt: 'soft snowflakes drifting slowly, winter atmosphere, cold blue tones' },
-{ id: 'sparkles', name: 'Paillettes', emoji: '💫', desc: 'Étincelles dorées', prompt: 'gold sparkles, glittering light effects, magical sparkling atmosphere' },
-{ id: 'bokeh', name: 'Bokeh', emoji: '🔮', desc: 'Flous lumineux', prompt: 'dreamy bokeh lights in background, soft out-of-focus orbs, romantic glow' },
-{ id: 'light-rays', name: 'Rayons', emoji: '☀️', desc: 'God rays', prompt: 'volumetric light rays, god rays through atmosphere, dramatic backlight' },
-{ id: 'smoke', name: 'Fumée', emoji: '💨', desc: 'Brume légère', prompt: 'soft smoke or mist drifting slowly, atmospheric haze, mysterious mood' },
-{ id: 'butterflies', name: 'Papillons', emoji: '🦋', desc: 'Papillons volants', prompt: 'butterflies fluttering around, delicate wings, magical nature atmosphere' },
-{ id: 'fireflies', name: 'Lucioles', emoji: '🌟', desc: 'Lucioles', prompt: 'fireflies glowing softly in the dark, warm flickering lights, magical night' },
-{ id: 'confetti', name: 'Confettis', emoji: '🎉', desc: 'Fête', prompt: 'colorful confetti falling, celebration atmosphere, festive mood' },
-{ id: 'hearts', name: 'Cœurs', emoji: '💕', desc: 'Cœurs flottants', prompt: 'floating heart shapes, romantic love atmosphere, soft pink glow' }
+{ id: 'particles', name: 'Particules', emoji: '✨', desc: 'Poussière dorée', prompt: 'golden floating particles, dust motes in light beams' },
+{ id: 'petals', name: 'Pétales', emoji: '🌸', desc: 'Fleurs qui volent', prompt: 'cherry blossom petals drifting slowly' },
+{ id: 'rain', name: 'Pluie', emoji: '🌧️', desc: 'Pluie fine', prompt: 'gentle rain falling, wet surfaces reflecting light' },
+{ id: 'snow', name: 'Neige', emoji: '❄️', desc: 'Flocons lents', prompt: 'soft snowflakes drifting slowly, cold blue tones' },
+{ id: 'sparkles', name: 'Paillettes', emoji: '💫', desc: 'Étincelles dorées', prompt: 'gold sparkles, glittering light effects' },
+{ id: 'bokeh', name: 'Bokeh', emoji: '🔮', desc: 'Flous lumineux', prompt: 'dreamy bokeh lights in background' },
+{ id: 'light-rays', name: 'Rayons', emoji: '☀️', desc: 'God rays', prompt: 'volumetric light rays, god rays' },
+{ id: 'smoke', name: 'Fumée', emoji: '💨', desc: 'Brume légère', prompt: 'soft smoke or mist drifting slowly' },
+{ id: 'butterflies', name: 'Papillons', emoji: '🦋', desc: 'Papillons', prompt: 'butterflies fluttering around' },
+{ id: 'fireflies', name: 'Lucioles', emoji: '🌟', desc: 'Lucioles', prompt: 'fireflies glowing softly in the dark' },
+{ id: 'confetti', name: 'Confettis', emoji: '🎉', desc: 'Fête', prompt: 'colorful confetti falling, celebration atmosphere' },
+{ id: 'hearts', name: 'Cœurs', emoji: '💕', desc: 'Cœurs flottants', prompt: 'floating heart shapes, romantic atmosphere' }
 ];
 
-// ═══ PRESETS D'ACTION ═══
 const ACTION_PRESETS = [
 'Il/elle tourne lentement la tête et regarde la caméra',
 'Le vent fait doucement bouger ses cheveux',
@@ -1113,93 +682,83 @@ const ACTION_PRESETS = [
 'Il/elle traverse la rue sous la pluie'
 ];
 
-// ═══ MAPPINGS ═══
 const INTENSITY_MAP = {
-subtle: 'very subtle movement, barely perceptible change, minimal animation, gentle and quiet',
-moderate: 'moderate movement, clear but controlled motion, balanced energy',
-strong: 'strong dynamic movement, energetic and pronounced, theatrical intensity'
+subtle: 'very subtle movement, barely perceptible change',
+moderate: 'moderate movement, clear but controlled motion',
+strong: 'strong dynamic movement, energetic and pronounced'
 };
 
 const CAMERA_MAP = {
 'static': 'static locked-off camera, absolutely no movement',
 'dolly-in': 'slow dolly-in, camera gliding forward toward the subject',
-'dolly-out': 'slow dolly-out, camera pulling back away from the subject',
-'pan-left': 'slow panoramic pan to the left, smooth rotation',
-'pan-right': 'slow panoramic pan to the right, smooth rotation',
-'tilt-up': 'slow tilt upward, camera revealing vertically',
-'tilt-down': 'slow tilt downward, camera descending vertically',
-'tracking-lateral': 'lateral tracking shot, camera moves sideways following the subject as they move',
-'tracking-frontal': 'frontal tracking shot, camera moves backward in front of the subject as they walk toward it',
-'tracking-dorsal': 'dorsal tracking shot, camera follows the subject from behind as they walk forward',
+'dolly-out': 'slow dolly-out, camera pulling back',
+'pan-left': 'slow panoramic pan to the left',
+'pan-right': 'slow panoramic pan to the right',
+'tilt-up': 'slow tilt upward revealing vertically',
+'tilt-down': 'slow tilt downward',
+'tracking-lateral': 'lateral tracking shot, camera moves sideways following the subject',
+'tracking-frontal': 'frontal tracking shot, camera moves backward in front of the subject',
+'tracking-dorsal': 'dorsal tracking shot, camera follows the subject from behind',
 'orbit': 'camera orbits around the subject in a smooth circular motion',
-'handheld-follow': 'handheld camera following the subject with organic natural movement and slight shake',
-'steadicam': 'smooth steadicam shot, fluid gliding movement following the subject',
-'crane-up': 'crane shot moving upward, camera rises vertically revealing the scene',
-'crane-down': 'crane shot moving downward, camera descends toward the subject',
-'aerial': 'aerial drone shot, elevated perspective looking down at the scene',
-'crash-zoom': 'rapid crash zoom, sudden dramatic zoom into the subject',
-'dolly-zoom': 'dolly zoom (Vertigo effect), camera moves forward while zooming out creating disorienting perspective shift',
-'whip-pan': 'fast whip pan, rapid rotation revealing a new perspective',
-'snorricam': 'snorricam mounted on the subject, background rotates around them as they move',
-'rack-focus': 'rack focus shifting sharpness between foreground and background elements',
-'pov': 'point of view shot, camera represents the subject\'s eyes, subjective perspective',
-'handheld': 'handheld camera with natural organic shake, documentary-style movement',
-'push-in-slow': 'slow deliberate push-in creating building tension toward the subject',
-'pull-out-reveal': 'slow pull-out revealing the wider environment and context',
-'auto': 'automatic camera movement chosen based on the scene mood and action'
+'handheld-follow': 'handheld camera following the subject with organic movement',
+'steadicam': 'smooth steadicam shot following the subject',
+'crane-up': 'crane shot moving upward, camera rises vertically',
+'crane-down': 'crane shot moving downward',
+'aerial': 'aerial drone shot, elevated perspective',
+'crash-zoom': 'rapid crash zoom, sudden dramatic zoom into subject',
+'dolly-zoom': 'dolly zoom (Vertigo effect), camera moves forward while zooming out',
+'whip-pan': 'fast whip pan, rapid rotation',
+'snorricam': 'snorricam mounted on subject, background rotates around them',
+'rack-focus': 'rack focus shifting sharpness between foreground and background',
+'pov': 'point of view shot, camera represents the subject\'s eyes',
+'handheld': 'handheld camera with natural organic shake',
+'push-in-slow': 'slow deliberate push-in creating tension',
+'pull-out-reveal': 'slow pull-out revealing the wider environment',
+'auto': 'automatic camera movement based on the scene'
 };
 
 const SHOT_MAP = {
-'close-up': 'extreme close-up framing, subject fills the frame, intimate and intense',
-'medium': 'medium shot, subject framed from waist up, balanced composition',
-'wide': 'wide shot, subject framed with the environment visible around them',
-'extreme-wide': 'extreme wide shot, vast landscape, subject small within the frame',
-'low-angle': 'low angle looking up at subject, heroic and powerful perspective',
-'high-angle': 'high angle looking down at subject, vulnerable and small perspective',
-'over-the-shoulder': 'over-the-shoulder framing, looking past one subject toward another (champ-contrechamp)',
-'dutch-angle': 'dutch tilted angle, canted horizon creating tension and unease',
-'auto': 'automatic framing chosen based on the scene content'
+'close-up': 'extreme close-up framing, subject fills the frame',
+'medium': 'medium shot, subject framed from waist up',
+'wide': 'wide shot, subject with environment visible',
+'extreme-wide': 'extreme wide shot, vast landscape',
+'low-angle': 'low angle looking up at subject, heroic perspective',
+'high-angle': 'high angle looking down at subject, vulnerable',
+'over-the-shoulder': 'over-the-shoulder framing',
+'dutch-angle': 'dutch tilted angle creating tension',
+'auto': 'automatic framing based on scene'
 };
 
 const EMOTION_MAP = {
-joie: 'joy and happiness',
-tristesse: 'sadness and melancholy',
-amour: 'love and tenderness',
-colere: 'anger and tension',
-peur: 'fear and anxiety',
-surprise: 'surprise and wonder',
-nostalgie: 'nostalgia and memory',
-serenite: 'serenity and peace',
-determination: 'determination and strength',
-mystere: 'mystery and strangeness'
+joie: 'joy and happiness', tristesse: 'sadness and melancholy',
+amour: 'love and tenderness', colere: 'anger and tension',
+peur: 'fear and anxiety', surprise: 'surprise and wonder',
+nostalgie: 'nostalgia and memory', serenite: 'serenity and peace',
+determination: 'determination and strength', mystere: 'mystery and strangeness'
 };
 
 const SOUND_MAP = {
-ambient: 'Natural ambient sounds only — wind, footsteps, rain, distant birds, breath. ABSOLUTELY NO MUSIC.',
-dialogue: 'Natural ambient sounds + a soft whispered voice-over murmuring the dialogue. NO MUSIC.',
-silent: 'Complete silence. No sound at all. Pure visual experience.'
+ambient: 'Natural ambient sounds only. NO MUSIC.',
+dialogue: 'Natural ambient sounds + soft whispered voice-over. NO MUSIC.',
+silent: 'Complete silence.'
 };
 
 const SUBTITLE_MAP = {
 none: '',
-bottom: 'A subtle text overlay appears at the bottom of the frame displaying the dialogue softly.',
-center: 'The dialogue appears as centered elegant text overlay, music-video style.',
-top: 'A subtle text overlay appears at the top of the frame displaying the dialogue.'
+bottom: 'A subtle text overlay appears at the bottom of the frame displaying the dialogue.',
+center: 'The dialogue appears as centered elegant text overlay.',
+top: 'A subtle text overlay appears at the top of the frame.'
 };
 
 const RHYTHM_MAP = {
 'single': 'ONE SINGLE CONTINUOUS SHOT with a single camera movement, no cuts.',
-'multi-3': 'THREE SHOTS edited together: begin with a medium establishing shot, cut to a close-up revealing emotion, finish with a wide shot. Smooth cinematic transitions between shots.',
-'multi-5': 'FIVE SHOTS edited together with cinematic rhythm: wide establishing, medium introduction, close-up emotional beat, over-the-shoulder moment, final wide release. Smooth professional editing.'
+'multi-3': 'THREE SHOTS edited together: medium establishing shot, close-up emotional beat, wide release.',
+'multi-5': 'FIVE SHOTS edited together with cinematic rhythm: wide establishing, medium introduction, close-up emotional, over-the-shoulder, final wide.'
 };
 
 const TRANSITION_MAP = {
-cut: 'hard cut',
-fade: 'fade to black',
-dissolve: 'cross dissolve',
-glitch: 'digital glitch transition',
-morph: 'fluid morphing transition',
-flash: 'white flash transition'
+cut: 'hard cut', fade: 'fade to black', dissolve: 'cross dissolve',
+glitch: 'digital glitch transition', morph: 'fluid morphing transition', flash: 'white flash transition'
 };
 
 // ═══ ÉTAT ═══
@@ -1209,6 +768,7 @@ characters: [],
 selectedStyle: null,
 selectedMode: 'animate',
 durationFrames: 241,
+selectedFormat: 'portrait',
 isRunning: false,
 stopRequested: false,
 queue: [],
@@ -1221,7 +781,11 @@ action: '', setting: '', mood: '', emotion: '',
 camera: 'auto', shot: 'auto', dialogue: '', sound: 'ambient',
 subtitles: 'none', rhythm: 'single'
 },
-transition: 'cut'
+transition: 'cut',
+agent: {
+idea: '', sceneCount: 5, usePhotos: true, generateImages: false,
+isRunning: false, generatedImages: [], scenario: null
+}
 };
 
 // ═══ TOAST ═══
@@ -1242,15 +806,29 @@ if (toastTimeout) clearTimeout(toastTimeout);
 toastTimeout = setTimeout(() => toast.classList.remove('visible'), duration);
 }
 
+// ═══ AGENT LOG ═══
+function agentLog(step, message, type) {
+const log = document.getElementById('agent-log');
+if (!log) return;
+log.style.display = 'block';
+const time = new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+const entry = document.createElement('div');
+entry.className = 'log-entry';
+let cls = 'log-text';
+if (type === 'success') cls = 'log-success';
+else if (type === 'error') cls = 'log-error';
+else if (type === 'thinking') cls = 'log-thinking';
+entry.innerHTML = '<span class="log-time">' + time + '</span><span class="log-step">' + esc(step) + '</span><span class="' + cls + '">' + esc(message) + '</span>';
+log.appendChild(entry);
+log.scrollTop = log.scrollHeight;
+}
+
 // ═══ WAKE LOCK ═══
 let wakeLockSentinel = null;
 let wakeLockEnabled = false;
 let canvasStream = null;
 let canvasInterval = null;
-
-function isWakeLockSupported() {
-return 'wakeLock' in navigator && typeof navigator.wakeLock.request === 'function';
-}
+function isWakeLockSupported() { return 'wakeLock' in navigator && typeof navigator.wakeLock.request === 'function'; }
 async function requestWakeLockAPI() {
 if (!isWakeLockSupported()) return false;
 try {
@@ -1338,11 +916,7 @@ localStorage.setItem(CHARS_KEY, JSON.stringify(memoryChars));
 
 // ═══ UTILS ═══
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function esc(s) {
-return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
-'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-}[c]));
-}
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function setStatus(text) {
 const bar = document.getElementById('status-bar');
 const txt = document.getElementById('status-text');
@@ -1400,6 +974,7 @@ input.value = '';
 input.placeholder = 'Collez votre clé API Agnes (sk-...)';
 }
 updateGenerateBtn();
+updateAgentBtn();
 }
 
 // ═══ IMAGE READING ═══
@@ -1421,13 +996,11 @@ try {
 const canvas = document.createElement('canvas');
 let { width, height } = img;
 const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(width, height));
-width = Math.round(width * scale);
-height = Math.round(height * scale);
+width = Math.round(width * scale); height = Math.round(height * scale);
 canvas.width = width; canvas.height = height;
 canvas.getContext('2d').drawImage(img, 0, 0, width, height);
 const dataUri = canvas.toDataURL('image/jpeg', 0.9);
-URL.revokeObjectURL(url);
-resolve(dataUri);
+URL.revokeObjectURL(url); resolve(dataUri);
 } catch (e) { URL.revokeObjectURL(url); reject(e); }
 };
 img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Image illisible')); };
@@ -1442,8 +1015,7 @@ img.onload = () => {
 try {
 let { width, height } = img;
 const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(width, height));
-width = Math.round(width * scale);
-height = Math.round(height * scale);
+width = Math.round(width * scale); height = Math.round(height * scale);
 const canvas = document.createElement('canvas');
 canvas.width = width; canvas.height = height;
 canvas.getContext('2d').drawImage(img, 0, 0, width, height);
@@ -1487,10 +1059,7 @@ if (badge) badge.textContent = state.photos.length;
 if (!list) return;
 if (!state.photos.length) { list.innerHTML = ''; return; }
 list.innerHTML = '<div class="photo-grid">' + state.photos.map(p =>
-'<div class="photo-card">' +
-'<img src="' + p.thumbnail + '" alt="">' +
-'<button type="button" class="rm" data-remove="' + p.id + '">✕</button>' +
-'</div>'
+'<div class="photo-card"><img src="' + p.thumbnail + '" alt=""><button type="button" class="rm" data-remove="' + p.id + '">✕</button></div>'
 ).join('') + '</div>';
 list.querySelectorAll('[data-remove]').forEach(btn => {
 btn.addEventListener('click', (e) => {
@@ -1510,12 +1079,9 @@ if (badge) badge.textContent = state.characters.length;
 if (!list) return;
 list.innerHTML = state.characters.map((c, i) =>
 '<div class="char-card" data-idx="' + i + '">' +
-'<div class="char-card-header">' +
-'<span class="char-card-name">✦ ' + esc(c.name || 'Personnage ' + (i + 1)) + '</span>' +
-'<button type="button" class="char-card-remove" data-remove-char="' + i + '">✕</button>' +
-'</div>' +
+'<div class="char-card-header"><span class="char-card-name">✦ ' + esc(c.name || 'Personnage ' + (i + 1)) + '</span><button type="button" class="char-card-remove" data-remove-char="' + i + '">✕</button></div>' +
 '<input type="text" class="text-input char-name-input" data-field="name" data-idx="' + i + '" placeholder="Nom du personnage" value="' + esc(c.name || '') + '">' +
-'<textarea class="char-desc-input" data-field="description" data-idx="' + i + '" placeholder="Apparence physique, vêtements, âge, particularités…" style="min-height:60px;">' + esc(c.description || '') + '</textarea>' +
+'<textarea class="char-desc-input" data-field="description" data-idx="' + i + '" placeholder="Apparence physique, vêtements, âge…" style="min-height:60px;">' + esc(c.description || '') + '</textarea>' +
 '<input type="text" class="text-input char-role-input" data-field="role" data-idx="' + i + '" placeholder="Rôle / action dans la scène" value="' + esc(c.role || '') + '">' +
 '</div>'
 ).join('');
@@ -1532,19 +1098,14 @@ updateStoryboard();
 list.querySelectorAll('[data-remove-char]').forEach(btn => {
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
-const idx = parseInt(btn.dataset.removeChar, 10);
-state.characters.splice(idx, 1);
-saveStorage();
-renderCharacters();
-updateStoryboard();
+state.characters.splice(parseInt(btn.dataset.removeChar, 10), 1);
+saveStorage(); renderCharacters(); updateStoryboard();
 });
 });
 }
 function addCharacter() {
 state.characters.push({ name: '', description: '', role: '' });
-saveStorage();
-renderCharacters();
-updateStoryboard();
+saveStorage(); renderCharacters(); updateStoryboard();
 setTimeout(() => {
 const list = document.getElementById('char-list');
 const cards = list.querySelectorAll('.char-card');
@@ -1555,7 +1116,38 @@ if (input) input.focus();
 }, 100);
 }
 
-// ═══ STYLES ═══
+// ═══ RENDER FORMATS ═══
+function renderFormats() {
+const grid = document.getElementById('format-grid');
+if (!grid) return;
+grid.innerHTML = FORMATS.map(f =>
+'<div class="format-btn' + (state.selectedFormat === f.id ? ' selected' : '') + '" data-format="' + f.id + '">' +
+'<span class="fmt-icon">' + f.icon + '</span>' +
+'<span class="fmt-name">' + esc(f.name) + '</span>' +
+'<span class="fmt-ratio">' + esc(f.ratio) + '</span>' +
+'<span class="fmt-use">' + esc(f.use) + '</span>' +
+'</div>'
+).join('');
+grid.querySelectorAll('[data-format]').forEach(el => {
+el.addEventListener('click', () => {
+state.selectedFormat = el.dataset.format;
+renderFormats();
+const badge = document.getElementById('format-badge');
+if (badge) {
+const f = FORMATS.find(x => x.id === state.selectedFormat);
+if (f) badge.textContent = f.ratio;
+}
+updateStoryboard();
+});
+});
+const badge = document.getElementById('format-badge');
+if (badge) {
+const f = FORMATS.find(x => x.id === state.selectedFormat);
+if (f) badge.textContent = f.ratio;
+}
+}
+
+// ═══ RENDER STYLES ═══
 function renderStyles() {
 const grid = document.getElementById('style-grid');
 if (!grid) return;
@@ -1569,16 +1161,14 @@ grid.innerHTML = STYLES.map(s =>
 grid.querySelectorAll('[data-style]').forEach(el => {
 el.addEventListener('click', () => {
 state.selectedStyle = el.dataset.style;
-renderStyles();
-updateGenerateBtn();
-updateStoryboard();
+renderStyles(); updateGenerateBtn(); updateStoryboard();
 const s = STYLES.find(x => x.id === state.selectedStyle);
 if (s) showToast('Style ' + s.name, 'success', 1200);
 });
 });
 }
 
-// ═══ EFFECTS ═══
+// ═══ RENDER EFFECTS ═══
 function renderEffects() {
 const grid = document.getElementById('effects-grid');
 if (!grid) return;
@@ -1604,7 +1194,7 @@ const badge = document.getElementById('effects-badge');
 if (badge) badge.textContent = state.selectedEffects.size;
 }
 
-// ═══ DURATIONS ═══
+// ═══ RENDER DURATIONS ═══
 function renderDurations() {
 const grid = document.getElementById('duration-grid');
 if (!grid) return;
@@ -1617,19 +1207,15 @@ grid.innerHTML = DURATIONS.map(d =>
 grid.querySelectorAll('[data-frames]').forEach(el => {
 el.addEventListener('click', () => {
 state.durationFrames = parseInt(el.dataset.frames, 10);
-renderDurations();
-updateGenerateBtn();
+renderDurations(); updateGenerateBtn();
 const badge = document.getElementById('duration-badge');
-if (badge) {
-const d = DURATIONS.find(x => x.frames === state.durationFrames);
-if (d) badge.textContent = d.label;
-}
+if (badge) { const d = DURATIONS.find(x => x.frames === state.durationFrames); if (d) badge.textContent = d.label; }
 updateStoryboard();
 });
 });
 }
 
-// ═══ INTENSITY ═══
+// ═══ RENDER INTENSITY ═══
 function renderIntensity() {
 const grid = document.getElementById('intensity-grid');
 if (!grid) return;
@@ -1637,16 +1223,12 @@ grid.querySelectorAll('.segment-btn').forEach(el => {
 el.classList.toggle('selected', el.dataset.intensity === state.intensity);
 if (!el.dataset.bound) {
 el.dataset.bound = '1';
-el.addEventListener('click', () => {
-state.intensity = el.dataset.intensity;
-renderIntensity();
-updateStoryboard();
-});
+el.addEventListener('click', () => { state.intensity = el.dataset.intensity; renderIntensity(); updateStoryboard(); });
 }
 });
 }
 
-// ═══ SHOOTING MODE ═══
+// ═══ RENDER SHOOTING MODE ═══
 function renderShootingMode() {
 const grid = document.getElementById('shooting-grid');
 if (!grid) return;
@@ -1658,8 +1240,7 @@ el.addEventListener('click', () => {
 state.selectedMode = el.dataset.mode;
 const badge = document.getElementById('mode-badge');
 if (badge) badge.textContent = state.selectedMode === 'animate' ? 'Animer' : (state.selectedMode === 'transform' ? 'Transformer' : 'Créer');
-renderShootingMode();
-updateStoryboard();
+renderShootingMode(); updateStoryboard();
 });
 }
 });
@@ -1683,7 +1264,7 @@ updateStoryboard();
 });
 }
 
-// ═══ SCENE INPUTS ═══
+// ═══ BIND SCENE INPUTS ═══
 function bindSceneInputs() {
 [['scene-action', 'action'], ['scene-setting', 'setting'], ['scene-mood', 'mood'], ['scene-dialogue', 'dialogue']].forEach(([id, key]) => {
 const el = document.getElementById(id);
@@ -1699,7 +1280,7 @@ const transEl = document.getElementById('transition-type');
 if (transEl) transEl.addEventListener('change', (e) => { state.transition = e.target.value; updateStoryboard(); });
 }
 
-// ═══ STORYBOARD ═══
+// ═══ UPDATE STORYBOARD ═══
 function updateStoryboard() {
 const sb = document.getElementById('storyboard');
 if (!sb) return;
@@ -1728,7 +1309,9 @@ const effs = EFFECTS.filter(e => state.selectedEffects.has(e.id)).map(e => e.emo
 parts.push('<div class="storyboard-scene"><strong>Effets</strong> : ' + esc(effs) + '</div>');
 }
 const d = DURATIONS.find(x => x.frames === state.durationFrames);
-if (d) parts.push('<div class="storyboard-scene"><strong>Durée</strong> : ' + d.label + ' · portrait 9:16</div>');
+if (d) parts.push('<div class="storyboard-scene"><strong>Durée</strong> : ' + d.label + '</div>');
+const fmt = FORMATS.find(x => x.id === state.selectedFormat) || FORMATS[0];
+parts.push('<div class="storyboard-scene"><strong>Format</strong> : ' + fmt.icon + ' ' + esc(fmt.name) + ' (' + fmt.ratio + ') · ' + fmt.width + '×' + fmt.height + '</div>');
 parts.push('<div class="storyboard-scene"><strong>Mouvement</strong> : ' + esc(state.intensity) + '</div>');
 parts.push('<div class="storyboard-scene"><strong>Son</strong> : ' + esc(SOUND_MAP[state.scene.sound] || state.scene.sound) + '</div>');
 sb.innerHTML = parts.join('');
@@ -1739,7 +1322,6 @@ function buildPrompt() {
 const style = STYLES.find(s => s.id === state.selectedStyle);
 if (!style) return 'Animate this image.';
 const parts = [];
-
 if (state.selectedMode === 'animate') {
 parts.push('Animate this EXACT image as the starting frame. The subject must remain IDENTICAL: same face, same expression, same identity. This is a CONTINUATION, not a re-imagination.');
 parts.push('Preserve the exact composition, framing, and layout of the source image.');
@@ -1751,7 +1333,6 @@ parts.push('Visual style: ' + style.style);
 parts.push('Use this image as the base scene. You MAY add or modify elements to include the described characters and action.');
 parts.push('Visual style: ' + style.style);
 }
-
 if (state.characters.length > 0) {
 const chars = state.characters.filter(c => c.name || c.description);
 if (chars.length > 0) {
@@ -1759,43 +1340,306 @@ parts.push('CHARACTERS in this scene:');
 chars.forEach((c, i) => {
 let desc = c.name || ('Personnage ' + (i + 1));
 if (c.description) desc += ' — ' + c.description;
-if (c.role) desc += '. Action dans la scène : ' + c.role;
+if (c.role) desc += '. Action : ' + c.role;
 parts.push('  • ' + desc);
 });
 }
 }
-
 if (state.scene.action) parts.push('ACTION: ' + state.scene.action);
 if (state.scene.setting) parts.push('SETTING: ' + state.scene.setting);
-if (state.scene.mood) parts.push('MOOD / ATMOSPHERE: ' + state.scene.mood);
+if (state.scene.mood) parts.push('MOOD: ' + state.scene.mood);
 if (state.scene.emotion && EMOTION_MAP[state.scene.emotion]) parts.push('EMOTION: ' + EMOTION_MAP[state.scene.emotion]);
 if (state.scene.shot !== 'auto' && SHOT_MAP[state.scene.shot]) parts.push('SHOT: ' + SHOT_MAP[state.scene.shot]);
 if (state.scene.camera !== 'auto' && CAMERA_MAP[state.scene.camera]) parts.push('CAMERA: ' + CAMERA_MAP[state.scene.camera]);
 else parts.push('CAMERA: ' + CAMERA_MAP.auto);
-
 if (state.scene.rhythm !== 'single') parts.push('EDITING: ' + RHYTHM_MAP[state.scene.rhythm]);
-
 if (state.selectedEffects.size > 0) {
 const effectPrompts = EFFECTS.filter(e => state.selectedEffects.has(e.id)).map(e => e.prompt).join('. ');
 if (effectPrompts) parts.push('VISUAL EFFECTS: ' + effectPrompts);
 }
-
 parts.push('MOTION INTENSITY: ' + (INTENSITY_MAP[state.intensity] || INTENSITY_MAP.moderate));
 parts.push('Motion style: ' + style.motion + '.');
-
 if (state.scene.dialogue && (state.scene.sound === 'dialogue' || state.scene.sound === 'ambient')) {
-parts.push('Dialogue / voice-over (soft, whispered, no forced lip-sync): "' + state.scene.dialogue + '"');
+parts.push('Dialogue / voice-over: "' + state.scene.dialogue + '"');
 }
-
 if (state.scene.subtitles !== 'none' && SUBTITLE_MAP[state.scene.subtitles] && state.scene.dialogue) {
 parts.push(SUBTITLE_MAP[state.scene.subtitles]);
 }
-
 parts.push('AUDIO: ' + (SOUND_MAP[state.scene.sound] || SOUND_MAP.ambient));
-parts.push('Portrait orientation 9:16 vertical, 24fps, cinematic quality.');
+const fmt = FORMATS.find(f => f.id === state.selectedFormat) || FORMATS[0];
+const orientText = fmt.ratio === '9:16' ? 'Portrait orientation 9:16 vertical' :
+fmt.ratio === '16:9' ? 'Landscape orientation 16:9 horizontal widescreen' :
+fmt.ratio === '1:1' ? 'Square format 1:1' :
+fmt.ratio === '21:9' ? 'Ultra-wide cinematic 21:9 horizontal' :
+fmt.ratio === '4:3' ? 'Classic 4:3 aspect ratio' :
+fmt.ratio === '4:5' ? 'Portrait 4:5 aspect ratio' : 'Portrait orientation';
+parts.push(orientText + ', 24fps, cinematic quality.');
 parts.push('No watermarks, no on-screen graphics other than specified subtitles.');
-
 return parts.join('. ');
+}
+
+// ═══ BUILD AGENT SCENARIO PROMPT ═══
+function buildAgentScenarioPrompt(idea, sceneCount) {
+return [
+'Tu es un scénariste et directeur artistique de courts-métrages cinématographiques.',
+'',
+'IDÉE DE L\'UTILISATEUR : ' + idea,
+'',
+'Tu dois générer un scénario complet en JSON avec exactement ' + sceneCount + ' scènes.',
+'',
+'Pour chaque scène, tu dois fournir :',
+'- "image_prompt" : un prompt en ANGLAIS pour générer une image cinématographique (portrait 9:16 ou selon format) qui servira d\'image de départ de la scène.',
+'- "video_prompt" : un prompt en ANGLAIS qui décrit l\'animation, le mouvement, l\'ambiance pour la vidéo.',
+'- "camera" : un choix parmi : static, dolly-in, dolly-out, pan-left, pan-right, tilt-up, tilt-down, tracking-lateral, tracking-frontal, tracking-dorsal, orbit, steadicam, crane-up, crane-down, aerial, crash-zoom, dolly-zoom, rack-focus, pov, push-in-slow, pull-out-reveal.',
+'- "shot" : un choix parmi : close-up, medium, wide, extreme-wide, low-angle, high-angle, over-the-shoulder, dutch-angle.',
+'- "emotion" : un mot parmi joie, tristesse, amour, colere, peur, surprise, nostalgie, serenite, determination, mystere.',
+'- "dialogue" : une phrase courte et poétique en FRANÇAIS (max 12 mots), ou "" si aucune.',
+'',
+'IMPORTANT : les personnages et le décor doivent rester COHÉRENTS entre les scènes.',
+'Toutes les chaînes sur une seule ligne, sans retour à la ligne interne. JSON valide uniquement, sans markdown.',
+'',
+'FORMAT :',
+'{',
+'  "title": "Titre poétique",',
+'  "logline": "Résumé en une phrase",',
+'  "characters": [ {"name": "Nom", "description": "Apparence détaillée"} ],',
+'  "scenes": [',
+'    { "scene_number": 1, "image_prompt": "...", "video_prompt": "...", "camera": "...", "shot": "...", "emotion": "...", "dialogue": "..." }',
+'  ]',
+'}'
+].join('\n');
+}
+
+// ═══ AGENT LOGIC ═══
+async function callAgentTextAPI(prompt) {
+const body = {
+model: MODEL_TEXT,
+messages: [
+{ role: 'system', content: 'Tu es un assistant qui répond UNIQUEMENT en JSON valide, sans markdown, sans commentaire. Toutes les chaînes tiennent sur une seule ligne.' },
+{ role: 'user', content: prompt }
+],
+temperature: 0.85,
+max_tokens: 4000,
+response_format: { type: 'json_object' }
+};
+const res = await apiFetch(API_BASE + '/chat/completions', {
+method: 'POST',
+headers: { 'Authorization': 'Bearer ' + getApiKey(), 'Content-Type': 'application/json' },
+body: JSON.stringify(body)
+});
+if (!res.ok) {
+const err = await res.text();
+throw new Error('HTTP ' + res.status + ' — ' + err.slice(0, 200));
+}
+const data = await res.json();
+const content = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content;
+if (!content) throw new Error('Pas de contenu retourné');
+return content;
+}
+
+function parseAgentJSON(text) {
+if (!text) return null;
+let c = text.trim();
+const fm = c.match(/```(?:json)?\s*([\s\S]*?)```/);
+if (fm) c = fm[1].trim();
+const firstBrace = c.indexOf('{');
+if (firstBrace < 0) return null;
+c = c.slice(firstBrace);
+try { return JSON.parse(c); } catch (e1) {}
+try {
+const fixed = c.replace(/[\u0000-\u001F]+/g, ' ').replace(/,\s*([}\]])/g, '$1');
+return JSON.parse(fixed);
+} catch (e2) {}
+const lastBrace = c.lastIndexOf('}');
+if (lastBrace > 0) {
+try { return JSON.parse(c.slice(0, lastBrace + 1).replace(/,\s*([}\]])/g, '$1')); } catch (e3) {}
+}
+return null;
+}
+
+async function generateAgentImage(prompt) {
+const fmt = FORMATS.find(f => f.id === state.selectedFormat) || FORMATS[0];
+const w = fmt.width, h = fmt.height;
+const sizeStr = w + 'x' + h;
+const body = {
+model: MODEL_IMAGE,
+prompt: prompt,
+n: 1,
+size: sizeStr,
+response_format: 'url'
+};
+const res = await apiFetch(API_BASE + '/images/generations', {
+method: 'POST',
+headers: { 'Authorization': 'Bearer ' + getApiKey(), 'Content-Type': 'application/json' },
+body: JSON.stringify(body)
+});
+if (!res.ok) {
+const err = await res.text();
+throw new Error('Image HTTP ' + res.status + ' — ' + err.slice(0, 200));
+}
+const data = await res.json();
+const item = data.data && data.data[0];
+if (!item) throw new Error('Pas de donnée image');
+if (item.url) return item.url;
+if (item.b64_json) return 'data:image/png;base64,' + item.b64_json;
+throw new Error('Format image inconnu');
+}
+
+async function runAgent() {
+if (state.agent.isRunning || state.isRunning) return;
+const idea = (document.getElementById('agent-idea').value || '').trim();
+if (idea.length < 10) { showToast('Décris ton idée (min 10 caractères)', 'error'); return; }
+if (!getApiKey()) { showToast('Ajoutez votre clé API', 'error'); return; }
+
+state.agent.isRunning = true;
+state.stopRequested = false;
+state.agent.idea = idea;
+state.agent.sceneCount = parseInt(document.getElementById('agent-scenes').value, 10);
+state.agent.usePhotos = document.getElementById('agent-use-photo').classList.contains('selected');
+state.agent.generateImages = document.getElementById('agent-generate-images').classList.contains('selected');
+
+if (!state.agent.usePhotos && state.photos.length === 0 && !state.agent.generateImages) {
+showToast('Ajoute des photos ou active la génération d\'images', 'error');
+state.agent.isRunning = false;
+return;
+}
+
+const logEl = document.getElementById('agent-log');
+if (logEl) { logEl.innerHTML = ''; logEl.style.display = 'block'; }
+
+wakeLockEnabled = true;
+try { if (localStorageAvailable) localStorage.setItem(WAKE_LOCK_PREF, '1'); } catch (e) {}
+await ensureWakeLockActive();
+
+document.getElementById('agent-launch-btn').disabled = true;
+document.getElementById('stop-btn').classList.add('visible');
+document.getElementById('agent-launch-btn').textContent = '🤖 Agent en cours…';
+
+try {
+agentLog('Agent', 'Démarrage — analyse de l\'idée…', 'thinking');
+setStatus('🤖 Agent — analyse…');
+await sleep(600);
+
+agentLog('Agent', 'Écriture du scénario (' + state.agent.sceneCount + ' scènes)…', 'thinking');
+setStatus('🤖 Agent — écriture du scénario…');
+const scenarioPrompt = buildAgentScenarioPrompt(idea, state.agent.sceneCount);
+const scenarioRaw = await callAgentTextAPI(scenarioPrompt);
+const scenario = parseAgentJSON(scenarioRaw);
+if (!scenario || !scenario.scenes || !scenario.scenes.length) {
+throw new Error('Scénario invalide');
+}
+state.agent.scenario = scenario;
+agentLog('Agent', '✓ Scénario « ' + (scenario.title || 'Sans titre') +' » — ' + scenario.scenes.length + ' scènes', 'success');
+
+// Auto-remplir les personnages
+if (scenario.characters && scenario.characters.length) {
+state.characters = scenario.characters.map(c => ({
+name: c.name || '', description: c.description || '', role: ''
+}));
+saveStorage();
+renderCharacters();
+agentLog('Agent', '✓ ' + scenario.characters.length + ' personnage(s) créé(s)', 'success');
+}
+
+// Application du scénario à la scène principale
+if (scenario.scenes[0]) {
+state.scene.action = scenario.scenes[0].video_prompt || '';
+state.scene.dialogue = scenario.scenes[0].dialogue || '';
+state.scene.emotion = scenario.scenes[0].emotion || '';
+state.scene.camera = scenario.scenes[0].camera || 'auto';
+state.scene.shot = scenario.scenes[0].shot || 'auto';
+document.getElementById('scene-action').value = state.scene.action;
+document.getElementById('scene-dialogue').value = state.scene.dialogue;
+document.getElementById('scene-emotion').value = state.scene.emotion;
+document.getElementById('scene-camera').value = state.scene.camera;
+document.getElementById('scene-shot').value = state.scene.shot;
+updateStoryboard();
+}
+agentLog('Agent', '✓ Paramètres de scène appliqués', 'success');
+
+await sleep(500);
+
+// Génération des images si demandé
+if (state.agent.generateImages) {
+agentLog('Agent', 'Génération de ' + scenario.scenes.length + ' image(s)…', 'thinking');
+setStatus('🤖 Agent — génération des images…');
+for (let i = 0; i < scenario.scenes.length; i++) {
+if (state.stopRequested) break;
+const s = scenario.scenes[i];
+try {
+agentLog('Agent', 'Image ' + (i + 1) + '/' + scenario.scenes.length + '…', 'thinking');
+const url = await generateAgentImage(s.image_prompt);
+const isDataUri = url.startsWith('data:');
+if (!isDataUri) {
+const compressed = await compressImageFromUrl(url);
+state.photos.push({ id: Date.now() + Math.random(), dataUri: compressed, thumbnail: compressed });
+} else {
+state.photos.push({ id: Date.now() + Math.random(), dataUri: url, thumbnail: url });
+}
+renderPhotoList();
+agentLog('Agent', '✓ Image ' + (i + 1) + ' générée', 'success');
+await sleep(1000);
+} catch (e) {
+agentLog('Agent', '✕ Image ' + (i + 1) + ' : ' + e.message.slice(0, 60), 'error');
+}
+}
+updateGenerateBtn();
+}
+
+if (state.stopRequested) throw new Error('Arrêt demandé');
+
+agentLog('Agent', '✓ Prêt — lancement de la création vidéo', 'success');
+await sleep(800);
+
+// Lancer la génération vidéo
+await startGeneration();
+
+agentLog('Agent', '✦ Mission terminée ✦', 'success');
+showToast('🤖 Agent — mission accomplie ✦', 'success', 4000);
+
+} catch (e) {
+if (e.message === 'Arrêt demandé') {
+agentLog('Agent', 'Arrêté par l\'utilisateur', 'error');
+} else {
+agentLog('Agent', '✕ Erreur : ' + e.message, 'error');
+showToast('Agent : ' + e.message.slice(0, 60), 'error', 4000);
+}
+}
+
+state.agent.isRunning = false;
+document.getElementById('agent-launch-btn').disabled = false;
+document.getElementById('agent-launch-btn').textContent = '🤖 Lancer l\'Agent';
+document.getElementById('stop-btn').classList.remove('visible');
+await deactivateWakeLock();
+updateAgentBtn();
+}
+
+function compressImageFromUrl(url) {
+return new Promise((resolve) => {
+const img = new Image();
+img.crossOrigin = 'anonymous';
+img.onload = () => {
+try {
+let { width, height } = img;
+const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(width, height));
+width = Math.round(width * scale); height = Math.round(height * scale);
+const canvas = document.createElement('canvas');
+canvas.width = width; canvas.height = height;
+canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+resolve(canvas.toDataURL('image/jpeg', 0.9));
+} catch (e) { resolve(url); }
+};
+img.onerror = () => resolve(url);
+img.src = url;
+});
+}
+
+function updateAgentBtn() {
+const btn = document.getElementById('agent-launch-btn');
+if (!btn) return;
+const hasKey = !!getApiKey();
+const idea = (document.getElementById('agent-idea')?.value || '').trim();
+btn.disabled = !hasKey || idea.length < 10 || state.agent.isRunning || state.isRunning;
 }
 
 // ═══ API ═══
@@ -1807,14 +1651,12 @@ const res = await fetch(url, options);
 if (res.status === 429) {
 const wait = [10, 20, 35, 50, 75, 100, 150][Math.min(attempt, 6)];
 setStatus('Patience… (' + wait + 's)');
-await sleep(wait * 1000);
-continue;
+await sleep(wait * 1000); continue;
 }
 if (res.status === 503) {
 const wait = [5, 10, 15, 20, 30, 45][Math.min(attempt, 5)];
 setStatus('Préparation… (' + wait + 's)');
-await sleep(wait * 1000);
-continue;
+await sleep(wait * 1000); continue;
 }
 return res;
 } catch (e) {
@@ -1828,12 +1670,15 @@ return fetch(url, options);
 }
 
 async function createVideoTask(photoDataUri) {
+const fmt = FORMATS.find(f => f.id === state.selectedFormat) || FORMATS[0];
 const body = {
 model: MODEL_VIDEO,
 prompt: buildPrompt(),
 image: photoDataUri,
 num_frames: state.durationFrames,
-frame_rate: FRAME_RATE
+frame_rate: FRAME_RATE,
+width: fmt.width,
+height: fmt.height
 };
 const res = await apiFetch(API_BASE + '/videos', {
 method: 'POST',
@@ -1855,8 +1700,7 @@ let remaining = POLL_INITIAL_WAIT_SEC;
 while (remaining > 0) {
 if (state.stopRequested) throw new Error('Arrêt demandé');
 onProgress('Préparation… — ' + remaining + 's');
-await sleep(1000);
-remaining--;
+await sleep(1000); remaining--;
 }
 for (let attempt = 0; attempt < MAX_POLL_ATTEMPTS; attempt++) {
 if (state.stopRequested) throw new Error('Arrêt demandé');
@@ -1865,8 +1709,7 @@ let r = POLL_INTERVAL_SEC;
 while (r > 0) {
 if (state.stopRequested) throw new Error('Arrêt demandé');
 onProgress('Votre vidéo prend vie… — ' + r + 's');
-await sleep(1000);
-r--;
+await sleep(1000); r--;
 }
 }
 const url = POLL_BASE + '?video_id=' + encodeURIComponent(videoId) + '&model_name=' + encodeURIComponent(MODEL_VIDEO);
@@ -1898,21 +1741,13 @@ let icon = '○', statusText = 'En file', cls = '';
 if (item.status === 'processing') { icon = '◐'; statusText = item.progress || 'En cours…'; cls = 'processing'; }
 else if (item.status === 'done') { icon = '✦'; statusText = 'Terminé'; cls = 'done'; }
 else if (item.status === 'failed') { icon = '✕'; statusText = item.errorMsg || 'Échec'; cls = 'failed'; }
-return '<div class="queue-item ' + cls + '">' +
-'<div class="q-icon">' + icon + '</div>' +
-'<div class="q-name">Vidéo ' + (item.index + 1) + ' / ' + item.total + '</div>' +
-'<div class="q-status">' + esc(statusText) + '</div>' +
-'</div>';
+return '<div class="queue-item ' + cls + '"><div class="q-icon">' + icon + '</div><div class="q-name">Vidéo ' + (item.index + 1) + ' / ' + item.total + '</div><div class="q-status">' + esc(statusText) + '</div></div>';
 }).join('');
 }
 
-// ═══ HISTORY + GALLERY ═══
-function addToHistory(videoUrl, styleName, durationLabel, sceneSummary) {
-const entry = {
-id: Date.now() + Math.random(),
-url: videoUrl, style: styleName, duration: durationLabel,
-scene: sceneSummary || '', date: Date.now()
-};
+// ═══ HISTORY ═══
+function addToHistory(videoUrl, styleName, durationLabel, sceneSummary, formatLabel) {
+const entry = { id: Date.now() + Math.random(), url: videoUrl, style: styleName, duration: durationLabel, scene: sceneSummary || '', format: formatLabel || '', date: Date.now() };
 state.history.unshift(entry);
 if (state.history.length > MAX_HISTORY) state.history = state.history.slice(0, MAX_HISTORY);
 saveStorage();
@@ -1921,14 +1756,12 @@ return entry.id;
 function removeFromHistory(id) {
 state.history = state.history.filter(h => h.id !== id);
 state.favorites.delete(id);
-saveStorage();
-renderGallery();
+saveStorage(); renderGallery();
 }
 function toggleFavorite(id) {
 if (state.favorites.has(id)) state.favorites.delete(id);
 else state.favorites.add(id);
-saveStorage();
-renderGallery();
+saveStorage(); renderGallery();
 }
 function renderGallery() {
 const galleryEl = document.getElementById('gallery');
@@ -1944,7 +1777,7 @@ return '<div class="gallery-item' + (isFav ? ' favorite' : '') + '">' +
 '<div class="g-caption">' +
 '<strong>✦ ' + esc(h.style) + '</strong>' +
 (h.scene ? '<span class="g-meta">' + esc(h.scene.slice(0, 90)) + (h.scene.length > 90 ? '…' : '') + '</span>' : '') +
-'<span class="g-meta">' + esc(h.duration) + ' · 9:16 · ' + formatDate(h.date) + '</span>' +
+'<span class="g-meta">' + esc(h.duration) + (h.format ? ' · ' + esc(h.format) : '') + ' · ' + formatDate(h.date) + '</span>' +
 '<div class="g-buttons">' +
 '<a class="g-download" href="' + h.url + '" download="DianaIA_' + esc(h.style) + '_' + esc(h.duration) + '_' + h.id + '.mp4" target="_blank" rel="noopener">⬇ Télécharger</a>' +
 '<button type="button" class="g-fav' + (isFav ? ' active' : '') + '" data-fav="' + h.id + '">' + (isFav ? '★' : '☆') + '</button>' +
@@ -1960,8 +1793,7 @@ if (confirm('Supprimer cette vidéo de l\'historique ?')) removeFromHistory(pars
 });
 galleryGrid.querySelectorAll('[data-fav]').forEach(btn => {
 btn.addEventListener('click', (e) => {
-e.stopPropagation();
-toggleFavorite(parseFloat(btn.dataset.fav));
+e.stopPropagation(); toggleFavorite(parseFloat(btn.dataset.fav));
 });
 });
 }
@@ -1986,13 +1818,15 @@ async function startGeneration() {
 if (state.isRunning) return;
 if (!state.photos.length) { showToast('Choisissez une photo', 'error'); return; }
 if (!state.selectedStyle) { showToast('Choisissez un style', 'error'); return; }
-if (!getApiKey()) { showToast('Ajoutez votre clé API', 'error'); document.getElementById('api-key-input').focus(); return; }
+if (!getApiKey()) { showToast('Ajoutez votre clé API', 'error'); return; }
 state.isRunning = true;
 state.stopRequested = false;
 const style = STYLES.find(s => s.id === state.selectedStyle);
 const dur = DURATIONS.find(d => d.frames === state.durationFrames);
+const fmt = FORMATS.find(f => f.id === state.selectedFormat) || FORMATS[0];
 const styleName = style ? style.name : 'Vidéo';
 const durLabel = dur ? dur.label : '';
+const fmtLabel = fmt ? fmt.name + ' ' + fmt.ratio : '';
 const sceneSummary = state.scene.action || (state.characters.length > 0 ? state.characters.map(c => c.name).filter(Boolean).join(' · ') : '');
 state.queue = state.photos.map((p, i) => ({ index: i, total: state.photos.length, photo: p, status: 'pending', progress: null, errorMsg: null }));
 document.getElementById('stop-btn').classList.add('visible');
@@ -2017,7 +1851,7 @@ const videoUrl = await pollVideo(videoId, (prog) => { item.progress = prog; rend
 item.status = 'done';
 item.progress = 'Terminé';
 successCount++;
-addToHistory(videoUrl, styleName, durLabel, sceneSummary);
+addToHistory(videoUrl, styleName, durLabel, sceneSummary, fmtLabel);
 renderGallery();
 setStatus('✦ ' + successCount + '/' + state.queue.length + ' prête' + (successCount > 1 ? 's' : '') + ' ✦');
 showToast('Vidéo ' + (i + 1) + ' prête ✦', 'success', 3000);
@@ -2047,7 +1881,7 @@ await deactivateWakeLock();
 }
 
 function stopGeneration() {
-if (!state.isRunning) return;
+if (!state.isRunning && !state.agent.isRunning) return;
 state.stopRequested = true;
 setStatus('Arrêt en cours…');
 }
@@ -2060,9 +1894,7 @@ const a = document.createElement('a');
 a.href = h.url;
 a.download = 'DianaIA_' + h.style + '_' + h.duration + '_' + h.id + '.mp4';
 a.target = '_blank';
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
+document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }, i * 900);
 });
 showToast('Téléchargement de ' + state.history.length + ' vidéo(s)…', 'success', 3000);
@@ -2071,10 +1903,8 @@ showToast('Téléchargement de ' + state.history.length + ' vidéo(s)…', 'succ
 function clearAll() {
 if (!state.history.length) return;
 if (!confirm('Effacer tout l\'historique ?')) return;
-state.history = [];
-state.favorites = new Set();
-saveStorage();
-renderGallery();
+state.history = []; state.favorites = new Set();
+saveStorage(); renderGallery();
 showToast('Historique effacé', 'warn');
 }
 
@@ -2086,9 +1916,7 @@ const saveBtn = document.getElementById('api-save-btn');
 if (saveBtn) saveBtn.addEventListener('click', saveApiKey);
 const apiInput = document.getElementById('api-key-input');
 if (apiInput) {
-apiInput.addEventListener('keydown', (e) => {
-if (e.key === 'Enter') { e.preventDefault(); saveApiKey(); }
-});
+apiInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); saveApiKey(); } });
 }
 
 const fileInput = document.getElementById('file-input');
@@ -2113,6 +1941,32 @@ if (addCharBtn) addCharBtn.addEventListener('click', addCharacter);
 bindSceneInputs();
 renderActionPresets();
 
+// Agent UI
+const agentIdea = document.getElementById('agent-idea');
+if (agentIdea) agentIdea.addEventListener('input', updateAgentBtn);
+const agentScenes = document.getElementById('agent-scenes');
+if (agentScenes) agentScenes.addEventListener('change', () => {
+state.agent.sceneCount = parseInt(agentScenes.value, 10);
+});
+const agentGenImg = document.getElementById('agent-generate-images');
+const agentUsePhoto = document.getElementById('agent-use-photo');
+if (agentGenImg && agentUsePhoto) {
+agentGenImg.addEventListener('click', () => {
+agentGenImg.classList.add('selected');
+agentUsePhoto.classList.remove('selected');
+state.agent.generateImages = true;
+state.agent.usePhotos = false;
+});
+agentUsePhoto.addEventListener('click', () => {
+agentUsePhoto.classList.add('selected');
+agentGenImg.classList.remove('selected');
+state.agent.usePhotos = true;
+state.agent.generateImages = false;
+});
+}
+const agentLaunch = document.getElementById('agent-launch-btn');
+if (agentLaunch) agentLaunch.addEventListener('click', runAgent);
+
 const generateBtn = document.getElementById('generate-btn');
 if (generateBtn) generateBtn.addEventListener('click', startGeneration);
 const stopBtn = document.getElementById('stop-btn');
@@ -2127,6 +1981,7 @@ try { wakeLockEnabled = localStorage.getItem(WAKE_LOCK_PREF) === '1'; } catch (e
 updateApiPanel();
 renderStyles();
 renderEffects();
+renderFormats();
 renderDurations();
 renderIntensity();
 renderShootingMode();
@@ -2134,9 +1989,10 @@ renderPhotoList();
 renderCharacters();
 renderGallery();
 updateGenerateBtn();
+updateAgentBtn();
 updateStoryboard();
 
-console.log('[DianaIA v5] Studio Couture prêt ✦ localStorage:', localStorageAvailable ? 'OK' : 'session');
+console.log('[DianaIA v6] Studio Couture + Agent IA prêt ✦');
 })();
 </script>
 
