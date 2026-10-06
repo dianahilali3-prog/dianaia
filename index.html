@@ -1,1 +1,1376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a0f14">
+<title>DianaIA — Studio de création vidéo IA</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root {
+--night: #0d0608; --night-2: #1a0f14; --night-3: #241620;
+--panel: #1e1218; --panel-2: #2a1a24; --border: #3a2430; --border-soft: #2e1e28;
+--rose: #e8a0b8; --rose-soft: #f4c4d4; --rose-deep: #c87090;
+--gold: #e5c15a; --gold-soft: #f0d080; --gold-deep: #b89a3a;
+--champagne: #f4e4c8; --champagne-soft: #faf0dc;
+--plum: #8b5fc4; --plum-soft: #a880d8;
+--mint: #a8d8c8; --coral: #f0a090;
+--ink: #f4e8ec; --ink-dim: #b090a0; --ink-faint: #6a5060;
+--success: #4a9d6a; --error: #c85a4a; --warn: #d4a017;
+--radius: 16px; --radius-sm: 10px;
+--font-serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+--font-sans: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+--font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+}
+html, body { background: var(--night); }
+body {
+font-family: var(--font-sans); background: var(--night);
+background-image:
+radial-gradient(circle at 15% 5%, rgba(232,160,184,0.10) 0%, transparent 50%),
+radial-gradient(circle at 85% 95%, rgba(139,95,196,0.08) 0%, transparent 50%),
+radial-gradient(circle at 50% 50%, rgba(229,193,90,0.04) 0%, transparent 60%);
+background-attachment: fixed; color: var(--ink); min-height: 100vh;
+padding: calc(1.2rem + env(safe-area-inset-top)) 1rem calc(2rem + env(safe-area-inset-bottom));
+font-size: 15px; line-height: 1.55; max-width: 720px; margin: 0 auto;
+letter-spacing: 0.01em; -webkit-font-smoothing: antialiased;
+}
+header { margin-bottom: 1.5rem; text-align: center; position: relative; padding: 0.8rem 0 1.2rem; }
+header::before { content: '✦'; position: absolute; top: 0; left: 50%; transform: translateX(-50%); color: var(--gold); font-size: 0.9rem; opacity: 0.7; }
+header::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 140px; height: 1px; background: linear-gradient(90deg, transparent, var(--rose), var(--gold), var(--plum), transparent); opacity: 0.6; }
+.brand-mark { display: inline-block; font-family: var(--font-serif); font-size: 0.7rem; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.5rem; opacity: 0.85; font-weight: 500; }
+h1 { font-family: var(--font-serif); font-size: 2.6rem; font-weight: 300; letter-spacing: 0.02em; margin-bottom: 0.4rem; background: linear-gradient(135deg, var(--rose-soft) 0%, var(--gold-soft) 40%, var(--champagne) 60%, var(--plum-soft) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; font-style: italic; }
+.subtitle { font-family: var(--font-serif); font-size: 0.9rem; color: var(--ink-dim); font-style: italic; letter-spacing: 0.08em; }
+.toast { position: fixed; top: calc(1.2rem + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%) translateY(-120px); background: var(--panel); color: var(--ink); border: 1px solid var(--border); border-left: 3px solid var(--gold); padding: 0.85rem 1.4rem; border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 500; box-shadow: 0 8px 32px rgba(0,0,0,0.6); z-index: 1000; opacity: 0; max-width: 90vw; text-align: center; transition: transform 0.4s cubic-bezier(0.2,0.9,0.3,1.2), opacity 0.4s ease; display: flex; align-items: center; gap: 0.6rem; }
+.toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast.success { border-left-color: var(--success); }
+.toast.error { border-left-color: var(--error); }
+.toast.warn { border-left-color: var(--warn); }
+.toast .toast-icon { font-size: 1rem; color: var(--gold); }
+.info-banner { background: linear-gradient(135deg, rgba(232,160,184,0.08), rgba(229,193,90,0.05)); border: 1px solid var(--border); border-left: 2px solid var(--rose); padding: 1rem 1.15rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--ink-dim); margin-bottom: 1.2rem; line-height: 1.6; position: relative; font-family: var(--font-serif); font-style: italic; }
+.info-banner::before { content: '❦'; position: absolute; top: 0.5rem; right: 0.9rem; font-family: var(--font-serif); font-size: 1.4rem; color: var(--rose); opacity: 0.35; }
+.info-banner strong { color: var(--ink); font-weight: 600; font-style: normal; }
+.section { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; transition: border-color 0.3s; }
+.section.open { box-shadow: 0 0 0 1px rgba(232,160,184,0.08), 0 6px 24px rgba(0,0,0,0.3); }
+.section-header { padding: 1rem 1.2rem; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+.section-header:active { background: var(--panel-2); }
+.section-title { font-family: var(--font-serif); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--ink); font-weight: 500; display: flex; align-items: center; gap: 0.6rem; }
+.section-title .badge { display: inline-block; padding: 0.15rem 0.55rem; background: transparent; color: var(--gold); border: 1px solid var(--gold-deep); border-radius: 2px; font-size: 0.6rem; letter-spacing: 0.15em; font-family: var(--font-sans); font-weight: 600; }
+.section-title .badge.soft { color: var(--rose-soft); border-color: var(--rose-deep); }
+.section-title .badge.plum { color: var(--plum-soft); border-color: #5c3a8a; }
+.section-title .badge.mint { color: var(--mint); border-color: #4a8878; }
+.section-header .chevron { font-size: 0.7rem; color: var(--ink-faint); transition: transform 0.3s; }
+.section.open .section-header .chevron { transform: rotate(180deg); color: var(--rose); }
+.section-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.section.open .section-body { max-height: 20000px; }
+.section-content { padding: 0 1.2rem 1.2rem; }
+.api-panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.2rem 1.3rem; margin-bottom: 1rem; transition: border-color 0.3s, box-shadow 0.3s; }
+.api-panel.ok { box-shadow: inset 3px 0 0 var(--success), 0 0 24px rgba(74,157,106,0.10); }
+.api-key-input { width: 100%; padding: 0.9rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); color: var(--ink); font-family: var(--font-mono); font-size: 0.82rem; margin-bottom: 0.6rem; }
+.api-key-input:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px rgba(232,160,184,0.12); }
+.api-save-btn { width: 100%; padding: 0.9rem 1.2rem; border-radius: var(--radius-sm); border: 1px solid var(--gold-deep); background: linear-gradient(135deg, rgba(232,160,184,0.18), rgba(229,193,90,0.12)); color: var(--gold-soft); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; margin-bottom: 0.7rem; transition: transform 0.1s; }
+.api-save-btn:active { transform: scale(0.98); }
+.api-status-line { font-size: 0.75rem; padding: 0.6rem 0.9rem; border-radius: var(--radius-sm); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.6rem; background: var(--night-2); color: var(--ink-dim); border: 1px solid var(--border-soft); }
+.api-status-line.ok { background: rgba(74,157,106,0.08); color: var(--success); border-color: rgba(74,157,106,0.3); font-weight: 500; }
+.api-status-line .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ink-faint); flex-shrink: 0; }
+.api-status-line.ok .status-dot { background: var(--success); box-shadow: 0 0 8px var(--success); }
+.api-hint { font-size: 0.72rem; color: var(--ink-dim); margin-top: 0.5rem; font-family: var(--font-serif); font-style: italic; }
+.api-hint a { color: var(--rose-soft); text-decoration: none; border-bottom: 1px dotted var(--rose-deep); }
+.upload-zone { position: relative; border: 2px dashed var(--border); border-radius: var(--radius); padding: 2rem 1rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--night-2); display: block; }
+.upload-zone:active { border-color: var(--rose); background: rgba(232,160,184,0.04); }
+.upload-zone input[type=file] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; clip: rect(0 0 0 0); pointer-events: none; }
+.upload-zone .icon { font-size: 2.4rem; color: var(--rose); opacity: 0.7; margin-bottom: 0.6rem; }
+.upload-zone .t1 { font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; color: var(--ink); margin-bottom: 0.3rem; }
+.upload-zone .t2 { font-size: 0.75rem; color: var(--ink-dim); }
+.style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.6rem; margin-top: 0.4rem; }
+.style-card { padding: 0.9rem 0.7rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); cursor: pointer; transition: all 0.2s; text-align: center; position: relative; overflow: hidden; }
+.style-card:active { transform: scale(0.97); }
+.style-card.selected { background: linear-gradient(135deg, rgba(232,160,184,0.15), rgba(229,193,90,0.10)); border-color: var(--rose); box-shadow: 0 0 0 1px var(--rose), 0 4px 20px rgba(232,160,184,0.2); }
+.style-card.selected::before { content: '✓'; position: absolute; top: 0.5rem; right: 0.6rem; color: var(--rose-soft); font-size: 0.9rem; font-weight: 700; }
+.style-card .style-emoji { font-size: 1.6rem; display: block; margin-bottom: 0.3rem; }
+.style-card .style-name { font-family: var(--font-serif); font-size: 0.85rem; font-weight: 500; color: var(--ink); font-style: italic; }
+.style-card .style-desc { font-size: 0.6rem; color: var(--ink-dim); margin-top: 0.2rem; letter-spacing: 0.04em; }
+.control-row { margin-bottom: 1rem; }
+.control-row:last-child { margin-bottom: 0; }
+.control-label { display: block; font-family: var(--font-serif); font-size: 0.78rem; color: var(--ink-dim); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 500; font-style: italic; }
+select, .text-input { width: 100%; padding: 0.85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); color: var(--ink); font-family: var(--font-sans); font-size: 0.9rem; }
+select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%23e8a0b8' d='M0 0l5 6 5-6z'/></svg>"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 10px; cursor: pointer; }
+select:focus, .text-input:focus, textarea:focus { outline: none; border-color: var(--rose); box-shadow: 0 0 0 3px rgba(232,160,184,0.12); }
+select option { background: var(--night-3); color: var(--ink); }
+textarea { width: 100%; padding: 0.85rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); color: var(--ink); font-family: var(--font-sans); font-size: 0.9rem; line-height: 1.5; resize: vertical; min-height: 70px; }
+textarea::placeholder, .text-input::placeholder { color: var(--ink-faint); font-style: italic; }
+.duration-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.duration-btn { padding: 0.85rem 0.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); color: var(--ink-dim); cursor: pointer; text-align: center; transition: all 0.15s; }
+.duration-btn:active { transform: scale(0.96); }
+.duration-btn.selected { background: linear-gradient(135deg, rgba(232,160,184,0.18), rgba(229,193,90,0.12)); border-color: var(--rose); color: var(--rose-soft); }
+.duration-btn .dur-val { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 500; font-style: italic; display: block; }
+.duration-btn .dur-lbl { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.7; margin-top: 0.15rem; }
+.segment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+.segment-grid.full { grid-template-columns: 1fr; }
+.segment-btn { padding: 0.65rem 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); color: var(--ink-dim); cursor: pointer; text-align: center; font-size: 0.72rem; letter-spacing: 0.05em; transition: all 0.15s; }
+.segment-btn:active { transform: scale(0.96); }
+.segment-btn.selected { background: linear-gradient(135deg, rgba(232,160,184,0.15), rgba(229,193,90,0.10)); border-color: var(--rose); color: var(--rose-soft); font-weight: 600; }
+.char-card { background: var(--night-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.9rem; margin-bottom: 0.6rem; }
+.char-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.char-card-name { font-family: var(--font-serif); font-size: 0.95rem; font-style: italic; color: var(--rose-soft); }
+.char-card-remove { background: transparent; border: 1px solid var(--error); color: var(--error); width: 26px; height: 26px; border-radius: 50%; font-size: 0.75rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.char-card input, .char-card textarea { margin-bottom: 0.4rem; font-size: 0.85rem; }
+.char-card input:last-child, .char-card textarea:last-child { margin-bottom: 0; }
+.add-char-btn { width: 100%; padding: 0.85rem; border-radius: var(--radius-sm); border: 1px dashed var(--gold-deep); background: transparent; color: var(--gold-soft); font-family: var(--font-serif); font-size: 0.85rem; font-style: italic; letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s; }
+.add-char-btn:active { background: rgba(229,193,90,0.08); }
+.btn-primary { width: 100%; padding: 1.25rem; border-radius: var(--radius); border: 1px solid var(--gold-deep); background: linear-gradient(135deg, rgba(232,160,184,0.25) 0%, rgba(229,193,90,0.18) 50%, rgba(139,95,196,0.18) 100%); color: var(--champagne-soft); font-family: var(--font-serif); font-size: 1.05rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; cursor: pointer; margin-bottom: 1rem; transition: transform 0.1s, box-shadow 0.2s; box-shadow: 0 6px 24px rgba(232,160,184,0.15); }
+.btn-primary:active:not(:disabled) { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; box-shadow: none; }
+.btn-stop { width: 100%; padding: 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--error); background: transparent; color: var(--error); font-family: var(--font-serif); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; margin-bottom: 1rem; display: none; font-style: italic; }
+.btn-stop.visible { display: block; }
+.queue { margin-top: 1rem; }
+.queue-item { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-soft); margin-bottom: 0.5rem; background: var(--panel); font-size: 0.85rem; transition: border-color 0.3s; }
+.queue-item.processing { border-color: var(--rose); background: linear-gradient(90deg, rgba(232,160,184,0.06), var(--panel)); }
+.queue-item.done { border-color: var(--success); background: linear-gradient(90deg, rgba(74,157,106,0.05), var(--panel)); }
+.queue-item.failed { border-color: var(--error); background: linear-gradient(90deg, rgba(200,90,74,0.05), var(--panel)); }
+.queue-item .q-icon { font-size: 1.1rem; width: 1.6rem; text-align: center; flex-shrink: 0; }
+.queue-item.processing .q-icon { color: var(--rose-soft); }
+.queue-item.done .q-icon { color: var(--success); }
+.queue-item.failed .q-icon { color: var(--error); }
+.queue-item .q-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-serif); font-style: italic; }
+.queue-item .q-status { font-size: 0.7rem; color: var(--ink-dim); text-align: right; max-width: 55%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--font-mono); }
+.storyboard { background: var(--night-2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1rem; display: block; }
+.storyboard-title { font-family: var(--font-serif); font-size: 0.95rem; font-style: italic; color: var(--gold-soft); margin-bottom: 0.7rem; letter-spacing: 0.1em; }
+.storyboard-scene { font-size: 0.78rem; color: var(--ink-dim); padding: 0.5rem 0.7rem; border-left: 2px solid var(--rose-deep); margin-bottom: 0.4rem; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; background: rgba(232,160,184,0.03); }
+.storyboard-scene strong { color: var(--rose-soft); font-family: var(--font-serif); font-style: italic; }
+.gallery { margin-top: 1.6rem; }
+.gallery-title { font-family: var(--font-serif); font-size: 1.2rem; color: var(--ink); margin-bottom: 1rem; letter-spacing: 0.2em; text-transform: uppercase; text-align: center; position: relative; padding-bottom: 0.8rem; font-weight: 400; font-style: italic; }
+.gallery-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--rose), var(--gold), transparent); }
+.gallery-actions { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.6rem; flex-wrap: wrap; }
+.gallery-actions button { padding: 0.4rem 0.9rem; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--night-2); color: var(--ink-dim); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: var(--font-sans); }
+.gallery-actions button:hover { color: var(--rose-soft); border-color: var(--rose-deep); }
+.gallery-grid { display: grid; grid-template-columns: 1fr; gap: 1.2rem; }
+.gallery-item { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: #000; box-shadow: 0 8px 32px rgba(0,0,0,0.4); animation: fadeIn 0.5s ease; position: relative; }
+.gallery-item.favorite { border-color: var(--gold); box-shadow: 0 0 24px rgba(229,193,90,0.25); }
+.gallery-item video { width: 100%; display: block; aspect-ratio: 9/16; object-fit: cover; background: #000; }
+.gallery-item .g-caption { padding: 0.9rem 1.1rem; background: var(--panel); display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--border); }
+.gallery-item .g-caption strong { font-family: var(--font-serif); color: var(--rose-soft); font-size: 1rem; font-weight: 500; font-style: italic; }
+.gallery-item .g-caption .g-meta { font-size: 0.68rem; color: var(--ink-dim); letter-spacing: 0.1em; text-transform: uppercase; font-family: var(--font-mono); }
+.gallery-item .g-buttons { display: flex; gap: 0.4rem; margin-top: 0.4rem; }
+.gallery-item .g-download, .gallery-item .g-fav { flex: 1; padding: 0.65rem 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--gold-deep); background: linear-gradient(135deg, rgba(229,193,90,0.15), rgba(232,160,184,0.10)); color: var(--gold-soft); font-family: var(--font-serif); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; text-align: center; cursor: pointer; font-style: italic; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; }
+.gallery-item .g-fav { background: transparent; color: var(--ink-dim); border-color: var(--border); flex: 0 0 auto; padding: 0.65rem 0.8rem; }
+.gallery-item .g-fav.active { color: var(--gold); border-color: var(--gold); background: rgba(229,193,90,0.1); }
+.gallery-item .g-download:active, .gallery-item .g-fav:active { transform: scale(0.98); }
+.gallery-item .g-remove { position: absolute; top: 0.5rem; right: 0.5rem; width: 30px; height: 30px; border-radius: 50%; background: rgba(200,90,74,0.85); color: #fff; border: none; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 2; box-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.status-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--night-3); border-top: 1px solid var(--border); color: var(--ink); padding: calc(0.9rem + env(safe-area-inset-bottom)) 1.1rem 0.9rem; font-size: 0.78rem; display: flex; align-items: center; gap: 0.7rem; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.2,0.9,0.3,1); z-index: 100; font-family: var(--font-mono); box-shadow: 0 -6px 24px rgba(0,0,0,0.5); }
+.status-bar.visible { transform: translateY(0); }
+.status-bar .spinner { width: 14px; height: 14px; border: 2px solid rgba(232,160,184,0.2); border-top-color: var(--rose); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+#noSleepCanvas { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -1; }
+#noSleepVideo { position: fixed; top: 0; left: 0; width: 1px; height: 1px; opacity: 0.01; pointer-events: none; z-index: -1; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.5rem; margin-top: 0.8rem; }
+.photo-card { position: relative; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); aspect-ratio: 9/16; }
+.photo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-card .rm { position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border-radius: 50%; background: rgba(200,90,74,0.9); color: #fff; border: none; font-size: 0.7rem; cursor: pointer; }
+.preset-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.preset-chip { padding: 0.35rem 0.75rem; border-radius: 999px; border: 1px solid var(--border); background: var(--night-2); color: var(--ink-dim); font-size: 0.7rem; cursor: pointer; font-style: italic; font-family: var(--font-serif); }
+.preset-chip:active { background: rgba(232,160,184,0.1); color: var(--rose-soft); }
+.help-text { font-size: 0.7rem; color: var(--ink-faint); font-style: italic; margin-top: 0.35rem; font-family: var(--font-serif); }
+@media (min-width: 620px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } h1 { font-size: 3.2rem; } }
+</style>
+</head>
+<body>
 
+<header>
+<div class="brand-mark">✦ Diana Studio ✦</div>
+<h1>DianaIA</h1>
+<p class="subtitle">Votre photo devient cinéma</p>
+</header>
+
+<div class="info-banner">
+Bienvenue dans <strong>Diana Studio</strong>. Déposez vos <strong>photos</strong>, décrivez vos <strong>personnages</strong>, racontez votre <strong>scène</strong>, choisissez un <strong>style</strong> et une <strong>durée</strong>. DianaIA orchestre tout — image, mouvement, lumière, ambiance. Format 9:16.
+</div>
+
+<div class="api-panel" id="api-panel">
+<input type="password" class="api-key-input" id="api-key-input" placeholder="Collez votre clé API Agnes (sk-...)" autocomplete="off" spellcheck="false">
+<button type="button" class="api-save-btn" id="api-save-btn">Enregistrer la clé</button>
+<div class="api-status-line" id="api-status-line">
+<span class="status-dot"></span>
+<span id="api-status-text">Aucune clé API enregistrée</span>
+</div>
+<div class="api-hint">
+Clé gratuite sur <a href="https://platform.agnes-ai.com" target="_blank" rel="noopener">platform.agnes-ai.com</a> → Settings → API Keys
+</div>
+</div>
+
+<div class="section open" id="section-photos">
+<div class="section-header" data-toggle="section-photos">
+<span class="section-title">📸 Vos photos <span class="badge" id="photos-badge">0</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<label class="upload-zone" for="file-input">
+<input type="file" id="file-input" accept="image/*,.heic,.heif" multiple>
+<div class="icon">✦</div>
+<div class="t1">Choisissez vos photos</div>
+<div class="t2">Une ou plusieurs · chacune deviendra une vidéo</div>
+</label>
+<div id="photo-list"></div>
+<div class="help-text">💡 La première photo sert de point de départ. Ajoutez-en plusieurs pour créer plusieurs vidéos.</div>
+</div></div>
+</div>
+
+<div class="section" id="section-characters">
+<div class="section-header" data-toggle="section-characters">
+<span class="section-title">🎭 Personnages <span class="badge plum" id="chars-badge">0</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="help-text" style="margin-bottom:0.7rem;">Décris tes personnages une fois — DianaIA les garde en mémoire pour toutes tes vidéos.</div>
+<div id="char-list"></div>
+<button type="button" class="add-char-btn" id="add-char-btn">+ Ajouter un personnage</button>
+</div></div>
+</div>
+
+<div class="section open" id="section-scene">
+<div class="section-header" data-toggle="section-scene">
+<span class="section-title">🎬 Votre scène <span class="badge soft">décrivez l'action</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="control-row">
+<label class="control-label">Que se passe-t-il dans la scène ?</label>
+<textarea id="scene-action" placeholder="Ex : Marie court vers Pierre sous la pluie, ils se prennent dans les bras. Pierre la fait tourner. La pluie ruisselle sur leurs visages."></textarea>
+<div class="preset-chips" id="action-presets"></div>
+</div>
+<div class="control-row">
+<label class="control-label">Décor (optionnel)</label>
+<input type="text" class="text-input" id="scene-setting" placeholder="Ex : rue pavée de Montmartre la nuit, lampadaires dorés">
+</div>
+<div class="control-row">
+<label class="control-label">Ambiance (optionnel)</label>
+<input type="text" class="text-input" id="scene-mood" placeholder="Ex : romantique, cinématographique, pluie scintillante">
+</div>
+<div class="control-row">
+<label class="control-label">Émotion dominante</label>
+<select id="scene-emotion">
+<option value="">— Aucune —</option>
+<option value="joie">Joie · bonheur</option>
+<option value="tristesse">Tristesse · mélancolie</option>
+<option value="amour">Amour · tendresse</option>
+<option value="colere">Colère · tension</option>
+<option value="peur">Peur · angoisse</option>
+<option value="surprise">Surprise · émerveillement</option>
+<option value="nostalgie">Nostalgie · souvenir</option>
+<option value="serenite">Sérénité · paix</option>
+<option value="determination">Détermination · force</option>
+<option value="mystere">Mystère · étrange</option>
+</select>
+</div>
+<div class="control-row">
+<label class="control-label">Mouvement de caméra</label>
+<select id="scene-camera">
+<option value="auto">Automatique</option>
+<option value="static">Caméra fixe</option>
+<option value="dolly-in">Travelling avant</option>
+<option value="dolly-out">Travelling arrière</option>
+<option value="pan-left">Panoramique gauche</option>
+<option value="pan-right">Panoramique droite</option>
+<option value="orbit">Orbite — caméra tourne</option>
+<option value="handheld">Caméra portée</option>
+<option value="aerial">Vue aérienne — drone</option>
+</select>
+</div>
+<div class="control-row">
+<label class="control-label">Type de plan</label>
+<select id="scene-shot">
+<option value="auto">Automatique</option>
+<option value="close-up">Très gros plan</option>
+<option value="medium">Plan moyen</option>
+<option value="wide">Plan large</option>
+<option value="extreme-wide">Très large</option>
+<option value="low-angle">Contre-plongée</option>
+<option value="high-angle">Plongée</option>
+</select>
+</div>
+<div class="control-row">
+<label class="control-label">Dialogue / voix (optionnel)</label>
+<textarea id="scene-dialogue" placeholder="Ex : Marie murmure : « Je t'ai attendu si longtemps… »" style="min-height:55px;"></textarea>
+<div class="help-text">Le dialogue sera murmuré par une voix off douce, sans synchronisation labiale forcée.</div>
+</div>
+<div class="control-row">
+<label class="control-label">Intensité du mouvement</label>
+<div class="segment-grid" id="intensity-grid">
+<div class="segment-btn" data-intensity="subtle">Subtile</div>
+<div class="segment-btn selected" data-intensity="moderate">Modérée</div>
+<div class="segment-btn" data-intensity="strong">Forte</div>
+</div>
+</div>
+<div class="control-row">
+<label class="control-label">Son</label>
+<select id="scene-sound">
+<option value="ambient">Ambiance naturelle</option>
+<option value="dialogue">Ambiance + voix murmurée</option>
+<option value="silent">Silence total</option>
+</select>
+</div>
+</div></div>
+</div>
+
+<div class="section open" id="section-style">
+<div class="section-header" data-toggle="section-style">
+<span class="section-title">🎨 Style visuel <span class="badge soft">choisissez-en un</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="style-grid" id="style-grid"></div>
+</div></div>
+</div>
+
+<div class="section" id="section-mode">
+<div class="section-header" data-toggle="section-mode">
+<span class="section-title">🎥 Mode de tournage <span class="badge mint" id="mode-badge">Animer</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="control-row">
+<div class="segment-grid full" id="shooting-grid">
+<div class="segment-btn selected" data-mode="animate">🎬 Animer la photo — la photo reste identique, on ajoute le mouvement</div>
+<div class="segment-btn" data-mode="transform">✨ Transformer la photo — style artistique appliqué</div>
+<div class="segment-btn" data-mode="create">🎭 Créer une scène — l'IA ajoute tes personnages</div>
+</div>
+</div>
+<div class="help-text">Animer : ta photo reste fidèle. Transformer : change le style. Créer : refait la scène avec tes personnages.</div>
+</div></div>
+</div>
+
+<div class="section open" id="section-duration">
+<div class="section-header" data-toggle="section-duration">
+<span class="section-title">⏱️ Durée <span class="badge plum" id="duration-badge">10s</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="duration-grid" id="duration-grid"></div>
+<div class="help-text" style="margin-top:0.6rem;">Plus c'est long, plus Agnes met de temps. 5-10s recommandé pour tester.</div>
+</div></div>
+</div>
+
+<div class="section open" id="section-story">
+<div class="section-header" data-toggle="section-story">
+<span class="section-title">📖 Storyboard <span class="badge soft">aperçu en temps réel</span></span>
+<span class="chevron">▼</span>
+</div>
+<div class="section-body"><div class="section-content">
+<div class="storyboard" id="storyboard"></div>
+</div></div>
+</div>
+
+<button type="button" class="btn-primary" id="generate-btn" disabled>Créer la vidéo</button>
+<button type="button" class="btn-stop" id="stop-btn">Arrêter la génération</button>
+
+<div class="queue" id="queue" style="display:none;"></div>
+
+<div class="gallery" id="gallery" style="display:none;">
+<div class="gallery-title">✦ Vos vidéos ✦</div>
+<div class="gallery-actions">
+<button type="button" id="export-all-btn">⬇ Tout télécharger</button>
+<button type="button" id="clear-all-btn">✕ Tout effacer</button>
+</div>
+<div class="gallery-grid" id="gallery-grid" style="margin-top:1rem;"></div>
+</div>
+
+<div class="status-bar" id="status-bar">
+<div class="spinner"></div>
+<span id="status-text">Préparation…</span>
+</div>
+
+<div class="toast" id="toast">
+<span class="toast-icon" id="toast-icon">✦</span>
+<span id="toast-text">Message</span>
+</div>
+
+<canvas id="noSleepCanvas" width="2" height="2"></canvas>
+<video id="noSleepVideo" playsinline muted loop></video>
+
+<script>
+const API_BASE = 'https://apihub.agnes-ai.com/v1';
+const POLL_BASE = 'https://apihub.agnes-ai.com/agnesapi';
+const MODEL_VIDEO = 'agnes-video-v2.0';
+const FRAME_RATE = 24;
+const POLL_INTERVAL_SEC = 8;
+const POLL_INITIAL_WAIT_SEC = 80;
+const MAX_POLL_ATTEMPTS = 100;
+const API_KEY_STORAGE = 'dianaia_api_key_v4';
+const WAKE_LOCK_PREF = 'dianaia_wakelock_v4';
+const HISTORY_KEY = 'dianaia_history_v4';
+const FAVORITES_KEY = 'dianaia_favorites_v4';
+const CHARS_KEY = 'dianaia_characters_v4';
+const MAX_IMAGE_SIZE = 12 * 1024 * 1024;
+const MAX_IMAGE_SIDE = 1280;
+const MAX_HISTORY = 80;
+
+let memoryApiKey = null;
+let memoryHistory = [];
+let memoryFavorites = new Set();
+let memoryChars = [];
+let localStorageAvailable = true;
+try {
+  const test = '__dianaia_test_v4__';
+  localStorage.setItem(test, '1');
+  localStorage.removeItem(test);
+} catch (e) { localStorageAvailable = false; }
+
+const STYLES = [
+{ id: 'realistic', name: 'Réaliste', emoji: '📷', desc: 'Photo vivante',
+style: 'Photorealistic continuation, same camera, same lens, same lighting. Do NOT stylize.',
+motion: 'natural breathing, subtle head movement, blinking, micro-expressions, lifelike physics' },
+{ id: 'cinematic', name: 'Cinématique', emoji: '🎬', desc: 'Film de cinéma',
+style: 'Cinematic film look, dramatic lighting, shallow depth of field, professional color grading, film grain, anamorphic feel.',
+motion: 'cinematic camera movement, dramatic light shifts, depth of field rack focus, cinematic parallax' },
+{ id: 'anime', name: 'Anime', emoji: '🌸', desc: 'Dessin japonais',
+style: 'High-quality Japanese anime style, hand-drawn cel-shading, vibrant colors, expressive eyes, Ghibli-inspired atmosphere.',
+motion: 'subtle anime animation, hair flowing, eyes blinking slowly, cherry blossom petals drifting' },
+{ id: 'cartoon', name: 'Cartoon', emoji: '🎨', desc: 'Dessin animé',
+style: 'Western cartoon animation style, bold outlines, flat saturated colors, playful Pixar/Disney-inspired aesthetic.',
+motion: 'bouncy playful movement, exaggerated expressions, lively gestures, cartoon physics' },
+{ id: 'documentary', name: 'Documentaire', emoji: '📽️', desc: 'Reportage vivant',
+style: 'Documentary film style, natural available light, handheld camera feel, authentic observational tone.',
+motion: 'gentle handheld movement, natural ambient motion, candid authentic moment' },
+{ id: 'pedagogue', name: 'Pédagogue', emoji: '📚', desc: 'Éducatif clair',
+style: 'Educational clear visual style, well-lit, high legibility, smooth professional e-learning aesthetic.',
+motion: 'smooth slow camera pan, gentle zoom on key details, informative reveal' },
+{ id: 'bw', name: 'Noir & Blanc', emoji: '⚫', desc: 'Monochrome élégant',
+style: 'Elegant black and white, high contrast monochrome, deep blacks, luminous whites, classic photography.',
+motion: 'slow deliberate movement, dramatic shadow play, cinematic monochrome' },
+{ id: 'vintage', name: 'Vintage Super 8', emoji: '📽️', desc: 'Rétro années 70',
+style: 'Vintage Super 8 film aesthetic, grainy texture, subtle vignette, warm faded colors, soft focus edges.',
+motion: 'gentle film-like movement, organic grain, warm faded tones' },
+{ id: 'cyberpunk', name: 'Cyberpunk', emoji: '🌃', desc: 'Futuriste néon',
+style: 'Cyberpunk futuristic aesthetic, neon pink and cyan lighting, holographic ads, Blade Runner atmosphere.',
+motion: 'neon reflections shifting, rain, holographic light, futuristic atmosphere' },
+{ id: 'fantasy', name: 'Fantastique', emoji: '🧙', desc: 'Monde magique',
+style: 'Epic fantasy aesthetic, magical atmosphere, glowing particles, enchanted forest or ancient castle mood.',
+motion: 'magical particles floating, glowing aura, ethereal movement' },
+{ id: 'horror', name: 'Horreur', emoji: '🕯️', desc: 'Ambiance sombre',
+style: 'Horror film aesthetic, dark shadows, deep contrast, unsettling atmosphere, cold color palette.',
+motion: 'creeping shadows, unsettling subtle movement, cold atmosphere' },
+{ id: 'watercolor', name: 'Aquarelle', emoji: '🖼️', desc: 'Peinture douce',
+style: 'Dreamy watercolor painting aesthetic, soft bleeding edges, translucent washes, paper texture.',
+motion: 'soft watercolor flow, gentle bleeding colors, dreamy painterly movement' }
+];
+
+const DURATIONS = [
+{ seconds: 5,  frames: 121, label: '5s'  },
+{ seconds: 8,  frames: 193, label: '8s'  },
+{ seconds: 10, frames: 241, label: '10s' },
+{ seconds: 15, frames: 361, label: '15s' }
+];
+
+const ACTION_PRESETS = [
+'Il/elle tourne lentement la tête et regarde la caméra',
+'Le vent fait doucement bouger ses cheveux',
+'Il/elle marche lentement vers la caméra',
+'Il/elle ferme les yeux puis les rouvre au ralenti',
+'Une larme roule doucement sur sa joue',
+'Il/elle sourit doucement puis regarde ailleurs',
+'Il/elle tend la main vers quelque chose hors champ',
+'Deux personnes se prennent dans les bras',
+'Il/elle rit, la tête renversée en arrière',
+'Le soleil se couche derrière lui/elle',
+'Des pétales de fleurs volent autour',
+'Il/elle se retourne brusquement, surpris(e)'
+];
+
+const INTENSITY_MAP = {
+subtle: 'very subtle movement, barely perceptible change, minimal animation, gentle and quiet',
+moderate: 'moderate movement, clear but controlled motion, balanced energy',
+strong: 'strong dynamic movement, energetic and pronounced, theatrical intensity'
+};
+
+const CAMERA_MAP = {
+static: 'static locked-off camera, no movement',
+'dolly-in': 'slow dolly-in, camera gliding forward',
+'dolly-out': 'slow dolly-out, camera pulling back',
+'pan-left': 'slow panoramic pan to the left',
+'pan-right': 'slow panoramic pan to the right',
+orbit: 'camera orbiting around the subject',
+handheld: 'handheld camera with gentle organic shake',
+aerial: 'aerial drone view, elevated perspective'
+};
+
+const SHOT_MAP = {
+'close-up': 'extreme close-up framing, subject fills frame',
+medium: 'medium shot, subject framed from waist up',
+wide: 'wide shot, subject with environment visible',
+'extreme-wide': 'extreme wide shot, vast landscape, subject small in frame',
+'low-angle': 'low angle looking up at subject, heroic perspective',
+'high-angle': 'high angle looking down at subject, vulnerable perspective'
+};
+
+const EMOTION_MAP = {
+joie: 'joy and happiness',
+tristesse: 'sadness and melancholy',
+amour: 'love and tenderness',
+colere: 'anger and tension',
+peur: 'fear and anxiety',
+surprise: 'surprise and wonder',
+nostalgie: 'nostalgia and memory',
+serenite: 'serenity and peace',
+determination: 'determination and strength',
+mystere: 'mystery and strangeness'
+};
+
+const SOUND_MAP = {
+ambient: 'Natural ambient sounds only — wind, footsteps, rain, distant birds, breath. ABSOLUTELY NO MUSIC.',
+dialogue: 'Natural ambient sounds + a soft whispered voice-over murmuring the dialogue. NO MUSIC.',
+silent: 'Silence. No sound at all. Pure visual.'
+};
+
+const state = {
+photos: [],
+characters: [],
+selectedStyle: null,
+selectedMode: 'animate',
+durationFrames: 241,
+isRunning: false,
+stopRequested: false,
+queue: [],
+history: [],
+favorites: new Set(),
+intensity: 'moderate',
+scene: {
+action: '', setting: '', mood: '', emotion: '',
+camera: 'auto', shot: 'auto', dialogue: '', sound: 'ambient'
+}
+};
+
+let toastTimeout = null;
+function showToast(message, type = 'success', duration = 2500) {
+const toast = document.getElementById('toast');
+const icon = document.getElementById('toast-icon');
+const text = document.getElementById('toast-text');
+if (!toast || !icon || !text) return;
+toast.classList.remove('visible', 'success', 'error', 'warn');
+void toast.offsetWidth;
+const icons = { success: '✦', error: '✕', warn: '⚠' };
+icon.textContent = icons[type] || '✦';
+text.textContent = message;
+toast.classList.add(type);
+requestAnimationFrame(() => toast.classList.add('visible'));
+if (toastTimeout) clearTimeout(toastTimeout);
+toastTimeout = setTimeout(() => toast.classList.remove('visible'), duration);
+}
+
+let wakeLockSentinel = null;
+let wakeLockEnabled = false;
+let canvasStream = null;
+let canvasInterval = null;
+function isWakeLockSupported() { return 'wakeLock' in navigator && typeof navigator.wakeLock.request === 'function'; }
+async function requestWakeLockAPI() {
+if (!isWakeLockSupported()) return false;
+try {
+wakeLockSentinel = await navigator.wakeLock.request('screen');
+wakeLockSentinel.addEventListener('release', () => { wakeLockSentinel = null; });
+return true;
+} catch (e) { return false; }
+}
+async function releaseWakeLockAPI() {
+if (wakeLockSentinel) { try { await wakeLockSentinel.release(); } catch (e) {} wakeLockSentinel = null; }
+}
+function startCanvasStream() {
+if (canvasStream) return true;
+try {
+const canvas = document.getElementById('noSleepCanvas');
+const video = document.getElementById('noSleepVideo');
+if (!canvas || !video) return false;
+const ctx = canvas.getContext('2d');
+if (!ctx) return false;
+ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+if (typeof canvas.captureStream !== 'function') return false;
+canvasStream = canvas.captureStream(1);
+let toggle = false;
+canvasInterval = setInterval(() => {
+toggle = !toggle;
+ctx.fillStyle = toggle ? '#000' : '#010101';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+}, 1000);
+video.srcObject = canvasStream;
+video.muted = true;
+video.playsInline = true;
+const p = video.play();
+if (p && p.catch) p.catch(() => {});
+return true;
+} catch (e) { return false; }
+}
+function stopCanvasStream() {
+if (canvasInterval) { clearInterval(canvasInterval); canvasInterval = null; }
+const video = document.getElementById('noSleepVideo');
+if (video) { try { video.pause(); video.srcObject = null; } catch (e) {} }
+if (canvasStream) { try { canvasStream.getTracks().forEach(t => t.stop()); } catch (e) {} canvasStream = null; }
+}
+async function activateWakeLock() {
+let success = false;
+if (isWakeLockSupported()) success = await requestWakeLockAPI();
+if (!success) success = startCanvasStream();
+return success;
+}
+async function deactivateWakeLock() {
+await releaseWakeLockAPI();
+stopCanvasStream();
+}
+document.addEventListener('visibilitychange', async () => {
+if (document.visibilityState === 'visible' && wakeLockEnabled) await activateWakeLock();
+});
+async function ensureWakeLockActive() {
+if (!wakeLockEnabled) return;
+if (wakeLockSentinel === null && canvasStream === null) await activateWakeLock();
+}
+
+function loadStorage() {
+if (localStorageAvailable) {
+try { state.history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) { state.history = memoryHistory; }
+try { const favs = JSON.parse(localStorage.getItem(FAVORITES_KEY) || '[]'); state.favorites = new Set(favs); } catch (e) { state.favorites = memoryFavorites; }
+try { state.characters = JSON.parse(localStorage.getItem(CHARS_KEY) || '[]'); } catch (e) { state.characters = memoryChars; }
+} else {
+state.history = memoryHistory;
+state.favorites = memoryFavorites;
+state.characters = memoryChars;
+}
+}
+function saveStorage() {
+memoryHistory = state.history.slice(0, MAX_HISTORY);
+memoryFavorites = new Set(state.favorites);
+memoryChars = state.characters.slice();
+if (localStorageAvailable) {
+try {
+localStorage.setItem(HISTORY_KEY, JSON.stringify(memoryHistory));
+localStorage.setItem(FAVORITES_KEY, JSON.stringify([...state.favorites]));
+localStorage.setItem(CHARS_KEY, JSON.stringify(memoryChars));
+} catch (e) {}
+}
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function setStatus(text) {
+const bar = document.getElementById('status-bar');
+const txt = document.getElementById('status-text');
+if (!bar || !txt) return;
+if (text) { bar.classList.add('visible'); txt.textContent = text; }
+else bar.classList.remove('visible');
+}
+function formatDate(ts) {
+return new Date(ts).toLocaleString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+
+function getApiKey() {
+if (localStorageAvailable) {
+try { const stored = (localStorage.getItem(API_KEY_STORAGE) || '').trim(); if (stored) return stored; } catch (e) {}
+}
+return memoryApiKey || '';
+}
+function saveApiKey() {
+const input = document.getElementById('api-key-input');
+if (!input) return;
+const key = input.value.trim();
+if (!key) {
+if (localStorageAvailable) { try { localStorage.removeItem(API_KEY_STORAGE); } catch (e) {} }
+memoryApiKey = null;
+updateApiPanel();
+showToast('Clé supprimée', 'warn');
+return;
+}
+memoryApiKey = key;
+let saved = false;
+if (localStorageAvailable) { try { localStorage.setItem(API_KEY_STORAGE, key); saved = true; } catch (e) {} }
+updateApiPanel();
+showToast(saved ? 'Clé enregistrée ✦' : 'Clé active (session)', saved ? 'success' : 'warn', saved ? 2500 : 3500);
+input.blur();
+}
+function updateApiPanel() {
+const panel = document.getElementById('api-panel');
+const input = document.getElementById('api-key-input');
+const statusLine = document.getElementById('api-status-line');
+const statusText = document.getElementById('api-status-text');
+const key = getApiKey();
+if (!panel || !input || !statusLine || !statusText) return;
+if (key) {
+panel.classList.add('ok');
+statusLine.classList.add('ok');
+statusText.textContent = 'Clé active · ' + key.slice(0, 8) + '…' + key.slice(-4);
+input.value = key;
+input.placeholder = '';
+} else {
+panel.classList.remove('ok');
+statusLine.classList.remove('ok');
+statusText.textContent = 'Aucune clé API enregistrée';
+input.value = '';
+input.placeholder = 'Collez votre clé API Agnes (sk-...)';
+}
+updateGenerateBtn();
+}
+
+function fileToDataUri(file) {
+return new Promise((resolve, reject) => {
+const r = new FileReader();
+r.onload = e => resolve(e.target.result);
+r.onerror = () => reject(new Error('Lecture impossible'));
+try { r.readAsDataURL(file); } catch (e) { reject(e); }
+});
+}
+function fileToDataUriViaObjectURL(file) {
+return new Promise((resolve, reject) => {
+try {
+const url = URL.createObjectURL(file);
+const img = new Image();
+img.onload = () => {
+try {
+const canvas = document.createElement('canvas');
+let { width, height } = img;
+const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(width, height));
+width = Math.round(width * scale);
+height = Math.round(height * scale);
+canvas.width = width; canvas.height = height;
+canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+const dataUri = canvas.toDataURL('image/jpeg', 0.9);
+URL.revokeObjectURL(url);
+resolve(dataUri);
+} catch (e) { URL.revokeObjectURL(url); reject(e); }
+};
+img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Image illisible')); };
+img.src = url;
+} catch (e) { reject(e); }
+});
+}
+function compressImage(dataUri) {
+return new Promise((resolve) => {
+const img = new Image();
+img.onload = () => {
+try {
+let { width, height } = img;
+const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(width, height));
+width = Math.round(width * scale);
+height = Math.round(height * scale);
+const canvas = document.createElement('canvas');
+canvas.width = width; canvas.height = height;
+canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+resolve(canvas.toDataURL('image/jpeg', 0.9));
+} catch (e) { resolve(dataUri); }
+};
+img.onerror = () => resolve(dataUri);
+img.src = dataUri;
+});
+}
+
+async function handleFiles(files) {
+const list = Array.from(files).filter(f => {
+if (!f.type) return false;
+return f.type.startsWith('image/') || f.name.match(/\.(jpg|jpeg|png|heic|heif|webp|gif)$/i);
+});
+if (!list.length) { showToast('Aucune image valide', 'error'); return; }
+setStatus('Chargement de ' + list.length + ' photo(s)…');
+let added = 0;
+for (const file of list) {
+try {
+let raw;
+try { raw = await fileToDataUri(file); }
+catch (e) { try { raw = await fileToDataUriViaObjectURL(file); } catch (e2) { continue; } }
+let processed = raw;
+try { processed = await compressImage(raw); } catch (e) {}
+state.photos.push({ id: Date.now() + Math.random(), dataUri: processed, thumbnail: processed });
+added++;
+} catch (e) {}
+}
+setStatus(null);
+renderPhotoList();
+updateGenerateBtn();
+if (added > 0) showToast(added + ' photo' + (added > 1 ? 's' : '') + ' prête' + (added > 1 ? 's' : ''), 'success');
+}
+
+function renderPhotoList() {
+const list = document.getElementById('photo-list');
+const badge = document.getElementById('photos-badge');
+if (badge) badge.textContent = state.photos.length;
+if (!list) return;
+if (!state.photos.length) { list.innerHTML = ''; return; }
+list.innerHTML = '<div class="photo-grid">' + state.photos.map(p =>
+'<div class="photo-card">' +
+'<img src="' + p.thumbnail + '" alt="">' +
+'<button type="button" class="rm" data-remove="' + p.id + '">✕</button>' +
+'</div>'
+).join('') + '</div>';
+list.querySelectorAll('[data-remove]').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+state.photos = state.photos.filter(p => String(p.id) !== btn.dataset.remove);
+renderPhotoList();
+updateGenerateBtn();
+});
+});
+}
+
+function renderCharacters() {
+const list = document.getElementById('char-list');
+const badge = document.getElementById('chars-badge');
+if (badge) badge.textContent = state.characters.length;
+if (!list) return;
+list.innerHTML = state.characters.map((c, i) =>
+'<div class="char-card" data-idx="' + i + '">' +
+'<div class="char-card-header">' +
+'<span class="char-card-name">✦ ' + esc(c.name || 'Personnage ' + (i + 1)) + '</span>' +
+'<button type="button" class="char-card-remove" data-remove-char="' + i + '">✕</button>' +
+'</div>' +
+'<input type="text" class="text-input char-name-input" data-field="name" data-idx="' + i + '" placeholder="Nom du personnage" value="' + esc(c.name || '') + '">' +
+'<textarea class="char-desc-input" data-field="description" data-idx="' + i + '" placeholder="Apparence physique, vêtements, âge, particularités…" style="min-height:55px;">' + esc(c.description || '') + '</textarea>' +
+'<input type="text" class="text-input char-role-input" data-field="role" data-idx="' + i + '" placeholder="Rôle / action dans la scène" value="' + esc(c.role || '') + '">' +
+'</div>'
+).join('');
+list.querySelectorAll('.char-card input, .char-card textarea').forEach(el => {
+el.addEventListener('input', (e) => {
+const idx = parseInt(e.target.dataset.idx, 10);
+const field = e.target.dataset.field;
+if (!state.characters[idx]) return;
+state.characters[idx][field] = e.target.value;
+saveStorage();
+updateStoryboard();
+});
+});
+list.querySelectorAll('[data-remove-char]').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const idx = parseInt(btn.dataset.removeChar, 10);
+state.characters.splice(idx, 1);
+saveStorage();
+renderCharacters();
+updateStoryboard();
+});
+});
+}
+function addCharacter() {
+state.characters.push({ name: '', description: '', role: '' });
+saveStorage();
+renderCharacters();
+updateStoryboard();
+setTimeout(() => {
+const list = document.getElementById('char-list');
+const cards = list.querySelectorAll('.char-card');
+const last = cards[cards.length - 1];
+if (last) last.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const input = last ? last.querySelector('.char-name-input') : null;
+if (input) input.focus();
+}, 100);
+}
+
+function renderStyles() {
+const grid = document.getElementById('style-grid');
+if (!grid) return;
+grid.innerHTML = STYLES.map(s =>
+'<div class="style-card' + (state.selectedStyle === s.id ? ' selected' : '') + '" data-style="' + s.id + '">' +
+'<span class="style-emoji">' + s.emoji + '</span>' +
+'<span class="style-name">' + esc(s.name) + '</span>' +
+'<span class="style-desc">' + esc(s.desc) + '</span>' +
+'</div>'
+).join('');
+grid.querySelectorAll('[data-style]').forEach(el => {
+el.addEventListener('click', () => {
+state.selectedStyle = el.dataset.style;
+renderStyles();
+updateGenerateBtn();
+updateStoryboard();
+const s = STYLES.find(x => x.id === state.selectedStyle);
+if (s) showToast('Style ' + s.name, 'success', 1200);
+});
+});
+}
+
+function renderDurations() {
+const grid = document.getElementById('duration-grid');
+if (!grid) return;
+grid.innerHTML = DURATIONS.map(d =>
+'<div class="duration-btn' + (state.durationFrames === d.frames ? ' selected' : '') + '" data-frames="' + d.frames + '">' +
+'<span class="dur-val">' + d.label + '</span>' +
+'<span class="dur-lbl">durée</span>' +
+'</div>'
+).join('');
+grid.querySelectorAll('[data-frames]').forEach(el => {
+el.addEventListener('click', () => {
+state.durationFrames = parseInt(el.dataset.frames, 10);
+renderDurations();
+updateGenerateBtn();
+const badge = document.getElementById('duration-badge');
+if (badge) {
+const d = DURATIONS.find(x => x.frames === state.durationFrames);
+if (d) badge.textContent = d.label;
+}
+updateStoryboard();
+});
+});
+}
+
+function renderIntensity() {
+const grid = document.getElementById('intensity-grid');
+if (!grid) return;
+grid.querySelectorAll('.segment-btn').forEach(el => {
+el.classList.toggle('selected', el.dataset.intensity === state.intensity);
+if (!el.dataset.bound) {
+el.dataset.bound = '1';
+el.addEventListener('click', () => {
+state.intensity = el.dataset.intensity;
+renderIntensity();
+updateStoryboard();
+});
+}
+});
+}
+
+function renderShootingMode() {
+const grid = document.getElementById('shooting-grid');
+if (!grid) return;
+grid.querySelectorAll('.segment-btn').forEach(el => {
+el.classList.toggle('selected', el.dataset.mode === state.selectedMode);
+if (!el.dataset.bound) {
+el.dataset.bound = '1';
+el.addEventListener('click', () => {
+state.selectedMode = el.dataset.mode;
+const badge = document.getElementById('mode-badge');
+if (badge) badge.textContent = state.selectedMode === 'animate' ? 'Animer' : (state.selectedMode === 'transform' ? 'Transformer' : 'Créer');
+renderShootingMode();
+updateStoryboard();
+});
+}
+});
+}
+
+function renderActionPresets() {
+const container = document.getElementById('action-presets');
+if (!container) return;
+container.innerHTML = ACTION_PRESETS.map(a => '<div class="preset-chip" data-preset="' + esc(a) + '">' + esc(a.slice(0, 38)) + (a.length > 38 ? '…' : '') + '</div>').join('');
+container.querySelectorAll('[data-preset]').forEach(el => {
+el.addEventListener('click', () => {
+const ta = document.getElementById('scene-action');
+if (ta) {
+const current = ta.value.trim();
+ta.value = current ? (current + '. ' + el.dataset.preset) : el.dataset.preset;
+state.scene.action = ta.value;
+}
+updateStoryboard();
+});
+});
+}
+
+function bindSceneInputs() {
+[['scene-action', 'action'], ['scene-setting', 'setting'], ['scene-mood', 'mood'], ['scene-dialogue', 'dialogue']].forEach(([id, key]) => {
+const el = document.getElementById(id);
+if (!el) return;
+el.addEventListener('input', (e) => { state.scene[key] = e.target.value; updateStoryboard(); });
+});
+[['scene-emotion', 'emotion'], ['scene-camera', 'camera'], ['scene-shot', 'shot'], ['scene-sound', 'sound']].forEach(([id, key]) => {
+const el = document.getElementById(id);
+if (!el) return;
+el.addEventListener('change', (e) => { state.scene[key] = e.target.value; updateStoryboard(); });
+});
+}
+
+function updateStoryboard() {
+const sb = document.getElementById('storyboard');
+if (!sb) return;
+const parts = [];
+parts.push('<div class="storyboard-title">📖 Aperçu de votre scène</div>');
+parts.push('<div class="storyboard-scene"><strong>Mode</strong> : ' + esc(state.selectedMode === 'animate' ? 'Animer la photo' : (state.selectedMode === 'transform' ? 'Transformer la photo' : 'Créer une scène')) + '</div>');
+if (state.photos.length > 0) parts.push('<div class="storyboard-scene"><strong>Photos</strong> : ' + state.photos.length + ' source' + (state.photos.length > 1 ? 's' : '') + '</div>');
+if (state.characters.length > 0) {
+const cl = state.characters.filter(c => c.name || c.description).map(c => (c.name || '?') + (c.description ? ' — ' + c.description.slice(0, 60) : '')).join(' · ');
+if (cl) parts.push('<div class="storyboard-scene"><strong>Personnages</strong> : ' + esc(cl) + '</div>');
+}
+if (state.scene.action) parts.push('<div class="storyboard-scene"><strong>Action</strong> : ' + esc(state.scene.action) + '</div>');
+if (state.scene.setting) parts.push('<div class="storyboard-scene"><strong>Décor</strong> : ' + esc(state.scene.setting) + '</div>');
+if (state.scene.mood) parts.push('<div class="storyboard-scene"><strong>Ambiance</strong> : ' + esc(state.scene.mood) + '</div>');
+if (state.scene.emotion) parts.push('<div class="storyboard-scene"><strong>Émotion</strong> : ' + esc(EMOTION_MAP[state.scene.emotion] || state.scene.emotion) + '</div>');
+if (state.scene.camera !== 'auto') parts.push('<div class="storyboard-scene"><strong>Caméra</strong> : ' + esc(CAMERA_MAP[state.scene.camera] || state.scene.camera) + '</div>');
+if (state.scene.shot !== 'auto') parts.push('<div class="storyboard-scene"><strong>Plan</strong> : ' + esc(SHOT_MAP[state.scene.shot] || state.scene.shot) + '</div>');
+if (state.scene.dialogue) parts.push('<div class="storyboard-scene"><strong>Dialogue</strong> : « ' + esc(state.scene.dialogue) + ' »</div>');
+if (state.selectedStyle) {
+const s = STYLES.find(x => x.id === state.selectedStyle);
+if (s) parts.push('<div class="storyboard-scene"><strong>Style</strong> : ' + s.emoji + ' ' + esc(s.name) + '</div>');
+}
+const d = DURATIONS.find(x => x.frames === state.durationFrames);
+if (d) parts.push('<div class="storyboard-scene"><strong>Durée</strong> : ' + d.label + ' · portrait 9:16</div>');
+parts.push('<div class="storyboard-scene"><strong>Mouvement</strong> : ' + esc(state.intensity) + '</div>');
+parts.push('<div class="storyboard-scene"><strong>Son</strong> : ' + esc(SOUND_MAP[state.scene.sound] || state.scene.sound) + '</div>');
+sb.innerHTML = parts.join('');
+}
+
+function buildPrompt() {
+const style = STYLES.find(s => s.id === state.selectedStyle);
+if (!style) return 'Animate this image.';
+const parts = [];
+if (state.selectedMode === 'animate') {
+parts.push('Animate this EXACT image as the starting frame. The subject must remain IDENTICAL: same face, same expression, same identity. This is a CONTINUATION, not a re-imagination.');
+parts.push('Preserve the exact composition, framing, and layout of the source image.');
+parts.push('Visual style: ' + style.style);
+} else if (state.selectedMode === 'transform') {
+parts.push('Animate this image as the starting frame. Transform the entire aesthetic into the following style while keeping the subject identifiable.');
+parts.push('Visual style: ' + style.style);
+} else {
+parts.push('Use this image as the base scene. You MAY add or modify elements to include the described characters and action.');
+parts.push('Visual style: ' + style.style);
+}
+if (state.characters.length > 0) {
+const chars = state.characters.filter(c => c.name || c.description);
+if (chars.length > 0) {
+parts.push('CHARACTERS in this scene:');
+chars.forEach((c, i) => {
+let desc = c.name || ('Personnage ' + (i + 1));
+if (c.description) desc += ' — ' + c.description;
+if (c.role) desc += '. Action dans la scène : ' + c.role;
+parts.push('  • ' + desc);
+});
+}
+}
+if (state.scene.action) parts.push('ACTION: ' + state.scene.action);
+if (state.scene.setting) parts.push('SETTING: ' + state.scene.setting);
+if (state.scene.mood) parts.push('MOOD / ATMOSPHERE: ' + state.scene.mood);
+if (state.scene.emotion && EMOTION_MAP[state.scene.emotion]) parts.push('EMOTION: ' + EMOTION_MAP[state.scene.emotion]);
+if (state.scene.shot !== 'auto' && SHOT_MAP[state.scene.shot]) parts.push('SHOT: ' + SHOT_MAP[state.scene.shot]);
+if (state.scene.camera !== 'auto' && CAMERA_MAP[state.scene.camera]) parts.push('CAMERA: ' + CAMERA_MAP[state.scene.camera]);
+parts.push('MOTION INTENSITY: ' + (INTENSITY_MAP[state.intensity] || INTENSITY_MAP.moderate));
+parts.push('Motion style: ' + style.motion + '.');
+if (state.scene.dialogue && (state.scene.sound === 'dialogue' || state.scene.sound === 'ambient')) {
+parts.push('Dialogue / voice-over (soft, whispered, no forced lip-sync): "' + state.scene.dialogue + '"');
+}
+parts.push('AUDIO: ' + (SOUND_MAP[state.scene.sound] || SOUND_MAP.ambient));
+parts.push('Portrait orientation 9:16 vertical, 24fps, cinematic quality.');
+parts.push('No text, no subtitles, no watermarks, no on-screen graphics.');
+return parts.join('. ');
+}
+
+async function apiFetch(url, options = {}) {
+for (let attempt = 0; attempt < 7; attempt++) {
+if (state.stopRequested) throw new Error('Arrêt demandé');
+try {
+const res = await fetch(url, options);
+if (res.status === 429) {
+const wait = [10, 20, 35, 50, 75, 100, 150][Math.min(attempt, 6)];
+setStatus('Patience… (' + wait + 's)');
+await sleep(wait * 1000);
+continue;
+}
+if (res.status === 503) {
+const wait = [5, 10, 15, 20, 30, 45][Math.min(attempt, 5)];
+setStatus('Préparation… (' + wait + 's)');
+await sleep(wait * 1000);
+continue;
+}
+return res;
+} catch (e) {
+if (e.message === 'Arrêt demandé') throw e;
+const wait = [3, 5, 8, 12, 20, 30][Math.min(attempt, 5)];
+setStatus('Connexion… (' + wait + 's)');
+await sleep(wait * 1000);
+}
+}
+return fetch(url, options);
+}
+
+async function createVideoTask(photoDataUri) {
+const body = {
+model: MODEL_VIDEO,
+prompt: buildPrompt(),
+image: photoDataUri,
+num_frames: state.durationFrames,
+frame_rate: FRAME_RATE
+};
+const res = await apiFetch(API_BASE + '/videos', {
+method: 'POST',
+headers: { 'Authorization': 'Bearer ' + getApiKey(), 'Content-Type': 'application/json' },
+body: JSON.stringify(body)
+});
+if (!res.ok) {
+const err = await res.text();
+throw new Error('HTTP ' + res.status + ' — ' + err.slice(0, 200));
+}
+const data = await res.json();
+const videoId = data.video_id || data.id || data.task_id;
+if (!videoId) throw new Error('Pas de video_id retourné');
+return videoId;
+}
+
+async function pollVideo(videoId, onProgress) {
+let remaining = POLL_INITIAL_WAIT_SEC;
+while (remaining > 0) {
+if (state.stopRequested) throw new Error('Arrêt demandé');
+onProgress('Préparation… — ' + remaining + 's');
+await sleep(1000);
+remaining--;
+}
+for (let attempt = 0; attempt < MAX_POLL_ATTEMPTS; attempt++) {
+if (state.stopRequested) throw new Error('Arrêt demandé');
+if (attempt > 0) {
+let r = POLL_INTERVAL_SEC;
+while (r > 0) {
+if (state.stopRequested) throw new Error('Arrêt demandé');
+onProgress('Votre vidéo prend vie… — ' + r + 's');
+await sleep(1000);
+r--;
+}
+}
+const url = POLL_BASE + '?video_id=' + encodeURIComponent(videoId) + '&model_name=' + encodeURIComponent(MODEL_VIDEO);
+const res = await apiFetch(url, { method: 'GET', headers: { 'Authorization': 'Bearer ' + getApiKey() } });
+const d = await res.json();
+const status = d.status || 'unknown';
+const progress = d.progress || 0;
+onProgress('Création… ' + progress + '%');
+if (status === 'completed' || status === 'succeeded' || status === 'done') {
+const videoUrl = (d.metadata && d.metadata.url) || d.url || (d.output && d.output.url);
+if (!videoUrl) throw new Error('Terminé mais pas d\'URL');
+return videoUrl;
+}
+if (status === 'failed' || status === 'error' || status === 'cancelled') {
+throw new Error('Échec (' + status + ')');
+}
+}
+throw new Error('Délai maximal dépassé');
+}
+
+function renderQueue() {
+const queueEl = document.getElementById('queue');
+if (!queueEl) return;
+if (!state.queue.length) { queueEl.style.display = 'none'; return; }
+queueEl.style.display = 'block';
+queueEl.innerHTML = state.queue.map(item => {
+let icon = '○', statusText = 'En file', cls = '';
+if (item.status === 'processing') { icon = '◐'; statusText = item.progress || 'En cours…'; cls = 'processing'; }
+else if (item.status === 'done') { icon = '✦'; statusText = 'Terminé'; cls = 'done'; }
+else if (item.status === 'failed') { icon = '✕'; statusText = item.errorMsg || 'Échec'; cls = 'failed'; }
+return '<div class="queue-item ' + cls + '">' +
+'<div class="q-icon">' + icon + '</div>' +
+'<div class="q-name">Vidéo ' + (item.index + 1) + ' / ' + item.total + '</div>' +
+'<div class="q-status">' + esc(statusText) + '</div>' +
+'</div>';
+}).join('');
+}
+
+function addToHistory(videoUrl, styleName, durationLabel, sceneSummary) {
+const entry = { id: Date.now() + Math.random(), url: videoUrl, style: styleName, duration: durationLabel, scene: sceneSummary || '', date: Date.now() };
+state.history.unshift(entry);
+if (state.history.length > MAX_HISTORY) state.history = state.history.slice(0, MAX_HISTORY);
+saveStorage();
+return entry.id;
+}
+function removeFromHistory(id) {
+state.history = state.history.filter(h => h.id !== id);
+state.favorites.delete(id);
+saveStorage();
+renderGallery();
+}
+function toggleFavorite(id) {
+if (state.favorites.has(id)) state.favorites.delete(id);
+else state.favorites.add(id);
+saveStorage();
+renderGallery();
+}
+function renderGallery() {
+const galleryEl = document.getElementById('gallery');
+const galleryGrid = document.getElementById('gallery-grid');
+if (!galleryEl || !galleryGrid) return;
+if (!state.history.length) { galleryEl.style.display = 'none'; return; }
+galleryEl.style.display = 'block';
+galleryGrid.innerHTML = state.history.map(h => {
+const isFav = state.favorites.has(h.id);
+return '<div class="gallery-item' + (isFav ? ' favorite' : '') + '">' +
+'<button type="button" class="g-remove" data-remove="' + h.id + '">✕</button>' +
+'<video controls preload="metadata" playsinline><source src="' + h.url + '" type="video/mp4"></video>' +
+'<div class="g-caption">' +
+'<strong>✦ ' + esc(h.style) + '</strong>' +
+(h.scene ? '<span class="g-meta">' + esc(h.scene.slice(0, 80)) + (h.scene.length > 80 ? '…' : '') + '</span>' : '') +
+'<span class="g-meta">' + esc(h.duration) + ' · 9:16 · ' + formatDate(h.date) + '</span>' +
+'<div class="g-buttons">' +
+'<a class="g-download" href="' + h.url + '" download="DianaIA_' + esc(h.style) + '_' + esc(h.duration) + '_' + h.id + '.mp4" target="_blank" rel="noopener">⬇ Télécharger</a>' +
+'<button type="button" class="g-fav' + (isFav ? ' active' : '') + '" data-fav="' + h.id + '">' + (isFav ? '★' : '☆') + '</button>' +
+'</div>' +
+'</div>' +
+'</div>';
+}).join('');
+galleryGrid.querySelectorAll('[data-remove]').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+if (confirm('Supprimer cette vidéo de l\'historique ?')) removeFromHistory(parseFloat(btn.dataset.remove));
+});
+});
+galleryGrid.querySelectorAll('[data-fav]').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+toggleFavorite(parseFloat(btn.dataset.fav));
+});
+});
+}
+
+function updateGenerateBtn() {
+const btn = document.getElementById('generate-btn');
+if (!btn) return;
+const hasKey = !!getApiKey();
+const hasPhotos = state.photos.length > 0;
+const hasStyle = !!state.selectedStyle;
+btn.disabled = !hasKey || !hasPhotos || !hasStyle || state.isRunning;
+if (state.isRunning) btn.textContent = 'Création en cours…';
+else if (!hasKey) btn.textContent = 'Ajoutez votre clé API';
+else if (!hasPhotos) btn.textContent = 'Choisissez une photo';
+else if (!hasStyle) btn.textContent = 'Choisissez un style';
+else btn.textContent = 'Créer ' + state.photos.length + ' vidéo' + (state.photos.length > 1 ? 's' : '');
+}
+
+async function startGeneration() {
+if (state.isRunning) return;
+if (!state.photos.length) { showToast('Choisissez une photo', 'error'); return; }
+if (!state.selectedStyle) { showToast('Choisissez un style', 'error'); return; }
+if (!getApiKey()) { showToast('Ajoutez votre clé API', 'error'); document.getElementById('api-key-input').focus(); return; }
+state.isRunning = true;
+state.stopRequested = false;
+const style = STYLES.find(s => s.id === state.selectedStyle);
+const dur = DURATIONS.find(d => d.frames === state.durationFrames);
+const styleName = style ? style.name : 'Vidéo';
+const durLabel = dur ? dur.label : '';
+const sceneSummary = state.scene.action || (state.characters.length > 0 ? state.characters.map(c => c.name).filter(Boolean).join(' · ') : '');
+state.queue = state.photos.map((p, i) => ({ index: i, total: state.photos.length, photo: p, status: 'pending', progress: null, errorMsg: null }));
+document.getElementById('stop-btn').classList.add('visible');
+document.getElementById('generate-btn').disabled = true;
+renderQueue();
+wakeLockEnabled = true;
+try { if (localStorageAvailable) localStorage.setItem(WAKE_LOCK_PREF, '1'); } catch (e) {}
+await ensureWakeLockActive();
+let successCount = 0;
+for (let i = 0; i < state.queue.length; i++) {
+if (state.stopRequested) break;
+const item = state.queue[i];
+item.status = 'processing';
+item.progress = 'Préparation…';
+renderQueue();
+try {
+setStatus('Vidéo ' + (i + 1) + '/' + state.queue.length + ' — envoi…');
+const videoId = await createVideoTask(item.photo.dataUri);
+item.progress = 'En cours…';
+renderQueue();
+const videoUrl = await pollVideo(videoId, (prog) => { item.progress = prog; renderQueue(); });
+item.status = 'done';
+item.progress = 'Terminé';
+successCount++;
+addToHistory(videoUrl, styleName, durLabel, sceneSummary);
+renderGallery();
+setStatus('✦ ' + successCount + '/' + state.queue.length + ' prête' + (successCount > 1 ? 's' : '') + ' ✦');
+showToast('Vidéo ' + (i + 1) + ' prête ✦', 'success', 3000);
+} catch (e) {
+if (e.message === 'Arrêt demandé') { item.status = 'failed'; item.errorMsg = 'Arrêté'; break; }
+item.status = 'failed';
+item.errorMsg = 'Échec';
+showToast('Erreur vidéo ' + (i + 1), 'error', 3000);
+}
+renderQueue();
+if (i < state.queue.length - 1 && !state.stopRequested) {
+for (let r = 62; r > 0; r--) {
+if (state.stopRequested) break;
+setStatus('Respiration… prochaine vidéo dans ' + r + 's');
+await sleep(1000);
+}
+}
+}
+setStatus(successCount > 0 ? '✦ ' + successCount + ' vidéo' + (successCount > 1 ? 's' : '') + ' créée' + (successCount > 1 ? 's' : '') + ' ✦' : 'Aucune vidéo créée');
+await sleep(4000);
+setStatus(null);
+state.isRunning = false;
+state.stopRequested = false;
+document.getElementById('stop-btn').classList.remove('visible');
+updateGenerateBtn();
+await deactivateWakeLock();
+}
+
+function stopGeneration() {
+if (!state.isRunning) return;
+state.stopRequested = true;
+setStatus('Arrêt en cours…');
+}
+
+function exportAll() {
+if (!state.history.length) return;
+state.history.forEach((h, i) => {
+setTimeout(() => {
+const a = document.createElement('a');
+a.href = h.url;
+a.download = 'DianaIA_' + h.style + '_' + h.duration + '_' + h.id + '.mp4';
+a.target = '_blank';
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+}, i * 800);
+});
+showToast('Téléchargement de ' + state.history.length + ' vidéo(s)…', 'success', 3000);
+}
+
+function clearAll() {
+if (!state.history.length) return;
+if (!confirm('Effacer tout l\'historique ?')) return;
+state.history = [];
+state.favorites = new Set();
+saveStorage();
+renderGallery();
+showToast('Historique effacé', 'warn');
+}
+
+(function init() {
+loadStorage();
+
+const saveBtn = document.getElementById('api-save-btn');
+if (saveBtn) saveBtn.addEventListener('click', saveApiKey);
+const apiInput = document.getElementById('api-key-input');
+if (apiInput) {
+apiInput.addEventListener('keydown', (e) => {
+if (e.key === 'Enter') { e.preventDefault(); saveApiKey(); }
+});
+}
+
+const fileInput = document.getElementById('file-input');
+if (fileInput) {
+fileInput.addEventListener('change', (e) => {
+if (e.target.files && e.target.files.length) {
+handleFiles(e.target.files).finally(() => { e.target.value = ''; });
+}
+});
+}
+
+document.querySelectorAll('[data-toggle]').forEach(header => {
+header.addEventListener('click', () => {
+const el = document.getElementById(header.dataset.toggle);
+if (el) el.classList.toggle('open');
+});
+});
+
+const addCharBtn = document.getElementById('add-char-btn');
+if (addCharBtn) addCharBtn.addEventListener('click', addCharacter);
+
+bindSceneInputs();
+renderActionPresets();
+
+const generateBtn = document.getElementById('generate-btn');
+if (generateBtn) generateBtn.addEventListener('click', startGeneration);
+const stopBtn = document.getElementById('stop-btn');
+if (stopBtn) stopBtn.addEventListener('click', stopGeneration);
+const exportBtn = document.getElementById('export-all-btn');
+if (exportBtn) exportBtn.addEventListener('click', exportAll);
+const clearBtn = document.getElementById('clear-all-btn');
+if (clearBtn) clearBtn.addEventListener('click', clearAll);
+
+try { wakeLockEnabled = localStorage.getItem(WAKE_LOCK_PREF) === '1'; } catch (e) {}
+
+updateApiPanel();
+renderStyles();
+renderDurations();
+renderIntensity();
+renderShootingMode();
+renderPhotoList();
+renderCharacters();
+renderGallery();
+updateGenerateBtn();
+updateStoryboard();
+
+console.log('[DianaIA v4] Studio prêt ✦ localStorage:', localStorageAvailable ? 'OK' : 'session');
+})();
+</script>
+
+</body>
+</html>
